@@ -6,6 +6,11 @@ disable-model-invocation: true
 
 **Context**: Create or update persona files with demographics, context, JTBD, pains/gains, and behavioral patterns. Integrates existing codebase analysis when available.
 
+## Required Skills [LOAD BEFORE EXECUTION]
+
+1. [LOAD IF NOT ACTIVE] `business-context` — VPC Customer Profile for JTBD/pains/gains mapping
+2. [LOAD IF NOT ACTIVE] `design-perspective` — persona template and design principles
+
 ## Orchestrator Definition
 
 **Execution Protocol**:
@@ -55,7 +60,7 @@ Gather available data:
 - Survey results
 - Support ticket patterns
 - Usage analytics
-- Market research (see business-context skill)
+- Market research (per business-context skill)
 
 #### From VPC Analysis
 Map Customer Profile from Value Proposition Canvas:
@@ -65,7 +70,7 @@ Map Customer Profile from Value Proposition Canvas:
 
 ### 3. Persona Drafting
 
-Use design-perspective skill's `references/persona-template.md` to create persona files:
+Use design-perspective skill `references/persona-template.md` to create persona files:
 
 1. **Demographics**: Role, experience, technical proficiency, industry
 2. **Context**: Environment, frequency, time pressure, adjacent tools

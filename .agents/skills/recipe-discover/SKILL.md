@@ -6,6 +6,12 @@ disable-model-invocation: true
 
 **Context**: Discover Opportunities and generate hypotheses by combining business analysis (BMC/VPC/market) with user analysis (JTBD/pains/gains). Outputs Opportunity files and hypothesis files.
 
+## Required Skills [LOAD BEFORE EXECUTION]
+
+1. [LOAD IF NOT ACTIVE] `business-context` — BMC, VPC, and market analysis frameworks
+2. [LOAD IF NOT ACTIVE] `hypothesis-discipline` — hypothesis lifecycle and confidence scoring
+3. [LOAD IF NOT ACTIVE] `product-principles` — OST hierarchy, 4 Risks, Knowledge Pyramid
+
 ## Orchestrator Definition
 
 **Execution Protocol**:
@@ -49,13 +55,13 @@ Input: $ARGUMENTS
 
 ### 2. Business Context Analysis
 
-When business context is needed, use the business-context skill's frameworks:
+When business context is needed, use the business-context skill frameworks:
 
 - **BMC**: Understand the business model — especially Customer Segments, Value Propositions, Revenue Streams
 - **VPC**: Map Customer Profile (jobs/pains/gains) to Value Map (products/pain relievers/gain creators)
 - **Market Analysis**: TAM/SAM/SOM, competitive landscape, market gaps
 
-See business-context skill and its references for detailed frameworks.
+See business-context skill `references/business-model-canvas.md`, `references/value-proposition-canvas.md`, and `references/market-analysis.md` for detailed frameworks.
 
 **Web search**: Use web search for market research — industry reports, competitor analysis, trend data. Market research benefits from hypothesis context (unlike code analysis).
 
@@ -69,7 +75,7 @@ See business-context skill and its references for detailed frameworks.
 
 Synthesize business and user analysis into Opportunities:
 
-1. Draft Opportunity files using `product-principles/references/opportunity-template.md`
+1. Draft Opportunity files using product-principles skill `references/opportunity-template.md`
 2. **3+ Solutions Test**: For each Opportunity, verify 3+ meaningfully different Solutions exist. If not, it may be a Solution disguised as an Opportunity
 3. Link Opportunities to Product Outcomes (if vision exists)
 4. Assess impact (frequency x severity x breadth)
@@ -86,7 +92,7 @@ Synthesize business and user analysis into Opportunities:
 
 For confirmed Opportunities, generate hypotheses:
 
-1. Draft hypothesis files using `hypothesis-discipline/references/hypothesis-template.md`
+1. Draft hypothesis files using hypothesis-discipline skill `references/hypothesis-template.md`
 2. Assign appropriate level (outcome / opportunity / solution / assumption)
 3. Set initial confidence scores (typically 0-2 for new hypotheses)
 4. Propose time budgets and deadlines

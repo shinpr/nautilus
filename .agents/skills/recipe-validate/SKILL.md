@@ -6,6 +6,13 @@ disable-model-invocation: true
 
 **Context**: Validate hypotheses using appropriate methods based on risk type. Invoke hypothesis-verifier for bias-free validation design. Record results in hypothesis files.
 
+## Required Skills [LOAD BEFORE EXECUTION]
+
+1. [LOAD IF NOT ACTIVE] `hypothesis-discipline` — hypothesis lifecycle, confidence scoring rules, time budgets
+2. [LOAD IF NOT ACTIVE] `product-principles` — 4 Risks, Confidence Meter, MVP definition
+3. [LOAD IF NOT ACTIVE] `prototype-guide` — prototype prompt construction and design context injection
+4. [LOAD IF NOT ACTIVE] `business-context` — BMC/VPC for Viability validation
+
 ## Orchestrator Definition
 
 **Execution Protocol**:
@@ -64,19 +71,19 @@ Execute validation based on the risk type and method:
 | Risk Type | Validation Methods | Tools |
 |-----------|-------------------|-------|
 | **Value** | Market research, user interviews, competitive analysis, landing page test | Web search, survey analysis |
-| **Usability** | Prototype testing, usability study, interaction analysis | Prototype generation (see prototype-guide skill) |
+| **Usability** | Prototype testing, usability study, interaction analysis | Prototype generation (per prototype-guide skill) |
 | **Feasibility** | Code spike, architecture review, dependency analysis | codebase-analyzer, code execution |
 | **Viability** | Business model analysis, ROI calculation, regulatory review | Web search, BMC/VPC analysis |
 
 #### Prototype Generation (for Usability validation)
 When generating prototypes:
-1. Construct prompt using prototype-guide skill's `references/prototype-prompt-guide.md`
+1. Construct prompt using prototype-guide skill `references/prototype-prompt-guide.md`
 2. Inject design context (principles, persona, scenario, DS)
 3. Generate prototype with appropriate tool
 4. Save output to `docs/discovery/prototypes/`
 
 #### Market Research (for Value/Viability validation)
-Use web search to gather market data. Reference product-principles skill's `references/mvp-definition.md` for scope assessment.
+Use web search to gather market data. See product-principles skill `references/mvp-definition.md` for scope assessment.
 
 ### 4. Result Recording
 

@@ -6,6 +6,11 @@ disable-model-invocation: true
 
 **Context**: Drive the feedback loop by reflecting on outcomes, updating target artifacts, and distilling learnings across the knowledge pyramid (see product-principles skill for Tier definitions).
 
+## Required Skills [LOAD BEFORE EXECUTION]
+
+1. [LOAD IF NOT ACTIVE] `product-principles` — Knowledge Pyramid, Tier definitions, distillation criteria
+2. [LOAD IF NOT ACTIVE] `hypothesis-discipline` — hypothesis lifecycle statuses, confidence scoring
+
 ## Orchestrator Definition
 
 **Execution Protocol**:
@@ -68,7 +73,7 @@ Input: $ARGUMENTS
 - knowledge-distiller operates in a separate context to avoid individual hypothesis bias
 - It analyzes multiple hypotheses to find patterns, contradictions, and trends
 - It proposes Tier 2 learnings (for Opportunity) or Tier 1 promotions (for Vision)
-- It enforces distillation quality criteria (see product-principles skill for definitions)
+- It enforces distillation quality criteria (per product-principles skill)
 
 **[STOP — BLOCKING]** Present distillation results to user for review:
 - Extracted patterns and trends

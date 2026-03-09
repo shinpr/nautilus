@@ -6,6 +6,12 @@ disable-model-invocation: true
 
 **Context**: Transform validated hypotheses into a PRD with 4 Risks confidence scores, hypothesis traceability, and user stories. The PRD follows a standard structure that can be consumed by downstream implementation workflows.
 
+## Required Skills [LOAD BEFORE EXECUTION]
+
+1. [LOAD IF NOT ACTIVE] `prd-standards` — PRD template, user story format, acceptance criteria
+2. [LOAD IF NOT ACTIVE] `product-principles` — 4 Risks, Confidence Meter, MVP scope
+3. [LOAD IF NOT ACTIVE] `design-perspective` — state design requirements, WCAG 2.2 AA for PRD completeness
+
 ## Orchestrator Definition
 
 **Execution Protocol**:
@@ -39,10 +45,10 @@ Assess whether hypotheses are "validated enough" for PRD creation:
 
 1. Read relevant Opportunity and hypothesis files
 2. For each hypothesis intended for the PRD:
-   - Check confidence scores against thresholds (see `references/user-story-guide.md`)
+   - Check confidence scores against thresholds (see prd-standards skill `references/user-story-guide.md`)
    - Assess cost x risk x reversibility
    - Determine: validated enough / needs more validation
-3. Reference product-principles skill's `references/mvp-definition.md` for scope determination
+3. See product-principles skill `references/mvp-definition.md` for scope determination
 
 **Decision**:
 - All key hypotheses validated enough → Proceed to PRD drafting
@@ -53,17 +59,17 @@ Assess whether hypotheses are "validated enough" for PRD creation:
 
 ### 2. PRD Drafting
 
-Use `references/prd-template.md` to create the PRD:
+Use prd-standards skill `references/prd-template.md` to create the PRD:
 
 1. **Overview**: Link to Opportunity and validated hypotheses
 2. **User Stories**: Apply 4 Risks assessment per story (see step 3)
-3. **Functional Requirements**: Derive from validated hypotheses with EARS-format ACs (see `references/acceptance-criteria.md`)
+3. **Functional Requirements**: Derive from validated hypotheses with EARS-format ACs (see prd-standards skill `references/acceptance-criteria.md`)
 4. **Success Criteria**: Tie to Product Outcomes from `docs/product/vision.md`
 5. **Assumptions (Unvalidated)**: Explicitly list hypotheses NOT yet validated that the PRD proceeds with
 
 ### 3. User Story Generation
 
-For each user story, follow `references/user-story-guide.md`:
+For each user story, follow prd-standards skill `references/user-story-guide.md`:
 
 1. Write in persona-grounded format (As a [persona name], I want to...)
 2. Assess 4 Risks confidence with evidence

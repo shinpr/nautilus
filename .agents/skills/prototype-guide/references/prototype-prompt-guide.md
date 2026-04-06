@@ -68,6 +68,13 @@ Each prompt should test one hypothesis. If you need to test multiple things, cre
 - Persona: [name and key characteristics from persona file]
 - Scenario: [what the user is trying to do, their environment, constraints]
 
+### Include When Relevant
+- Brand Direction: [relevant decisions and Visual Tokens from `docs/product/design/brand-direction.md`]
+- IA Context: [relevant page path from `docs/product/design/information-architecture.md` when navigation matters]
+- Flow Context: [specific file from `docs/product/design/flows/` that matches this interaction]
+- Content Model Context: [relevant entities/relationships from `docs/product/design/content-model.md` when data structure matters]
+- AI Interaction Context: [relevant section from `docs/product/design/ai-interaction-model.md` for AI-powered features]
+
 ## Hypothesis
 - Testing: [the specific hypothesis being validated]
 - Success looks like: [observable criteria for this prototype]
@@ -142,6 +149,28 @@ Apply these design tokens:
 - Typography: [font stack and scale]
 ```
 
+### Blueprint Visual Tokens
+```markdown
+## Design System
+Read `docs/product/design/brand-direction.md` and apply Visual Tokens directly:
+- Colors: use `--color-*` token values for surfaces, actions, text, feedback
+- Typography: use `--font-*`, `--font-size-base`, and weight tokens
+- Spacing: use `--space-*`, `--radius-*`, and `--shadow-*` tokens
+Trace any overrides back to the relevant blueprint decision.
+```
+
+### Source Selection Rule
+
+```markdown
+Choose one primary design source in this order:
+1. Existing in-repo design system/components
+2. Blueprint Visual Tokens
+3. Tailwind config / standalone tokens
+4. Ad-hoc constraints derived from principles
+
+If multiple sources exist, prefer the highest-priority source and use lower-priority sources only to fill gaps.
+```
+
 ### No DS Yet
 ```markdown
 ## Design System
@@ -172,6 +201,8 @@ Record any new design decisions made during prototyping.
 
 - [ ] Design principles included in prompt
 - [ ] Persona and scenario specified
+- [ ] Blueprint artifacts referenced when relevant
+- [ ] Primary design source selected using the precedence rule
 - [ ] Hypothesis under test is explicit
 - [ ] User flow described step-by-step
 - [ ] Features have specific acceptance criteria

@@ -63,9 +63,14 @@ Use prd-standards skill `references/prd-template.md` to create the PRD:
 
 1. **Overview**: Link to Opportunity and validated hypotheses
 2. **User Stories**: Apply 4 Risks assessment per story (see step 3)
-3. **Functional Requirements**: Derive from validated hypotheses with EARS-format ACs (see prd-standards skill `references/acceptance-criteria.md`)
-4. **Success Criteria**: Tie to Product Outcomes from `docs/product/vision.md`
-5. **Assumptions (Unvalidated)**: Explicitly list hypotheses NOT yet validated that the PRD proceeds with
+3. **Functional Requirements**: Derive from validated hypotheses with EARS-format ACs (see prd-standards skill `references/acceptance-criteria.md`). Assign stable AC IDs (`AC-001`, `AC-002`, ...) sequentially across the PRD
+4. **Design Context**: Populate from project design artifacts and validation artifacts:
+   - **Design Principles**: Copy from `docs/product/design-principles.md`
+   - **Tone & Voice / Visual Direction**: Copy from `docs/product/design/brand-direction.md` when available
+   - **Design Guardrails**: Derive Do/Don't guidance from principles and prototype learnings
+   - **Visual Reference**: Link relevant blueprint and prototype files
+5. **Success Criteria**: Tie to Product Outcomes from `docs/product/vision.md`
+6. **Assumptions (Unvalidated)**: Explicitly list hypotheses NOT yet validated that the PRD proceeds with
 
 ### 3. User Story Generation
 
@@ -117,8 +122,8 @@ After user approval:
 ## PRD Structure
 
 The PRD output follows a standard structure:
-- **Core sections**: Overview, User Stories, Functional Requirements, Non-Functional Requirements, Success Criteria, Technical Considerations
-- **nautilus extensions**: Hypothesis & validation references, 4 Risks confidence per user story, unvalidated assumptions section
+- **Core sections**: Overview, User Stories, Functional Requirements, Design Context, Non-Functional Requirements, Success Criteria, Technical Considerations
+- **nautilus extensions**: Hypothesis & validation references, 4 Risks confidence per user story, design context references, unvalidated assumptions section
 - **Storage**: `docs/prd/`
 
 The extensions are additive — they don't replace or modify the core sections. This means the PRD can be consumed by any downstream workflow that expects the standard structure.

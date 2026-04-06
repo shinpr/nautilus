@@ -100,9 +100,9 @@ Every user-facing AC should consider relevant states:
 
 ```markdown
 - [ ] Requirement: [Description]
-  - AC-1: When [trigger], the system shall [behavior]
-  - AC-2: If [condition], then the system shall [behavior]
-  - AC-3: While [state], the system shall [behavior]
+  - AC-001: When [trigger], the system shall [behavior]
+  - AC-002: If [condition], then the system shall [behavior]
+  - AC-003: While [state], the system shall [behavior]
 ```
 
 ## Accessibility ACs
@@ -128,3 +128,4 @@ Each AC should be traceable:
 - **User Story** → AC tests a specific aspect of the story's value
 - **4 Risks** → ACs collectively cover all four risk dimensions
 - **Design States** → ACs specify behavior for each relevant state
+- **Implementation/Test** → Stable AC IDs (`AC-001`, `AC-002`, ...) can be referenced in downstream specs, plans, and tests

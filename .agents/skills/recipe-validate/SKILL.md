@@ -79,8 +79,16 @@ Execute validation based on the risk type and method:
 When generating prototypes:
 1. Construct prompt using prototype-guide skill `references/prototype-prompt-guide.md`
 2. Inject design context (principles, persona, scenario, DS)
-3. Generate prototype with appropriate tool
-4. Save output to `docs/discovery/prototypes/`
+3. When `docs/product/design/` exists, read only the blueprint artifacts relevant to the prototype:
+   - see `blueprint-standards` Artifact Overview for the full artifact list
+   - always read `brand-direction.md` when present
+   - read `information-architecture.md` when page hierarchy or navigation matters
+   - read the specific file in `flows/` that matches the interaction under test
+   - read `content-model.md` when mock data shape or entity relationships matter
+   - read `ai-interaction-model.md` only for AI-powered features
+   - if a relevant artifact is missing, say so explicitly instead of inferring a missing file
+4. Generate prototype with appropriate tool
+5. Save output to `docs/discovery/prototypes/`
 
 #### Market Research (for Value/Viability validation)
 Use web search to gather market data. See product-principles skill `references/mvp-definition.md` for scope assessment.

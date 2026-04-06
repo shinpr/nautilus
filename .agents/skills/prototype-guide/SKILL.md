@@ -27,14 +27,31 @@ Every prototype prompt must include relevant design context. Without context, pr
 7. **Existing Components** — design system components for consistency
 8. **Journey Position** — where in the user journey this occurs
 
+### Blueprint Context (include when `docs/product/design/` exists)
+
+See `blueprint-standards` Artifact Overview for the full blueprint artifact list.
+
+Read only the blueprint artifacts relevant to the hypothesis under test:
+- **Always**: `brand-direction.md` when present
+- **Include** `information-architecture.md` when navigation, page hierarchy, or screen placement matters
+- **Include** the specific file in `flows/` that matches the interaction under test
+- **Include** `content-model.md` when realistic entities, relationships, or stateful data shape the prototype
+- **Include** `ai-interaction-model.md` only for AI-powered features
+
+If no matching flow exists, say so explicitly and proceed with the available blueprint artifacts.
+
+### Design Source Priority
+
+Use the primary-source precedence defined in `references/prototype-prompt-guide.md` under `Source Selection Rule`.
+
 ## Design System Integration
 
 How to connect prototypes with your design system depends on your setup:
 
 - **npm Package**: Include install instruction and component names in prompt
 - **In-Repository Components**: Use codebase-analyzer to identify existing components, list paths and APIs
-- **Tailwind Config / Design Tokens**: Include token definitions in prompt
-- **No DS Yet**: Define basic constraints (palette, typography, spacing) — these seed a future DS
+- **Tailwind Config / Design Tokens**: Include token definitions in prompt only when no higher-priority source exists
+- **No DS Yet**: Use Visual Tokens from `brand-direction.md` when available; otherwise define basic constraints (palette, typography, spacing) that can seed a future DS
 
 ## Key Principles
 

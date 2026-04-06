@@ -19,6 +19,8 @@ Business Problem
       ↓
   Hypothesis        ← what we believe and why
       ↓
+  Blueprint         ← shared structural design + visual tokens
+      ↓
   Validation        ← how we tested it, what we learned
       ↓
      PRD            ← traceable to evidence, not assumptions
@@ -95,15 +97,19 @@ Reflect is not something you do at the end. You run it every time validation res
 
 3. **`/recipe-discover`** — Discover opportunities from two angles: business (market size, competitive landscape, business model) and user (pain points, unmet needs, journey gaps). Generates hypotheses with validation methods and time budgets.
 
-4. **`/recipe-validate`** — Test each hypothesis with the method that fits its risk type:
+4. **`/recipe-blueprint`** — Define shared structural design context before prototype-heavy validation: information architecture, key flows, content model, brand direction, and Visual Tokens. Add AI interaction model when the product has AI features.
+
+5. **`/recipe-refine-visuals`** — Optional side workflow for a design-capable reviewer to refine the auto-derived Visual Tokens after blueprint creation. This is for the case where the main workflow was advanced by someone without token-level design judgment, and a designer later steps in to improve the visual system without changing the rest of the flow.
+
+6. **`/recipe-validate`** — Test each hypothesis with the method that fits its risk type:
    - **Value risk** → market research, competitive analysis, user interviews
    - **Usability risk** → prototype testing (Nautilus generates prompts with your design context baked in — paste them into [Lovable](https://lovable.dev), [v0](https://v0.dev), or any prototyping tool)
    - **Feasibility risk** → code spikes, architecture review
    - **Viability risk** → business model analysis, ROI calculation
 
-5. **`/recipe-reflect`** — After each round of validation, run a reflection. It extracts learnings from your results, spots patterns across hypotheses, and builds up your product knowledge base.
+7. **`/recipe-reflect`** — After each round of validation, run a reflection. It extracts learnings from your results, spots patterns across hypotheses, and builds up your product knowledge base.
 
-6. **`/recipe-define`** — When hypotheses are validated enough, turn them into a PRD. Each user story shows its confidence scores and remaining risks. The PRD is ready for handoff to your implementation workflow.
+8. **`/recipe-define`** — When hypotheses are validated enough, turn them into a PRD. Each user story shows its confidence scores and remaining risks. The PRD carries Design Context and stable AC IDs for downstream traceability.
 
 ### Adding to an existing product
 
@@ -114,7 +120,10 @@ Reflect is not something you do at the end. You run it every time validation res
 ### Day-to-day patterns
 
 **Exploring a new feature idea:**
-`/recipe-discover` → `/recipe-validate` → `/recipe-reflect` → `/recipe-define`
+`/recipe-discover` → `/recipe-blueprint` → `/recipe-validate` → `/recipe-reflect` → `/recipe-define`
+
+**A designer joins after blueprint is already done:**
+`/recipe-blueprint` by a non-designer → `/recipe-refine-visuals` by a design-capable reviewer → `/recipe-validate`
 
 **User feedback came in:**
 `/recipe-discover` with the feedback as input → update existing opportunities or discover new ones
@@ -123,7 +132,9 @@ Reflect is not something you do at the end. You run it every time validation res
 `/recipe-validate` to record results → `/recipe-reflect` to extract learnings → if confidence is high enough, `/recipe-define`
 
 **Testing usability with a prototype:**
-`/recipe-validate` generates a prompt with your design principles, persona, and hypothesis baked in. Paste it into Lovable or v0. Test the prototype, then record results back in `/recipe-validate`.
+`/recipe-blueprint` captures shared structure and Visual Tokens. `/recipe-validate` then generates a prompt with those artifacts, your design principles, persona, and hypothesis baked in. Paste it into Lovable or v0. Test the prototype, then record results back in `/recipe-validate`.
+
+If the blueprint was created by someone without deep design expertise, a designer can run `/recipe-refine-visuals` as a side workflow before validation. It updates the same `brand-direction.md` file, so downstream prototype generation uses the refined token set without needing a separate branch in the process.
 
 **Quarterly review or post-launch retro:**
 `/recipe-reflect` at the Vision level — reassess whether your outcomes and NSM are still right based on everything you've learned.
@@ -137,6 +148,8 @@ Reflect is not something you do at the end. You run it every time validation res
 | `/recipe-vision` | Define or update product vision, outcomes, and North Star Metric |
 | `/recipe-persona` | Create or update personas with JTBD integration |
 | `/recipe-discover` | Find opportunities, generate hypotheses from business + user angles |
+| `/recipe-blueprint` | Define structural design artifacts and Visual Tokens for consistent prototypes |
+| `/recipe-refine-visuals` | Let a design-capable reviewer refine Visual Tokens after blueprint creation without changing the main workflow |
 | `/recipe-validate` | Test hypotheses with type-appropriate methods |
 | `/recipe-define` | Turn validated hypotheses into a PRD with confidence scores |
 | `/recipe-reflect` | Run retrospectives, distill learnings, update the knowledge base |
@@ -152,6 +165,7 @@ These skills provide the frameworks and principles that shape product decisions.
 | `product-principles` | 4 Risks framework (Value, Usability, Feasibility, Viability), OST hierarchy, knowledge tiers |
 | `hypothesis-discipline` | Hypothesis lifecycle, confidence scoring, time budgets |
 | `design-perspective` | Design principles, state design (loading/empty/error), WCAG 2.2 AA |
+| `blueprint-standards` | Information architecture, flows, content model, brand direction, Visual Tokens |
 | `prototype-guide` | Design context injection for prototype generation prompts |
 | `business-context` | BMC, Value Proposition Canvas, market analysis frameworks |
 
@@ -186,6 +200,7 @@ your-project/
 ├── .cursor/agents/          # Subagent specifications
 └── docs/                    # Created as you use the recipes
     ├── product/             # Vision, personas, design principles, learnings
+    │   └── design/          # Blueprint: IA, flows, content model, brand direction, AI interaction model
     ├── discovery/           # Opportunities, hypotheses, journeys, prototypes
     │   └── INDEX.md         # Auto-generated summary of discovery status
     ├── prd/                 # PRDs (ready for development)

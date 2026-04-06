@@ -29,6 +29,7 @@ A nautilus PRD follows a standard structure with additive extensions. See `refer
 - Overview (one-line summary, background)
 - User Stories
 - Functional Requirements (with EARS-format ACs)
+- Design Context
 - Non-Functional Requirements (including accessibility)
 - Success Criteria (tied to Product Outcomes)
 - Technical Considerations
@@ -36,6 +37,7 @@ A nautilus PRD follows a standard structure with additive extensions. See `refer
 **Nautilus extensions** (additive, never replace core sections):
 - Hypothesis & validation references in Overview
 - 4 Risks confidence per user story
+- Design Context derived from design artifacts and prototypes
 - Unvalidated assumptions section in Technical Considerations
 
 ## User Story Standards

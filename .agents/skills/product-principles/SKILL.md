@@ -11,6 +11,7 @@ description: Defines 4 Risks confidence thresholds, OST hierarchy levels, Knowle
 2. **Value Traceability**: From hypothesis to validation to user story to PRD to implementation to test — maintain traceability across the entire chain
 3. **Feedback Accumulation**: Every outcome (including failures) is a learning asset. Never delete invalidated hypotheses — they inform future decisions
 4. **Validated Enough, Not Perfect**: Don't wait for perfect validation. Use cost x risk x reversibility to determine sufficient confidence
+5. **Artifacts Over Notes**: Keep structural decisions in designated repo artifacts so prototypes, PRDs, and implementation can reuse the same context
 
 ## Opportunity Solution Tree (OST) Hierarchy
 

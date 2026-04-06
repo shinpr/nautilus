@@ -55,24 +55,62 @@ So that [expected value/benefit]
 
 ### Must Have (MVP)
 - [ ] Requirement 1: [Detailed description]
-  - AC: [Acceptance criteria — EARS format: When/While/If-then]
+  - AC-001: [Acceptance criteria — EARS format: When/While/If-then]
+  - AC-002: [Additional acceptance criteria if needed]
   - States: [Loading / Empty / Error / Partial / Success — note which are relevant and expected behavior]
 - [ ] Requirement 2: [Detailed description]
-  - AC: [Acceptance criteria]
+  - AC-003: [Acceptance criteria]
   - States: [Loading / Empty / Error / Partial / Success — note which are relevant and expected behavior]
 - [ ] Requirement 3: [Detailed description]
-  - AC: [Acceptance criteria]
+  - AC-004: [Acceptance criteria]
   - States: [Loading / Empty / Error / Partial / Success — note which are relevant and expected behavior]
 
 ### Nice to Have
 - [ ] Requirement 1: [Detailed description]
+  - AC-005: [Acceptance criteria]
   - States: [If user-facing, note relevant Loading / Empty / Error / Partial / Success behavior]
 - [ ] Requirement 2: [Detailed description]
+  - AC-006: [Acceptance criteria]
   - States: [If user-facing, note relevant Loading / Empty / Error / Partial / Success behavior]
 
 ### Out of Scope
 - Item 1: [Description and reason]
 - Item 2: [Description and reason]
+
+## Design Context
+
+Context for downstream UI specification and implementation. Prototypes show concrete examples; this section carries the reusable intent behind them.
+
+### Design Principles
+
+[Copy 3-5 principles from `docs/product/design-principles.md`]
+
+1. **[Principle name]**: [Trade-off resolution and rationale]
+2. **[Principle name]**: [Trade-off resolution and rationale]
+3. **[Principle name]**: [Trade-off resolution and rationale]
+
+### Tone & Voice
+
+| Dimension | Position | Rationale |
+|-----------|----------|-----------|
+| Formal ↔ Casual | [position] | [rationale] |
+| Serious ↔ Playful | [position] | [rationale] |
+| Expert ↔ Approachable | [position] | [rationale] |
+| Technical ↔ Plain | [position] | [rationale] |
+
+### Design Guardrails
+
+**Do:**
+- [Positive pattern traced to a design principle]
+
+**Avoid → Prefer:**
+- [Anti-pattern] → [Preferred alternative]
+
+### Visual Reference
+
+- Brand direction: `docs/product/design/brand-direction.md`
+- Prototypes: [list relevant files from `docs/discovery/prototypes/`]
+- Key flow: [reference relevant file from `docs/product/design/flows/` if available]
 
 ## Non-Functional Requirements
 

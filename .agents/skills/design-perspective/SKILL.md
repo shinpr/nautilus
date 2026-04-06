@@ -54,6 +54,19 @@ When creating or updating personas, use `references/persona-template.md` for the
 
 Design decisions without persona/context grounding are assumptions that need validation.
 
+## Blueprint Integration
+
+See `blueprint-standards` Artifact Overview for the full blueprint artifact list.
+
+When `docs/product/design/` exists, blueprint artifacts provide shared structural context:
+- `information-architecture.md` — page hierarchy and navigation
+- `content-model.md` — entities, relationships, and stateful data
+- `brand-direction.md` — tone, visual direction, and Visual Tokens
+- `flows/` — critical user flows and edge paths
+- `ai-interaction-model.md` — AI interaction patterns, guardrails, and error taxonomy
+
+Prototypes and PRDs should reference these artifacts when available instead of re-inferring structure from scratch.
+
 ## Design in Hypothesis Validation
 
 When validating Usability risk through prototypes:

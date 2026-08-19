@@ -38,14 +38,13 @@ Framework for defining Minimum Viable Product scope. Use when transitioning from
 
 Each factor scored 1-10. Simpler than RICE, useful for quick prioritization.
 
-## MVP Scoping Process
+## MVP Scoping Decision
 
-1. **Identify core problem** — What is the primary pain point? (from validated Opportunities)
-2. **Define success criteria** — What metrics indicate success? (from Product Outcome)
-3. **List all potential features** — From validated hypotheses and Solutions
-4. **Apply MoSCoW** — Be ruthless: when in doubt, Should Have or lower
-5. **Validate scope** — Can this be built in reasonable time? Does it deliver core value?
-6. **Define roadmap** — MVP → V1.1 → V1.2 → V2.0
+1. **Identify the core outcome** — What is the smallest observable value to deliver or validate?
+2. **Gather supported candidates** — Include only features backed by the confirmed outcome, boundary, or evidence
+3. **Choose the smallest sufficient set** — Use MoSCoW, RICE, or ICE only when competing candidates need comparison
+4. **Check feasibility** — Confirm that the selected scope can deliver the core value within its boundary
+5. **Record later work only for a real roadmap consumer**
 
 ## Scope Reduction Techniques
 
@@ -65,7 +64,7 @@ Each factor scored 1-10. Simpler than RICE, useful for quick prioritization.
 ## Connection to nautilus Concepts
 
 - **Must Have** features come from **adopted hypotheses** with sufficient confidence
-- **Confidence scores** from hypothesis validation directly inform RICE's Confidence factor
+- **Confidence scores** from hypothesis validation can inform RICE's Confidence factor when RICE is used
 - **4 Risks** assessment determines which features need more validation vs. are ready for MVP
 - PRD's user stories should only include features that are **validated enough** per the Confidence Meter
 
@@ -76,13 +75,3 @@ Each factor scored 1-10. Simpler than RICE, useful for quick prioritization.
 - **No hypothesis**: Building without clear validation goal
 - **Kitchen sink MVP**: Trying to serve everyone
 - **Scope too large**: MVP takes too long to build
-
-## Quality Checklist
-
-- [ ] Core hypothesis clearly stated
-- [ ] Core value identified from validated evidence
-- [ ] Features prioritized using MoSCoW or RICE
-- [ ] Must Haves are truly essential (challenge each one)
-- [ ] Success metrics defined and tied to Product Outcome
-- [ ] MVP scope achievable in target timeframe
-- [ ] Clear path from MVP to full product

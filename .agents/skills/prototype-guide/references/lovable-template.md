@@ -7,10 +7,12 @@
 - Full user journeys across multiple screens
 - Prototypes that benefit from deployment for remote testing
 
-## Prompt Structure
+## Prompt Section Library
+
+Use only the sections that affect the prototype or its evaluation.
 
 ```markdown
-Before building, ask clarifying questions if any of these are ambiguous:
+Before building, ask about an ambiguity only when its plausible answers would materially change the prototype or its evaluation:
 - Target user or role
 - Primary user flow
 - Design system constraints
@@ -48,7 +50,7 @@ This prototype tests: [hypothesis statement].
 - [Component]: [specific behavior]
 - Copy: [actual headline, helper text, CTA labels]
 
-## States
+## Relevant States
 - Loading: [show skeleton / spinner / progressive load]
 - Empty: [empty state message and CTA]
 - Error: [error message and recovery action]
@@ -61,18 +63,18 @@ This prototype tests: [hypothesis statement].
 - Use realistic copy, not placeholder text like "Lorem ipsum" or generic labels
 - Prefer frontend mocks over real integrations until the flow is validated
 
-## Design
+## Design (when visual decisions affect the prototype)
 - Color palette: [hex values]
 - Typography: [font family, sizes]
 - Spacing: [scale]
 - Border-radius: [values]
-- Atmosphere: [3-5 adjectives describing the feel]
+- Atmosphere: [Only product-specific qualities that affect the evaluated experience]
 
-## Mock Data
+## Mock Data (when data shape or copy affects the flow)
 Use LocalStorage with this sample data:
-[provide JSON structure with 3-5 sample records]
+[provide the smallest record set that exercises the relevant cases]
 
-## Technical
+## Technical (when the output consumer requires it)
 - Responsive: mobile-first, breakpoints at 768px and 1024px
 - Framework: React + Tailwind
 ```
@@ -81,20 +83,13 @@ Use LocalStorage with this sample data:
 
 ### Prompt Size
 
-Keep prompts focused. One prompt per feature area or user flow. Asking for too many features in one prompt leads to incomplete implementations.
+Keep prompts focused on one validation decision and the flow needed to observe it.
 
-If requirements are unclear, ask 2-5 clarifying questions before generating. A short clarification round is better than a broad but inaccurate first pass.
+Ask only the questions whose answers can change correctness, scope, or evaluation.
 
 ### Incremental Building
 
-Build in layers:
-1. First prompt: core layout and navigation
-2. Second prompt: primary feature with interactions
-3. Third prompt: states (empty, error, loading)
-4. Fourth prompt: polish and edge cases
-
-Use Lovable's version pinning after each stable state.
-Prefer editing the current prototype in focused increments over re-prompting the entire app from scratch.
+Edit the current prototype in the smallest increment that makes the next validation boundary observable. Use Lovable's version pinning when a stable state must be preserved for comparison.
 
 ### What Works Well
 
@@ -112,9 +107,9 @@ Prefer editing the current prototype in focused increments over re-prompting the
 - Start without authentication — add it as a separate prompt later
 - Keep one prompt focused on one flow or tightly related page set
 
-## Guide File Template
+## Optional Guide File
 
-The guide file (`lovable-guide.md`) should contain:
+Create `lovable-guide.md` only when a human evaluator needs instructions outside the executable prompt. Include only the applicable items:
 
 1. **What this prototype tests** — the hypothesis in plain language
 2. **How to use it** — steps for the person doing the testing

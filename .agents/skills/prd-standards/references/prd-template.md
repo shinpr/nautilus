@@ -1,190 +1,87 @@
 # PRD: [Feature Name]
 
+Use the sections that carry a decision, boundary, evidence, or information required by delivery. Omit empty sections and avoid repeating shared evidence per story.
+
 ## Overview
 
-### One-line Summary
-[Describe this feature in one line]
+- **Outcome**: [Observable product or user outcome]
+- **Background**: [Why this outcome matters]
+- **In scope**: [Required behavior]
+- **Out of scope**: [Explicit exclusions]
+- **Decision-bearing references**: [Opportunity, hypothesis, prototype, or product decision links]
 
-### Background
-[Why is this feature needed? What problem does it solve?]
-
-**Hypothesis & Validation References:**
-- Opportunity: [OPP-NNN](../../../docs/discovery/opportunities/OPP-NNN.md)
-- Key hypotheses validated:
-  - [HYPO-NNN](../../../docs/discovery/hypotheses/HYPO-NNN.md) — [status, key finding]
-  - [HYPO-NNN](../../../docs/discovery/hypotheses/HYPO-NNN.md) — [status, key finding]
-
-## User Stories
+## Users and Stories
 
 ### Primary Users
-[Define the main target users. Reference personas from `docs/product/personas/`]
 
-### User Stories
+[Reference the personas or user evidence that changes behavior or acceptance.]
 
-Each user story includes 4 Risks confidence assessment:
+### US-N: [Story Title]
 
-#### US-1: [Story Title]
-
-```
+```text
 As a [user type]
-I want to [goal/desire]
-So that [expected value/benefit]
+I want to [goal]
+So that [benefit]
 ```
 
-**4 Risks Confidence (0-10):**
-| Risk | Score | Evidence | Remaining Risk |
-|------|-------|----------|----------------|
-| Value | - | [what validated this] | [what's still uncertain] |
-| Usability | - | [what validated this] | [what's still uncertain] |
-| Feasibility | - | [what validated this] | [what's still uncertain] |
-| Viability | - | [what validated this] | [what's still uncertain] |
+- **Delivery readiness**: [validated enough / needs more validation]
+- **Rationale**: [Cost x risk x reversibility evidence]
+- **Story-specific risk**: [Only a risk or evidence delta not already covered at feature scope]
 
-**Delivery readiness**: [validated enough / needs more validation]
-**Rationale**: [Why this confidence level is sufficient — cost x risk x reversibility]
+### Shared Risk Evidence
 
-#### US-2: [Story Title]
+Include this section when multiple stories rely on the same evidence.
 
-[Repeat the same structure]
-
-### Use Cases
-1. [Specific usage scenario 1]
-2. [Specific usage scenario 2]
-3. [Specific usage scenario 3]
+| Material Risk | Confidence | Evidence | Remaining Risk |
+|---------------|------------|----------|----------------|
+| [Value / Usability / Feasibility / Viability] | [0-10] | [source] | [decision-relevant uncertainty] |
 
 ## Functional Requirements
 
-### Must Have (MVP)
-- [ ] Requirement 1: [Detailed description]
-  - AC-001: [Acceptance criteria — EARS format: When/While/If-then]
-  - AC-002: [Additional acceptance criteria if needed]
-  - States: [Loading / Empty / Error / Partial / Success — note which are relevant and expected behavior]
-- [ ] Requirement 2: [Detailed description]
-  - AC-003: [Acceptance criteria]
-  - States: [Loading / Empty / Error / Partial / Success — note which are relevant and expected behavior]
-- [ ] Requirement 3: [Detailed description]
-  - AC-004: [Acceptance criteria]
-  - States: [Loading / Empty / Error / Partial / Success — note which are relevant and expected behavior]
+### Required
 
-### Nice to Have
-- [ ] Requirement 1: [Detailed description]
-  - AC-005: [Acceptance criteria]
-  - States: [If user-facing, note relevant Loading / Empty / Error / Partial / Success behavior]
-- [ ] Requirement 2: [Detailed description]
-  - AC-006: [Acceptance criteria]
-  - States: [If user-facing, note relevant Loading / Empty / Error / Partial / Success behavior]
+- **FR-N**: [Required behavior]
+  - [Testable acceptance criterion; use EARS when its event, state, or condition improves precision. Prefix with a stable AC ID when an implementation, test, or planning consumer references individual ACs.]
+  - **Relevant states**: [Only states that can occur and affect acceptance]
 
-### Out of Scope
-- Item 1: [Description and reason]
-- Item 2: [Description and reason]
+### Optional
+
+[Include only options retained in the confirmed scope.]
 
 ## Design Context
 
-Context for downstream UI specification and implementation. Prototypes show concrete examples; this section carries the reusable intent behind them.
+Include the design sources and decisions needed by UI specification or implementation:
 
-### Design Principles
-
-[Copy 3-5 principles from `docs/product/design-principles.md`]
-
-1. **[Principle name]**: [Trade-off resolution and rationale]
-2. **[Principle name]**: [Trade-off resolution and rationale]
-3. **[Principle name]**: [Trade-off resolution and rationale]
-
-### Tone & Voice
-
-| Dimension | Position | Rationale |
-|-----------|----------|-----------|
-| Formal ↔ Casual | [position] | [rationale] |
-| Serious ↔ Playful | [position] | [rationale] |
-| Expert ↔ Approachable | [position] | [rationale] |
-| Technical ↔ Plain | [position] | [rationale] |
-
-### Design Guardrails
-
-**Do:**
-- [Positive pattern traced to a design principle]
-
-**Avoid → Prefer:**
-- [Anti-pattern] → [Preferred alternative]
-
-### Visual Reference
-
-- Brand direction: `docs/product/design/brand-direction.md`
-- Prototypes: [list relevant files from `docs/discovery/prototypes/`]
-- Key flow: [reference relevant file from `docs/product/design/flows/` if available]
+- Design principles: [Relevant trade-offs]
+- Brand direction or Visual Tokens: [Relevant source]
+- Critical flow: [Relevant flow]
+- Prototype evidence: [Relevant artifact]
+- Accessibility boundary: [Applicable WCAG 2.2 AA requirement]
 
 ## Non-Functional Requirements
 
-### Performance
-- Response Time: [Target value]
-- Throughput: [Target value]
-- Concurrency: [Target value]
-
-### Reliability
-- Availability: [Target value]
-- Error Rate: [Target value]
-
-### Security
-- [Security requirements details]
-
-### Scalability
-- [Considerations for future scaling]
-
-### Accessibility (when feature includes UI)
-- Compliance standard: WCAG 2.2 AA
-- Target assistive technologies: [Screen reader, keyboard operation, voice control, etc.]
-- Platform requirements: [e.g., app store review requirements]
-- Known constraints: [e.g., external library limitations]
+Include only measurable performance, reliability, security, scalability, accessibility, or operational requirements that constrain the solution or its verification.
 
 ## Success Criteria
 
-### Quantitative Metrics
-1. [Measurable success metric 1 — tied to Product Outcome]
-2. [Measurable success metric 2]
-3. [Measurable success metric 3]
-
-### Qualitative Metrics
-1. [User experience metric 1]
-2. [User experience metric 2]
-
-### UI Quality Metrics (when feature includes UI)
-1. [Key operation completion rate / error recovery rate]
-2. [Accessibility audit target score]
+- [Observable criterion tied to the approved outcome]
 
 ## Technical Considerations
 
-### Dependencies
-- [Dependencies on existing systems]
-- [Dependencies on external services]
+### Dependencies and Constraints
 
-### Constraints
-- [Technical constraints]
-- [Resource constraints]
+- [Dependency or constraint that affects delivery]
 
-### Assumptions (Unvalidated)
-[Hypotheses that are NOT yet validated but the PRD proceeds with. These are explicit risks.]
-- [ ] [Assumption 1 — confidence level, plan to validate]
-- [ ] [Assumption 2 — confidence level, plan to validate]
+### Unvalidated Assumptions
 
-### Risks and Mitigation
-| Risk | Impact | Probability | Mitigation |
-|------|--------|-------------|------------|
-| [Risk 1] | High/Medium/Low | High/Medium/Low | [Countermeasure] |
-| [Risk 2] | High/Medium/Low | High/Medium/Low | [Countermeasure] |
+- [Assumption that the PRD proceeds with, its evidence, and the decision it may change]
 
-## Undetermined Items
+### Material Risks
 
-- [ ] [Question 1]: [Description of options or impacts]
-- [ ] [Question 2]: [Description of options or impacts]
+| Risk | Effect | Response |
+|------|--------|----------|
+| [Risk] | [Outcome, boundary, or delivery effect] | [Accepted mitigation or remaining uncertainty] |
 
-*Discuss with user until this section is empty, then delete after confirmation*
+## Unresolved Decisions
 
-## Appendix
-
-### References
-- [Related document 1]
-- [Related document 2]
-- [Prototype references from `docs/discovery/prototypes/`]
-
-### Glossary
-- **Term 1**: [Definition]
-- **Term 2**: [Definition]
+List only user-owned decisions or missing evidence that blocks faithful delivery. Repository-local reversible choices stay with implementation.

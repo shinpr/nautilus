@@ -26,11 +26,9 @@ What evidence supports this Opportunity?
 
 ## 3+ Solutions Test (Torres Principle)
 
-Can you generate 3+ meaningfully different Solutions for this Opportunity? If not, you may be describing a Solution, not an Opportunity.
+Can you identify 3+ meaningfully different Solutions for this Opportunity? If not, record that the framing may describe a Solution. This is a diagnostic result; do not create filler alternatives to pass it.
 
-1. [Solution idea 1 — brief description]
-2. [Solution idea 2 — brief description]
-3. [Solution idea 3 — brief description]
+- [Meaningfully different Solution ideas found during discovery]
 
 ## Impact Assessment
 

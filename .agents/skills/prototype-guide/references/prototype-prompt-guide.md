@@ -6,18 +6,18 @@ Guide for constructing prompts that generate prototypes with proper design conte
 
 ## Prompt Engineering Principles
 
-These principles apply to all prototype prompts regardless of platform.
+Apply these principles when they affect the prototype's validation decision.
 
 Examples in this guide are illustrative only. Replace them with domain-specific content for the product you are testing.
 
-### Be Specific, Not Vague
+### Make the Validation Observable
 
-Vague instructions produce vague prototypes. Specify exactly what you want to see.
+Specify the behavior, state, or visual decision needed to evaluate the prototype. Leave choices that do not affect the evaluation to the generator.
 
 | Instead of | Write |
 |-----------|-------|
 | "Create a search feature" | "Create a search bar that filters a product list by name and category. When user types 'laptop', show only laptop products. Include autocomplete suggestions showing top 3 matches." |
-| "Make it look good" | "Use a white background, 4px border-radius, subtle shadow (0 1px 3px rgba(0,0,0,0.1)), 16px padding between cards." |
+| "Make it look good" | "Apply the product's primary design source. Preserve its hierarchy and interaction patterns; introduce new visual values only where the prototype tests them." |
 | "Add error handling" | "When search returns no results: show 'No products found for [query]' with a clear search button. When API fails: show 'Search unavailable' with a retry button." |
 
 ### Structure Over Length
@@ -26,7 +26,7 @@ A well-structured short prompt outperforms a long unstructured one. Use the sect
 
 ### Describe Interactions as State Transitions
 
-Every interactive element has states. Describe them explicitly:
+Describe the states that the prototype must demonstrate or that can change the evaluation:
 
 ```markdown
 Add to Cart button:
@@ -37,9 +37,9 @@ Add to Cart button:
 - Error: Shake animation, show error message below button
 ```
 
-### Provide Concrete Data Examples
+### Provide Decision-Relevant Data
 
-Instead of "show some sample data", provide the exact structure:
+Provide concrete data when its shape, wording, or edge cases affect the interaction being tested:
 
 ```markdown
 Sample product:
@@ -55,11 +55,13 @@ Sample product:
 
 ### One Prompt, One Focus
 
-Each prompt should test one hypothesis. If you need to test multiple things, create separate prompts. Bundling reduces the quality of each test.
+Keep one decision focus per prompt. Multiple hypotheses may share a prompt when the same interaction and evidence resolve them together.
 
 ## Prompt Template
 
-### Required Sections
+### Section Library
+
+Use only the sections needed by the prototype generator or evaluator.
 
 ```markdown
 ## Context
@@ -109,12 +111,7 @@ Each prompt should test one hypothesis. If you need to test multiple things, cre
 
 ### Output Format Principle
 
-Generate **two separate files** per platform:
-
-1. **`[platform]-prompt.md`**: Machine-executable instructions only. Content that gets copy-pasted directly into the AI tool
-2. **`[platform]-guide.md`**: Human-readable usage documentation, platform tips, post-execution workflow
-
-**Decision test**: "Would I paste this text directly into the AI tool?" YES → prompt file. NO → guide file.
+Generate the machine-executable `[platform]-prompt.md`. Add a separate `[platform]-guide.md` only when a human consumer needs usage instructions that do not belong in the executable prompt.
 
 For platform-specific prompt templates, see:
 - `references/lovable-template.md` — Lovable prompt structure and tips

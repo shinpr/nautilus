@@ -23,36 +23,36 @@ Canonical reference for PRD quality — shared by both authoring (recipe-define)
 
 ## PRD Structure
 
-A nautilus PRD follows a standard structure with additive extensions. See `references/prd-template.md` for the authoritative template.
+A nautilus PRD uses the portions of the standard structure required by its delivery consumer. See `references/prd-template.md` for the available structure.
 
-**Core sections** (standard PRD):
+**Core sections** (include when they carry a delivery decision or required evidence):
 - Overview (one-line summary, background)
-- User Stories
+- Users and Stories
 - Functional Requirements (with EARS-format ACs)
 - Design Context
 - Non-Functional Requirements (including accessibility)
 - Success Criteria (tied to Product Outcomes)
 - Technical Considerations
 
-**Nautilus extensions** (additive, never replace core sections):
+**Nautilus extensions** (include at the smallest scope that affects delivery):
 - Hypothesis & validation references in Overview
-- 4 Risks confidence per user story
+- 4 Risks evidence at the scope that changes delivery readiness
 - Design Context derived from design artifacts and prototypes
 - Unvalidated assumptions section in Technical Considerations
 
 ## User Story Standards
 
-Each user story follows the persona-grounded format with 4 Risks assessment. See `references/user-story-guide.md` for the full guide.
+User stories remain persona-grounded. Record 4 Risks evidence at the smallest scope that changes delivery readiness; shared evidence does not need to be repeated per story. See `references/user-story-guide.md` for the full guide.
 
 Key rules:
 - Reference a specific persona from `docs/product/personas/`, not generic "user"
-- Every story has a 4 Risks confidence table with evidence
+- Each material risk has evidence available to the delivery decision
 - "Validated enough" is judged by cost x risk x reversibility, not a fixed threshold
 - Remaining risks are documented explicitly, not hidden
 
 ## Acceptance Criteria Standards
 
-All functional requirements use EARS-format acceptance criteria. See `references/acceptance-criteria.md` for patterns and examples.
+Use EARS-format acceptance criteria when its event, state, or conditional form makes the requirement more testable or a downstream consumer requires it. See `references/acceptance-criteria.md` for patterns and examples.
 
 Key rules:
 - Use When (event-driven), While (state-driven), or If-Then (conditional) patterns

@@ -7,7 +7,7 @@ description: Manages hypothesis lifecycle, enforces validation criteria, time bu
 
 ## Core Principle
 
-A hypothesis is not a guess — it is a **structured statement with clear validation criteria and a time budget**. Every hypothesis must answer: "How will we know if this is true or false?"
+A hypothesis is not a guess. A hypothesis selected for validation needs a clear decision, evidence criteria, and a stopping condition.
 
 ## Hypothesis Characteristics
 
@@ -34,22 +34,22 @@ The authoritative schema is defined in `references/hypothesis-template.md`. Key 
 - `level`: outcome / opportunity / solution / assumption
 - `status`: draft / testing / validated / invalidated / inconclusive / adopted / rejected / timeout
 - `confidence`: per-risk scores (value, usability, feasibility, viability) on 0-10 scale (see product-principles skill for Confidence Meter definition)
-- `time-budget` and `deadline`: validation time constraints
+- `time-budget` and `deadline`: include when time or calendar limits affect the validation decision
 
 ## Validation Criteria Requirements
 
-Every hypothesis **must** define before testing begins:
+A hypothesis entering validation defines:
 
 1. **We believe that** — the hypothesis statement
 2. **We'll know we're right when** — measurable success criteria
 3. **We'll know we're wrong when** — measurable failure criteria
 4. **Validation method** — how we will test (prototype, data analysis, interview, code spike, market research)
-5. **Time budget** — maximum time investment before forced decision
+5. **Stopping condition** — the evidence, time limit, or cost limit that ends this validation
 
 ## Time Budget and Cutoff
 
-- Every hypothesis gets a **time budget** (e.g., 1d, 1w, 2w)
-- A **deadline** sets the hard cutoff date
+- Give a validation a **time budget** when exploration or evidence collection can expand
+- Add a **deadline** when a calendar cutoff changes the decision
 - When deadline passes without conclusion → status becomes `timeout`
 - Timeout forces a decision: extend (with justification), pivot, or abandon
 - **Never let a hypothesis run indefinitely** — unbounded exploration wastes resources
@@ -75,8 +75,8 @@ When a hypothesis reaches conclusion (validated/invalidated/inconclusive/adopted
 
 - **Separate creation from evaluation**: Don't judge hypotheses while generating them
 - **Seek disconfirming evidence**: Actively look for reasons the hypothesis might be wrong
-- **One hypothesis, one test**: Don't bundle multiple hypotheses into a single validation
-- **Record everything**: Even "obvious" conclusions need recorded reasoning
+- **One decision per validation**: Combine hypotheses when the same evidence resolves the same decision; separate them when bundling would make the result uninterpretable
+- **Record decision-relevant evidence**: Preserve the evidence and reasoning needed to understand or reuse the conclusion
 - **Rejected ≠ worthless**: A rejected hypothesis teaches what doesn't work and why
 - **Inconclusive is honest**: When evidence is insufficient, say so instead of forcing a verdict
 
@@ -86,6 +86,6 @@ Each discipline exists to counter a specific cognitive tendency:
 
 - **Separate creation from evaluation** counters premature judgment that kills divergent thinking
 - **Seek disconfirming evidence** counters the natural pull toward confirming what we already believe
-- **One hypothesis, one test** counters the temptation to bundle tests, which makes results uninterpretable
-- **Time budgets with hard cutoffs** counter unbounded exploration — a hypothesis without a deadline is an excuse to avoid decisions
+- **One decision per validation** keeps results interpretable without forcing duplicate tests that use the same evidence
+- **Stopping conditions** counter unbounded exploration; use time or calendar cutoffs when they change the decision
 - **Confidence can go down** counters the assumption that validation is always forward progress. Negative evidence is equally valuable

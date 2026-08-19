@@ -1,6 +1,6 @@
 ---
 name: recipe-persona
-description: Create or update personas with demographic, contextual, JTBD, and behavioral data
+description: Creates or updates evidence-backed personas with the context and JTBD needed for product decisions. Use when user segments or behavior affect discovery, design, or requirements.
 disable-model-invocation: true
 ---
 
@@ -8,29 +8,13 @@ disable-model-invocation: true
 
 ## Required Skills [LOAD BEFORE EXECUTION]
 
-1. [LOAD IF NOT ACTIVE] `business-context` — VPC Customer Profile for JTBD/pains/gains mapping
-2. [LOAD IF NOT ACTIVE] `design-perspective` — persona template and design principles
+1. [LOAD IF NOT ACTIVE] `design-perspective` — persona template and context criteria
 
-## Orchestrator Definition
+## Conditional Skills [LOAD WHEN TRIGGERED]
 
-**Execution Protocol**:
-1. **Delegate code analysis** to codebase-analyzer when existing code reveals user behavior
-2. **Follow the persona flow** defined below
-3. **Stop at every `[STOP — BLOCKING]` marker** — present findings and CANNOT proceed until user explicitly confirms
+- WHEN VPC, market, or viability evidence informs the persona: [LOAD IF NOT ACTIVE] `business-context`
 
-## Workflow Overview
-
-```
-Input (new persona request / persona update / discovery trigger)
-    ↓
-1. Context Assessment → New vs. Update, existing code?
-    ↓
-2. Research Gathering → User data, interviews, analytics, code analysis
-    ↓
-3. Persona Drafting → Using persona-template.md [Stop: User confirms persona]
-    ↓
-Output: docs/product/personas/persona-[name].md
-```
+Delegate code analysis when repository evidence can answer a current persona question.
 
 ## Execution Decision Flow
 
@@ -42,7 +26,7 @@ Input: $ARGUMENTS
 |-----------|--------|
 | No personas exist | Create from scratch — gather user research or assumptions |
 | Personas exist, new data available | Update existing personas with new evidence |
-| Existing codebase | Invoke codebase-analyzer for real user behavior insights |
+| Existing codebase | Invoke codebase-analyzer when roles, permissions, or implemented workflows can change the persona |
 | Post-interview / post-survey | Update with new primary research |
 
 ### 2. Research Gathering
@@ -55,7 +39,7 @@ Input: $ARGUMENTS
 - Analytics/tracking events (if present)
 
 #### From User Research
-Gather available data:
+Gather the available data that can answer a current persona question:
 - Interview transcripts or summaries
 - Survey results
 - Support ticket patterns
@@ -79,37 +63,32 @@ Use design-perspective skill `references/persona-template.md` to create persona 
 5. **Behavioral Patterns**: Decision-making, adoption tendency, information sources
 6. **Validation Status**: Based on research quality — mark assumptions explicitly
 
-**[STOP — BLOCKING]** Present persona draft to user for confirmation:
+Present the persona draft to the user for confirmation:
 - Complete persona draft
 - Evidence sources and confidence level
 - Assumptions that need validation
 - Connections to existing Opportunities (if any)
 
-**CANNOT write persona file until user explicitly confirms.**
+End the current turn with the persona draft as the workflow output. Write files only after the user confirms that draft in a later turn.
 
 ### 4. File Output
 
-After user approval:
+After that confirmation:
 - Write persona to `docs/product/personas/persona-[name].md`
-- Update any Opportunity files that reference this persona
+- Update an Opportunity file only when the confirmed persona changes its meaning
 - Update journey maps if persona context changed
 
 ## Sub-agent Usage
 
 | Agent | When | Why (context separation benefit) |
 |-------|------|----------------------------------|
-| codebase-analyzer | Existing codebase with user-facing features | Objective analysis of actual user behavior patterns in code |
+| codebase-analyzer | Implemented behavior can answer a current persona question | Objective analysis of actual user behavior patterns in code |
 
 ## Scope Boundaries
 
 **Included**: Persona creation, persona update, integration with VPC and code analysis
 **Not included**: Journey mapping (→ recipe-discover), user story writing (→ recipe-define)
 
-## Completion Criteria
+## Completion
 
-- [ ] Context assessed (create vs. update)
-- [ ] Research gathered (code analysis, user data, market research as available)
-- [ ] Persona drafted with all template sections
-- [ ] Validation status clearly marked (evidence-based vs. assumption)
-- [ ] User confirmed persona
-- [ ] File written to `docs/product/personas/`
+The workflow is complete when the confirmed persona exists, or a no-change result identifies the evidence reused, and the user has received any assumptions that still require validation.

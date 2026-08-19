@@ -1,6 +1,6 @@
 ---
 name: recipe-reflect
-description: Orchestrate structured reflection — update target artifacts with learnings, distill knowledge across hypotheses, and maintain INDEX.md
+description: Orchestrates reflection by updating affected artifacts and distilling reusable knowledge from validation results.
 disable-model-invocation: true
 ---
 
@@ -8,33 +8,10 @@ disable-model-invocation: true
 
 ## Required Skills [LOAD BEFORE EXECUTION]
 
-1. [LOAD IF NOT ACTIVE] `product-principles` — Knowledge Pyramid, Tier definitions, distillation criteria
-2. [LOAD IF NOT ACTIVE] `hypothesis-discipline` — hypothesis lifecycle statuses, confidence scoring
+1. [LOAD IF NOT ACTIVE] `product-principles` — Knowledge Pyramid and promotion criteria
+2. [LOAD IF NOT ACTIVE] `hypothesis-discipline` — validation results, lifecycle status, and confidence changes
 
-## Orchestrator Definition
-
-**Execution Protocol**:
-1. **Delegate distillation** to knowledge-distiller for unbiased pattern extraction
-2. **Follow the reflection flow** defined below
-3. **Stop at every `[STOP — BLOCKING]` marker** — present findings and CANNOT proceed until user explicitly confirms
-
-## Workflow Overview
-
-```
-Input (reflection trigger — hypothesis concluded, Opportunity review, or periodic)
-    ↓
-1. Scope Assessment → Determine reflection level (hypothesis / Opportunity / Vision)
-    ↓
-2. Result Recording → Update target artifacts with outcomes
-    ↓
-3. Knowledge Distillation → knowledge-distiller extracts patterns [Stop: Distillation review]
-    ↓
-4. Knowledge Promotion → Tier 2 → Tier 1 if criteria met
-    ↓
-5. Index Update → Update INDEX.md
-    ↓
-Output: Updated artifacts + learnings + INDEX.md
-```
+Delegate Level 2 and Level 3 distillation to knowledge-distiller for unbiased pattern extraction.
 
 ## Execution Decision Flow
 
@@ -54,15 +31,15 @@ Input: $ARGUMENTS
 
 #### Level 1: Hypothesis Reflection
 1. Verify the hypothesis file has been updated with results (validation results, confidence scores, evidence)
-2. Document learnings: What did we learn regardless of outcome?
+2. Document a learning when the result changes the parent Opportunity or a later decision
 3. Check if this result changes understanding of the parent Opportunity
 
 #### Level 2: Opportunity Reflection
-1. Gather all hypotheses under the target Opportunity
+1. Start from the Opportunity summary or index and load the hypothesis evidence needed to confirm or challenge a candidate pattern
 2. Prepare context for knowledge-distiller (hypothesis summaries, results, confidence changes)
 
 #### Level 3: Vision Reflection
-1. Gather cross-Opportunity data
+1. Gather the cross-Opportunity evidence needed for the outcome, NSM, or Tier 1 decision
 2. Review Product Outcomes — are targets still correct?
 3. Review NSM — still the right connecting metric?
 4. Prepare context for knowledge-distiller
@@ -75,17 +52,17 @@ Input: $ARGUMENTS
 - It proposes Tier 2 learnings (for Opportunity) or Tier 1 promotions (for Vision)
 - It enforces distillation quality criteria (per product-principles skill)
 
-**[STOP — BLOCKING]** Present distillation results to user for review:
+Present distillation results to the user for the knowledge-promotion decision:
 - Extracted patterns and trends
 - Proposed learnings (Tier 2 or Tier 1)
-- Contradictions found (these become priority Discovery targets)
+- Contradictions found and the decisions they may affect
 - Tier promotion proposals with supporting evidence
 
-**CANNOT write learnings or promote Tiers until user explicitly confirms.**
+End the current turn with the distillation result as the workflow output. Promote knowledge only after the user confirms the proposal in a later turn.
 
 ### 4. Knowledge Promotion
 
-After user approval:
+After that confirmation:
 
 #### Tier 3 → Tier 2
 - Write learnings to the Opportunity file's "Tier 2 Learnings" section
@@ -99,7 +76,7 @@ After user approval:
 
 ### 5. Index Update
 
-Update `docs/discovery/INDEX.md` with:
+Update `docs/discovery/INDEX.md` when one of these indexed values changed:
 - Hypothesis status summary (counts by status)
 - Opportunity-to-hypothesis mapping
 - Recent validation results
@@ -117,12 +94,6 @@ Update `docs/discovery/INDEX.md` with:
 **Included**: Result recording, knowledge distillation, Tier promotion, INDEX.md maintenance
 **Not included**: Hypothesis validation (→ recipe-validate), new hypothesis generation (→ recipe-discover)
 
-## Completion Criteria
+## Completion
 
-- [ ] Reflection level determined
-- [ ] Target artifacts updated with results
-- [ ] knowledge-distiller invoked for pattern extraction (Level 2+)
-- [ ] User reviewed distillation proposals
-- [ ] Tier promotions applied (if approved)
-- [ ] `docs/discovery/INDEX.md` updated
-- [ ] Freshness tags current on modified learnings
+The workflow is complete when approved promotions and affected index values are updated, or a no-change result is reported with the evidence and contradictions relevant to the decision.

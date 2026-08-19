@@ -1,54 +1,141 @@
 <p align="center">
-  <img src="assets/banner.jpg" alt="Nautilus — AI-Native Product Management" width="100%" />
+  <img src="assets/banner.jpg" alt="Nautilus" width="100%" />
 </p>
 
-An AI-native product discovery system for Cursor workflows. Connects hypotheses, validation, and PRDs directly to your codebase — so your AI coding assistant has the full context from business problem to implementation.
+# Nautilus
 
-## The Problem with Product Discovery Today
+Turn product questions into evidence-backed PRDs in Cursor.
 
-Most product discovery lives in Notion, Figma comments, and Slack threads. That works fine for humans — but when you hand a PRD to an AI coding assistant, it has no idea *why* those decisions were made, what alternatives were tried, or what assumptions haven't been tested yet.
+Nautilus installs Agent Skills and review agents in your repository. They help you frame opportunities and test the assumptions that could change a product decision. The resulting evidence stays next to the code when implementation begins.
 
-The context gap between "what to build" and "build it" is where products go wrong. And in AI-native development, that gap is even more expensive — because the LLM will confidently build the wrong thing with no way to course-correct.
+## What You Can Do
 
-## What Nautilus Does
+- Frame product opportunities from user feedback, market evidence, or an existing codebase
+- Track hypotheses with explicit success, failure, and stopping conditions
+- Validate Value, Usability, Feasibility, and Viability risks with evidence proportional to the decision
+- Create only the design context needed by a prototype or PRD
+- Produce PRDs that carry the relevant evidence, remaining risks, and design decisions
+- Review documents and validation plans in a separate context before committing important decisions
 
-Nautilus keeps the entire discovery trail in your repo, right next to the code:
+Nautilus does not require a fixed sequence. Start with the recipe that matches the decision in front of you, reuse what already exists, and add an artifact only when it helps the current work.
 
-```
-Business Problem
-      ↓
-  Hypothesis        ← what we believe and why
-      ↓
-  Blueprint         ← shared structural design + visual tokens
-      ↓
-  Validation        ← how we tested it, what we learned
-      ↓
-     PRD            ← traceable to evidence, not assumptions
-      ↓
-  Implementation    ← AI coding assistant sees the full history
-```
+## Quick Start
 
-Every user story in a PRD traces back to validated hypotheses. Every hypothesis has a record of how it was tested. The confidence threshold scales with cost and reversibility — a feature flag experiment needs less proof than a platform migration.
-
-Nothing gets built on vibes alone — but the process isn't heavyweight either. It's hypothesis-driven development with the rigor tuned to what's at stake.
-
-## Requirements
+Requirements:
 
 - [Cursor](https://cursor.com)
-- Node.js (for npx installer only — not required if cloning)
+- Node.js for the `npx` installer
 
-## Installation
-
-### Option A: npx (recommended)
+Install Nautilus in your project:
 
 ```bash
 cd your-project
 npx nautilus-kit install
 ```
 
-This copies `.agents/skills/` and `.cursor/agents/` into your project and creates a `.nautilus-manifest.json` for tracking managed files. You may want to add `.nautilus-manifest.json` to your `.gitignore`.
+Then invoke a recipe in Cursor chat. For example:
 
-### Option B: Clone
+```text
+/recipe-discover Explore why trial users abandon onboarding
+```
+
+The recipe frames Opportunities, asks you to confirm the product scope, and then records the confirmed Opportunities and their hypotheses under `docs/discovery/`.
+
+Other useful starting points:
+
+```text
+/recipe-validate HYPO-001
+/recipe-define Create a PRD from the validated onboarding hypotheses
+/recipe-vision Reassess our product outcomes
+```
+
+## Choose a Recipe
+
+| Command | Use it when you want to |
+|---------|-------------------------|
+| `/recipe-vision` | Define or revise the product vision, outcomes, North Star Metric, or product-specific design principles |
+| `/recipe-persona` | Create or update a persona from research, product evidence, or implemented user roles |
+| `/recipe-discover` | Frame Opportunities and generate hypotheses from the evidence available now |
+| `/recipe-blueprint` | Add the information architecture, flows, content model, brand direction, or AI interaction decisions needed by a prototype or PRD |
+| `/recipe-refine-visuals` | Have a designer refine generated Visual Tokens before prototype testing |
+| `/recipe-validate` | Test a hypothesis with a method suited to its primary risk |
+| `/recipe-reflect` | Update affected artifacts or distill a reusable learning when validation changes a product decision |
+| `/recipe-define` | Turn sufficiently supported hypotheses into a PRD |
+
+Examples:
+
+- For an existing product, `/recipe-discover` can ask the codebase-analyzer to report current behavior before framing an Opportunity.
+- For usability testing, run `/recipe-blueprint` only when shared design context is missing, then use `/recipe-validate` to prepare the prototype prompt and record the result.
+- After validation, use `/recipe-reflect` when the result changes an artifact, reveals a repeated pattern, or affects a later decision.
+
+## Where Nautilus Pauses
+
+Nautilus asks for confirmation before recording product scope, strategy, personas, major design choices, PRDs, visual overrides, or promoted learnings.
+
+Validation pauses before it would use external resources, change the product outcome, or exceed an agreed time or cost boundary. Local analysis and reversible validation within the agreed boundary continue without another approval step.
+
+## What It Writes
+
+Recipes create or update only the artifacts needed for the current work:
+
+```text
+your-project/
+├── .agents/skills/          # Product workflows and shared rules
+├── .cursor/agents/          # Separate-context reviewers and analyzers
+└── docs/
+    ├── product/
+    │   ├── vision.md
+    │   ├── design-principles.md
+    │   ├── learnings.md
+    │   ├── personas/
+    │   └── design/          # IA, flows, content model, brand direction, AI interaction model
+    ├── discovery/
+    │   ├── opportunities/
+    │   ├── hypotheses/
+    │   ├── journeys/
+    │   ├── prototypes/
+    │   └── INDEX.md         # Updated when indexed status or mappings change
+    └── prd/                 # PRDs ready for an implementation workflow
+```
+
+Not every project needs every directory or file.
+
+## How It Works
+
+### Match the evidence to the stakes
+
+Nautilus tracks confidence separately across Value, Usability, Feasibility, and Viability. A small feature behind a flag needs less proof than a platform migration.
+
+### Load only what the current task needs
+
+Artifacts remain available in the repo, but recipes read only the sources that can change the current task. This keeps prior evidence reachable without loading the entire discovery history.
+
+### Review in a separate context
+
+Four agents handle work where a fresh context improves the result:
+
+| Agent | Responsibility |
+|-------|----------------|
+| `doc-reviewer` | Reviews PRDs for unsupported claims, contradictions, missing boundaries, and delivery usability |
+| `codebase-analyzer` | Reports relevant facts about the current implementation |
+| `hypothesis-verifier` | Designs validation that can disprove a hypothesis and checks material confounders |
+| `knowledge-distiller` | Looks across hypothesis evidence for repeated patterns and contradictions |
+
+The authoring recipe does not treat review findings as commands. It checks the evidence behind each one and returns any change to an approved product decision to you.
+
+### Promote repeated findings into product knowledge
+
+Validation results stay with their hypotheses. Reflection promotes a repeated finding to `docs/product/learnings.md` only when independent evidence supports it. Freshness dates keep older learnings visible for review instead of treating them as permanent facts.
+
+## Connecting to Implementation
+
+Nautilus stops at the PRD. The PRD links the approved outcome and requirements to the evidence and design decisions needed for delivery. From there, use your coding assistant or implementation workflow to design, build, and test the change.
+
+## Installation and Updates
+
+The installer copies `.agents/skills/` and `.cursor/agents/` into your project and creates `.nautilus-manifest.json` to track files managed by Nautilus. You may want to add the manifest to `.gitignore`.
+
+To install from a clone instead of `npx`:
 
 ```bash
 git clone https://github.com/shinpr/nautilus.git
@@ -56,175 +143,20 @@ cp -r nautilus/.agents your-project/
 cp -r nautilus/.cursor your-project/
 ```
 
-### Updating
-
-When a new version is released:
+Preview and apply an update:
 
 ```bash
-# Preview what will change
 npx nautilus-kit update --dry-run
-
-# Apply updates
 npx nautilus-kit update
 ```
 
-Files you've modified locally are preserved — the updater only touches files that match the previously installed version. New files are added automatically.
+`update` replaces changed files listed in `.nautilus-manifest.json` and adds new packaged files. Commit or back up edits to managed files before updating. Files outside the manifest are left untouched.
+
+Check the installed version and managed file count:
 
 ```bash
-# Check installed version
 npx nautilus-kit status
 ```
-
-## Usage
-
-Recipes are Cursor Agent Skills — invoke them by typing `/recipe-vision`, `/recipe-discover`, etc. in Cursor chat.
-
-This is not a linear process — it's a cycle. You can start from anywhere and loop back as you learn.
-
-```
-     Discover → Validate → Define → Implement
-         ↑                              |
-         └──────── Reflect ◀────────────┘
-```
-
-Reflect is not something you do at the end. You run it every time validation results come in. The learnings it accumulates make each round of Discovery sharper.
-
-### Starting a new product
-
-1. **`/recipe-vision`** — Define your product vision, outcomes (business and product), and North Star Metric. Also set 3-5 design principles specific to your product.
-
-2. **`/recipe-persona`** — Create your first personas. Define who you're building for: their jobs-to-be-done, pains, gains, and behavioral patterns.
-
-3. **`/recipe-discover`** — Discover opportunities from two angles: business (market size, competitive landscape, business model) and user (pain points, unmet needs, journey gaps). Generates hypotheses with validation methods and time budgets.
-
-4. **`/recipe-blueprint`** — Define shared structural design context before prototype-heavy validation: information architecture, key flows, content model, brand direction, and Visual Tokens. Add AI interaction model when the product has AI features.
-
-5. **`/recipe-refine-visuals`** — Optional side workflow for a design-capable reviewer to refine the auto-derived Visual Tokens after blueprint creation. This is for the case where the main workflow was advanced by someone without token-level design judgment, and a designer later steps in to improve the visual system without changing the rest of the flow.
-
-6. **`/recipe-validate`** — Test each hypothesis with the method that fits its risk type:
-   - **Value risk** → market research, competitive analysis, user interviews
-   - **Usability risk** → prototype testing (Nautilus generates prompts with your design context baked in — paste them into [Lovable](https://lovable.dev), [v0](https://v0.dev), or any prototyping tool)
-   - **Feasibility risk** → code spikes, architecture review
-   - **Viability risk** → business model analysis, ROI calculation
-
-7. **`/recipe-reflect`** — After each round of validation, run a reflection. It extracts learnings from your results, spots patterns across hypotheses, and builds up your product knowledge base.
-
-8. **`/recipe-define`** — When hypotheses are validated enough, turn them into a PRD. Each user story shows its confidence scores and remaining risks. The PRD carries Design Context and stable AC IDs for downstream traceability.
-
-### Adding to an existing product
-
-1. **`/recipe-vision`** — Articulate the vision and outcomes for what already exists.
-2. **`/recipe-persona`** — Document your current users. If you have a codebase, the codebase-analyzer reports what's actually built today.
-3. **`/recipe-discover`** — The codebase-analyzer objectively reports what exists today. Opportunities emerge from the gap between current state and where you want to be. From here, the cycle is the same.
-
-### Day-to-day patterns
-
-**Exploring a new feature idea:**
-`/recipe-discover` → `/recipe-blueprint` → `/recipe-validate` → `/recipe-reflect` → `/recipe-define`
-
-**A designer joins after blueprint is already done:**
-`/recipe-blueprint` by a non-designer → `/recipe-refine-visuals` by a design-capable reviewer → `/recipe-validate`
-
-**User feedback came in:**
-`/recipe-discover` with the feedback as input → update existing opportunities or discover new ones
-
-**Validation results are in:**
-`/recipe-validate` to record results → `/recipe-reflect` to extract learnings → if confidence is high enough, `/recipe-define`
-
-**Testing usability with a prototype:**
-`/recipe-blueprint` captures shared structure and Visual Tokens. `/recipe-validate` then generates a prompt with those artifacts, your design principles, persona, and hypothesis baked in. Paste it into Lovable or v0. Test the prototype, then record results back in `/recipe-validate`.
-
-If the blueprint was created by someone without deep design expertise, a designer can run `/recipe-refine-visuals` as a side workflow before validation. It updates the same `brand-direction.md` file, so downstream prototype generation uses the refined token set without needing a separate branch in the process.
-
-**Quarterly review or post-launch retro:**
-`/recipe-reflect` at the Vision level — reassess whether your outcomes and NSM are still right based on everything you've learned.
-
-## How It Works
-
-### Workflow recipes
-
-| Command | What it does |
-|---------|-------------|
-| `/recipe-vision` | Define or update product vision, outcomes, and North Star Metric |
-| `/recipe-persona` | Create or update personas with JTBD integration |
-| `/recipe-discover` | Find opportunities, generate hypotheses from business + user angles |
-| `/recipe-blueprint` | Define structural design artifacts and Visual Tokens for consistent prototypes |
-| `/recipe-refine-visuals` | Let a design-capable reviewer refine Visual Tokens after blueprint creation without changing the main workflow |
-| `/recipe-validate` | Test hypotheses with type-appropriate methods |
-| `/recipe-define` | Turn validated hypotheses into a PRD with confidence scores |
-| `/recipe-reflect` | Run retrospectives, distill learnings, update the knowledge base |
-
-Each recipe has **stop points** where it pauses for your input before proceeding. You stay in control of every key decision.
-
-### Foundational skills
-
-These skills provide the frameworks and principles that shape product decisions. Cursor loads them automatically when the conversation context matches:
-
-| Skill | What it does |
-|-------|-------------|
-| `product-principles` | 4 Risks framework (Value, Usability, Feasibility, Viability), OST hierarchy, knowledge tiers |
-| `hypothesis-discipline` | Hypothesis lifecycle, confidence scoring, time budgets |
-| `design-perspective` | Design principles, state design (loading/empty/error), WCAG 2.2 AA |
-| `blueprint-standards` | Information architecture, flows, content model, brand direction, Visual Tokens |
-| `prototype-guide` | Design context injection for prototype generation prompts |
-| `business-context` | BMC, Value Proposition Canvas, market analysis frameworks |
-
-### Subagents (`.cursor/agents/`)
-
-Four specialized agents handle tasks where **context separation matters** — they run in isolated sessions to eliminate the biases that come from reviewing your own work:
-
-| Agent | Why it's separate |
-|-------|------------------|
-| `doc-reviewer` | Reviews PRDs without the author's "I wrote it, so it's correct" bias |
-| `codebase-analyzer` | Reports facts about existing code without being influenced by the current hypothesis |
-| `hypothesis-verifier` | Designs validation tests that can actually *disprove* the hypothesis (confirmation bias is real) |
-| `knowledge-distiller` | Looks across all hypotheses to find patterns, not just the ones you're focused on |
-
-Context separation is a deliberate design choice. Cursor's subagent architecture makes it possible to give each agent a clean context window — no carry-over from the session that generated the artifact being reviewed.
-
-### Knowledge architecture
-
-As hypotheses accumulate, you can't read everything every time. Nautilus manages this with three tiers:
-
-- **Tier 1** (`docs/product/learnings.md`) — Distilled principles from 3+ validated hypotheses. Loaded every session. A few dozen lines that capture what your team has learned.
-- **Tier 2** (within each Opportunity file) — Learnings specific to a problem area. Loaded when you're working in that area.
-- **Tier 3** (`docs/discovery/hypotheses/`) — Raw hypothesis files with full evidence. Referenced on demand.
-
-Learnings get promoted up the tiers as evidence accumulates. Stale insights (6-12 months without revalidation) get flagged.
-
-## Repo Structure
-
-```
-your-project/
-├── .agents/skills/          # Skills and workflow definitions
-├── .cursor/agents/          # Subagent specifications
-└── docs/                    # Created as you use the recipes
-    ├── product/             # Vision, personas, design principles, learnings
-    │   └── design/          # Blueprint: IA, flows, content model, brand direction, AI interaction model
-    ├── discovery/           # Opportunities, hypotheses, journeys, prototypes
-    │   └── INDEX.md         # Auto-generated summary of discovery status
-    ├── prd/                 # PRDs (ready for development)
-    ├── design/              # Design Docs
-    ├── adr/                 # Architecture Decision Records
-    ├── ui-spec/             # UI Specifications
-    └── plans/               # Work Plans
-```
-
-## Why Keep Discovery in Your Repo
-
-**Why keep discovery in the repo?** AI coding assistants work best when they can access all relevant context. When hypotheses, validation results, and PRDs live alongside code, the LLM has the full picture — from "why are we building this" to "how is it implemented." Repo is the one place every tool in the chain can read.
-
-**Why Cursor skills?** Product discovery isn't a separate activity from development — it's the upstream part of the same flow. Skills and subagents let the AI handle structured, hypothesis-driven workflows while you keep using the editor you already know.
-
-**Why subagents for review?** When the same session creates a document and reviews it, the review is generous. Separate agents with fresh context catch what the creator misses. Same reason code review exists.
-
-**Why confidence thresholds instead of binary validation?** A $500 feature behind a feature flag needs less proof than a platform migration. The Confidence Meter (0-10) lets you match rigor to risk.
-
-## Connecting to Implementation
-
-Nautilus produces PRDs designed to flow directly into LLM-powered implementation workflows. The PRD format, along with Design Docs, ADRs, UI Specs, and Work Plans, follows conventions that AI coding assistants can pick up and execute — from design through implementation and testing.
-
-Nautilus handles everything up to the PRD. From there, hand it to your AI coding assistant or any LLM-powered implementation workflow — with full traceability back to the evidence that justified building it.
 
 ## License
 

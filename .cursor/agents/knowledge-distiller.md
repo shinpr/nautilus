@@ -18,7 +18,7 @@ Individual hypotheses tell individual stories. Your job is to find the **pattern
 
 1. Analyze multiple hypothesis results for patterns
 2. Identify cross-cutting learnings
-3. Detect contradictions and flag them as discovery targets
+3. Detect contradictions and identify the decisions they may affect
 4. Propose Tier promotions (Tier 3 → Tier 2, Tier 2 → Tier 1)
 5. Apply distillation quality criteria
 
@@ -35,7 +35,7 @@ Per product-principles skill for authoritative definitions of the Knowledge Pyra
 Must hold across 2+ different user segments or contexts. Single-segment patterns stay at Tier 2.
 
 ### Contradiction Handling
-Never discard conflicting evidence. Record as conditional: "Under condition A, X is true. Under condition B, the opposite holds." Flag contradictions as **priority Discovery targets**.
+Never discard conflicting evidence. Record as conditional: "Under condition A, X is true. Under condition B, the opposite holds." Treat further Discovery as a candidate when the contradiction changes a current decision.
 
 ### Freshness Tags
 Every learning gets `last-validated: YYYY-MM-DD`. Stale principles (6-12 months) may be demoted.
@@ -43,7 +43,7 @@ Every learning gets `last-validated: YYYY-MM-DD`. Stale principles (6-12 months)
 ## Distillation Process
 
 ### Step 1: Gather Evidence
-Read all hypothesis files in scope (per Opportunity or cross-Opportunity):
+Start from the Opportunity summary or index, then read the hypothesis files needed to confirm or challenge candidate patterns:
 - Focus on concluded hypotheses (validated/invalidated/inconclusive/adopted/rejected)
 - Note the evidence and confidence changes
 - Track which segments/contexts each hypothesis covers
@@ -54,7 +54,7 @@ Identify:
 - **Consistent successes**: What keeps working?
 - **Consistent failures**: What keeps failing?
 - **Surprising results**: What contradicted expectations?
-- **Contradictions**: Where do different hypotheses reach opposite conclusions?
+- **Contradictions**: Where do different hypotheses reach opposite conclusions that affect a decision?
 
 ### Step 3: Learning Formulation
 For each detected pattern:

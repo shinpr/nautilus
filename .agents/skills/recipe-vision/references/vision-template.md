@@ -1,5 +1,7 @@
 # Product Vision & Strategy
 
+Use the sections that carry the current product-strategy decision. Omit cycle plans, metrics, or histories that have no current consumer.
+
 ## Product Vision
 
 [2-3 sentence aspirational statement of what this product will become and why it matters]
@@ -56,7 +58,7 @@ The single metric that connects Product Outcomes to Business Outcomes.
 
 Reference: `docs/product/design-principles.md`
 
-[List the 3-5 product-specific design principles that guide all design decisions]
+[List the small set of product-specific design principles needed to resolve recurring trade-offs]
 
 1. **[Principle name]** — [Brief explanation of the trade-off this principle resolves]
 2. **[Principle name]** — [Brief explanation]

@@ -1,6 +1,6 @@
 ---
 name: recipe-define
-description: Orchestrate PRD creation from validated hypotheses — standard PRD output with 4 Risks confidence and hypothesis traceability
+description: Creates a delivery-ready PRD from validated hypotheses with material 4 Risks evidence and necessary traceability. Use when turning validation results into requirements or user stories.
 disable-model-invocation: true
 ---
 
@@ -8,32 +8,14 @@ disable-model-invocation: true
 
 ## Required Skills [LOAD BEFORE EXECUTION]
 
-1. [LOAD IF NOT ACTIVE] `prd-standards` — PRD template, user story format, acceptance criteria
-2. [LOAD IF NOT ACTIVE] `product-principles` — 4 Risks, Confidence Meter, MVP scope
-3. [LOAD IF NOT ACTIVE] `design-perspective` — state design requirements, WCAG 2.2 AA for PRD completeness
+1. [LOAD IF NOT ACTIVE] `prd-standards` — PRD structure, user stories, and acceptance criteria
+2. [LOAD IF NOT ACTIVE] `product-principles` — 4 Risks, confidence thresholds, and MVP scope
 
-## Orchestrator Definition
+## Conditional Skills [LOAD WHEN TRIGGERED]
 
-**Execution Protocol**:
-1. **Delegate review** to doc-reviewer for bias-free quality assessment
-2. **Follow the definition flow** defined below
-3. **Stop at every `[STOP — BLOCKING]` marker** — present findings and CANNOT proceed until user explicitly confirms
+- WHEN the PRD contains user-facing interaction, Design Context, or accessibility requirements: [LOAD IF NOT ACTIVE] `design-perspective`
 
-## Workflow Overview
-
-```
-Input (validated hypotheses + Opportunity context)
-    ↓
-1. Readiness Assessment → Check hypothesis confidence levels
-    ↓
-2. PRD Drafting → Using prd-template.md with nautilus extensions
-    ↓
-3. User Story Generation → 4 Risks per story [Stop: User reviews PRD draft]
-    ↓
-4. Quality Review → doc-reviewer assesses the PRD [Stop: User reviews feedback]
-    ↓
-Output: docs/prd/[feature-name]-prd.md
-```
+Delegate the completed draft to doc-reviewer for bias-free quality assessment before asking for final product approval.
 
 ## Execution Decision Flow
 
@@ -62,32 +44,20 @@ Assess whether hypotheses are "validated enough" for PRD creation:
 Use prd-standards skill `references/prd-template.md` to create the PRD:
 
 1. **Overview**: Link to Opportunity and validated hypotheses
-2. **User Stories**: Apply 4 Risks assessment per story (see step 3)
-3. **Functional Requirements**: Derive from validated hypotheses with EARS-format ACs (see prd-standards skill `references/acceptance-criteria.md`). Assign stable AC IDs (`AC-001`, `AC-002`, ...) sequentially across the PRD
-4. **Design Context**: Populate from project design artifacts and validation artifacts:
-   - **Design Principles**: Copy from `docs/product/design-principles.md`
-   - **Tone & Voice / Visual Direction**: Copy from `docs/product/design/brand-direction.md` when available
-   - **Design Guardrails**: Derive Do/Don't guidance from principles and prototype learnings
-   - **Visual Reference**: Link relevant blueprint and prototype files
+2. **User Stories**: Record material 4 Risks evidence at the smallest scope that changes delivery readiness
+3. **Functional Requirements**: Derive from validated hypotheses with testable ACs. Use EARS patterns when they clarify the trigger, state, or condition. Assign stable AC IDs when an implementation, test, or planning consumer references individual ACs; keep criteria unnumbered when no such consumer exists
+4. **Design Context**: Include the project design decisions and validation artifacts needed by delivery; link the source instead of copying unrelated sections
 5. **Success Criteria**: Tie to Product Outcomes from `docs/product/vision.md`
 6. **Assumptions (Unvalidated)**: Explicitly list hypotheses NOT yet validated that the PRD proceeds with
 
 ### 3. User Story Generation
 
-For each user story, follow prd-standards skill `references/user-story-guide.md`:
+Use prd-standards skill `references/user-story-guide.md` for the user stories:
 
 1. Write in persona-grounded format (As a [persona name], I want to...)
-2. Assess 4 Risks confidence with evidence
+2. Assess the risk dimensions that can change the story's delivery decision, reusing shared evidence instead of repeating it
 3. Determine delivery readiness per story
-4. Document remaining risks per story
-
-**[STOP — BLOCKING]** Present PRD draft to user for review:
-- Complete PRD draft
-- User stories with 4 Risks confidence summary
-- Highlighted remaining risks and unvalidated assumptions
-- MVP scope recommendation (Must Have / Should Have / Could Have)
-
-**CANNOT proceed to quality review until user explicitly approves the draft.**
+4. Document a remaining risk at story level only when it differs from the shared assessment
 
 ### 4. Quality Review
 
@@ -96,21 +66,18 @@ For each user story, follow prd-standards skill `references/user-story-guide.md`
 - It checks: completeness, internal consistency, evidence backing
 - It identifies gaps the author might have missed
 
-**[STOP — BLOCKING]** Present doc-reviewer feedback to user:
-- doc-reviewer's assessment
-- Required changes (if any)
-- Approval recommendation
+For each finding:
+- apply it when it corrects an approved requirement, accepted decision, repository rule, observable correctness, or necessary evidence;
+- decline it with evidence when it adds scope, reverses an exclusion, duplicates proof, or has no justified effect on the PRD consumer; or
+- return it to the user when resolving it changes the product outcome or a major approved decision.
 
-**CANNOT finalize PRD until user explicitly approves after reviewing feedback.**
+Re-run doc-reviewer only when an applied change can invalidate its assessment. Present the reviewed PRD, remaining risks, declined findings, and approval recommendation to the user for final product approval.
 
-If changes required:
-1. Apply changes to the PRD
-2. Re-run doc-reviewer if changes are significant
-3. Present updated PRD for final approval
+End the current turn with the reviewed draft as the workflow output. Write the PRD only after the user confirms that draft in a later turn.
 
 ### 5. File Output
 
-After user approval:
+After that confirmation:
 - Write PRD to `docs/prd/[feature-name]-prd.md`
 
 ## Sub-agent Usage
@@ -121,24 +88,13 @@ After user approval:
 
 ## PRD Structure
 
-The PRD output follows a standard structure:
-- **Core sections**: Overview, User Stories, Functional Requirements, Design Context, Non-Functional Requirements, Success Criteria, Technical Considerations
-- **nautilus extensions**: Hypothesis & validation references, 4 Risks confidence per user story, design context references, unvalidated assumptions section
-- **Storage**: `docs/prd/`
-
-The extensions are additive — they don't replace or modify the core sections. This means the PRD can be consumed by any downstream workflow that expects the standard structure.
+The PRD uses the sections and nautilus extensions needed by its delivery consumer and is stored in `docs/prd/`. Shared evidence belongs at feature scope; story sections contain only story-specific decisions or differences.
 
 ## Scope Boundaries
 
 **Included**: PRD creation, user story generation, quality review
 **Not included**: Hypothesis validation (→ recipe-validate), Design Doc/ADR creation, implementation
 
-## Completion Criteria
+## Completion
 
-- [ ] Hypothesis readiness assessed
-- [ ] PRD drafted with hypothesis refs, 4 Risks, remaining risks
-- [ ] User stories include 4 Risks confidence per story
-- [ ] User reviewed PRD draft
-- [ ] doc-reviewer assessed quality
-- [ ] User approved final PRD
-- [ ] PRD written to `docs/prd/`
+The workflow is complete when the confirmed PRD exists at its target path and the user has received the remaining risks, declined findings, and any unresolved product decision.

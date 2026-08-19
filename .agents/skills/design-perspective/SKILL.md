@@ -19,7 +19,7 @@ Design is not a phase — it is a **perspective applied across all product proce
 
 ## Design Principles Reference
 
-Always reference `docs/product/design-principles.md` for this product's design principles (3-5 principles).
+Before making a UX or product-design decision, read `docs/product/design-principles.md` when it exists. An accessibility-only check does not require it unless the check also changes a product-specific trade-off.
 
 Design principles are **product-specific guardrails** that guide all design decisions. They are not generic best practices but choices that reflect this product's values and trade-offs.
 
@@ -28,8 +28,8 @@ Design principles are **product-specific guardrails** that guide all design deci
 See product-principles skill for the authoritative State Design definition (Loading / Empty / Error / Partial / Success).
 
 In practice:
-- PRDs should specify behavior for all states in acceptance criteria
-- Prototypes should demonstrate at minimum: empty, success, and error states
+- PRDs should specify behavior for the states relevant to each acceptance boundary
+- Prototypes should demonstrate the states needed to test the current hypothesis
 - User stories addressing Usability risk should consider all relevant states
 
 ## Accessibility Standards
@@ -46,7 +46,7 @@ Accessibility is a **Usability risk** dimension — factor it into confidence sc
 
 ## Persona and Context Integration
 
-When making design decisions, always reference:
+When they can change the design decision, reference:
 - **Personas** (`docs/product/personas/`) — Who is using this? What's their context, skill level, environment?
 - **Journey Maps** (`docs/discovery/journeys/`) — Where in their journey does this interaction happen?
 
@@ -79,7 +79,7 @@ When validating Usability risk through prototypes:
 ## Key Principles for Daily Decisions
 
 - **Design principles first**: Check product design principles before making UX decisions
-- **All states matter**: A feature isn't designed until all states are considered
+- **Relevant states matter**: Cover each state that can occur or change the acceptance decision
 - **Accessibility is not optional**: WCAG 2.2 AA is the baseline, not a stretch goal
 - **Context over aesthetics**: A beautiful design that ignores user context fails the Usability risk
 - **Test with real scenarios**: Validate UX with persona-grounded scenarios, not abstract tasks

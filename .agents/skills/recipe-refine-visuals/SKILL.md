@@ -22,7 +22,8 @@ This is intentionally a side workflow. Use it when a human with design judgment 
    - heading text is at least 1.25x the body size in the primary hierarchy step
    - spacing tokens form a consistent increasing scale without reversals
 4. Present overrides and rationale to the user
-5. After approval, update the same `brand-direction.md` file and mark the source as `expert-refined`
+5. End the current turn with the proposed overrides as the workflow output
+6. After the user confirms those overrides in a later turn, update the same `brand-direction.md` file and mark the source as `expert-refined`
 
 ## Scope Boundaries
 

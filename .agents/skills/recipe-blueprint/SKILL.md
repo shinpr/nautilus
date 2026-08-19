@@ -1,6 +1,6 @@
 ---
 name: recipe-blueprint
-description: Use when you need shared structural design context before prototype-heavy validation — define information architecture, user flows, content model, brand direction, Visual Tokens, and AI interaction model
+description: Selects and defines the structural design context needed by a prototype or PRD. Use when shared information architecture, flows, content, brand, Visual Tokens, or AI interaction decisions are missing.
 disable-model-invocation: true
 ---
 
@@ -8,57 +8,22 @@ disable-model-invocation: true
 
 ## Required Skills [LOAD BEFORE EXECUTION]
 
-1. [LOAD IF NOT ACTIVE] `blueprint-standards` — blueprint templates and artifact rules
-2. [LOAD IF NOT ACTIVE] `design-perspective` — design principles, persona grounding, accessibility
-3. [LOAD IF NOT ACTIVE] `product-principles` — traceability, state design, validation discipline
+1. [LOAD IF NOT ACTIVE] `blueprint-standards` — artifact selection and templates
 
-## Orchestrator Definition
+## Conditional Skills [LOAD WHEN TRIGGERED]
 
-**Execution Protocol**:
-1. Follow the blueprint flow below
-2. Stop at every `[STOP — BLOCKING]` marker
+- WHEN the selected artifacts define user-facing states, persona-sensitive behavior, or accessibility boundaries: [LOAD IF NOT ACTIVE] `design-perspective`
+- WHEN the selected artifacts require state-design or product-confidence rules: [LOAD IF NOT ACTIVE] `product-principles`
 
-## Workflow Overview
-
-```
-Input (vision, personas, opportunities, existing product context)
-    ↓
-1. Context Reading
-    ↓
-2. IA and Key Flow Definition
-    ↓
-3. Content Model Definition
-    ↓
-4. Brand Direction and Visual Tokens
-    ↓
-5. AI Interaction Model (if applicable)
-    ↓
-Output: docs/product/design/ artifacts
-```
+A blueprint may contain any subset of the defined artifacts.
 
 ## Execution Decision Flow
 
 ### 1. Context Reading
 
-Read:
-- `docs/product/vision.md`
-- `docs/product/design-principles.md`
-- `docs/product/personas/`
-- `docs/discovery/opportunities/`
-- `docs/discovery/journeys/` when available
-- `docs/product/learnings.md` when available
+Identify the prototype or PRD decision that needs shared design context. Read only the available vision, principles, personas, Opportunities, journeys, and learnings that can change that decision.
 
-**Gate**: vision, design principles, at least one persona, and at least one opportunity must exist.
-
-If the gate fails:
-- list the missing prerequisites explicitly
-- recommend the corresponding recipe:
-  - missing vision or design principles → `recipe-vision`
-  - missing personas → `recipe-persona`
-  - missing opportunities → `recipe-discover`
-- present the missing prerequisites to the user and stop
-
-Do not invent missing prerequisite artifacts in order to continue.
+When missing evidence leaves the design outcome materially ambiguous, name the exact product decision required from the user. Otherwise proceed with the available evidence and mark the assumption in the affected artifact.
 
 ### 2. IA and Key Flow Definition
 
@@ -66,15 +31,15 @@ Use blueprint-standards references:
 - `references/ia-template.md`
 - `references/flow-template.md`
 
-Capture:
+When navigation or task sequence affects the consumer, capture:
 - page hierarchy
 - navigation model
 - labeling and taxonomy
-- 3-5 critical user flows with entry, success, and recovery paths
+- the critical user flows needed by the consumer, with entry, success, and relevant recovery paths
 
 ### 3. Content Model Definition
 
-Use `references/content-model-template.md` to define:
+When entity shape or lifecycle affects the consumer, use `references/content-model-template.md` to define:
 - core entities
 - relationships
 - lifecycle states when relevant
@@ -82,7 +47,7 @@ Use `references/content-model-template.md` to define:
 
 ### 4. Brand Direction and Visual Tokens
 
-Use `references/brand-direction-template.md` to define:
+When visual consistency affects the consumer, use `references/brand-direction-template.md` to define:
 - tone and voice
 - color and typography direction
 - motion and density choices
@@ -90,33 +55,34 @@ Use `references/brand-direction-template.md` to define:
 - Visual Tokens for prototype consistency
 
 Visual Tokens are concrete prototype values, not final production tokens.
-Always derive and write the Visual Tokens section using the `Derived From` rules in the template. Mark `Source` as `auto-derived` unless a design expert later refines the values.
+When Visual Tokens are needed, derive them using the `Derived From` rules in the template and mark `Source` as `auto-derived` unless a design expert later refines the values.
 
 ### 5. AI Interaction Model
 
-If the product includes AI-powered features, use `references/ai-interaction-model-template.md` to define:
+If AI behavior affects the current prototype or PRD, use `references/ai-interaction-model-template.md` to define:
 - interaction patterns
 - disclosure and confidence communication
 - guardrails
 - error taxonomy
 
-**[STOP — BLOCKING]** Present the blueprint draft to the user:
-- IA summary
-- key flows
-- content model summary
-- brand direction and Visual Tokens
-- AI interaction model summary when applicable
+Present the blueprint decisions that were created to the user for confirmation.
+
+End the current turn with the blueprint draft as the workflow output. Write artifacts only after the user confirms those decisions in a later turn.
 
 ### 6. File Output
 
-After user approval, write:
-- `docs/product/design/information-architecture.md`
-- `docs/product/design/content-model.md`
-- `docs/product/design/brand-direction.md`
-- `docs/product/design/ai-interaction-model.md` when applicable
-- `docs/product/design/flows/flow-{name}.md`
+After that confirmation, write only the artifacts produced for the current consumer:
+- `docs/product/design/information-architecture.md` when IA was needed
+- `docs/product/design/content-model.md` when a content model was needed
+- `docs/product/design/brand-direction.md` when brand direction or Visual Tokens were needed
+- `docs/product/design/ai-interaction-model.md` when AI interaction decisions were needed
+- `docs/product/design/flows/flow-{name}.md` for each required flow
 
 ## Scope Boundaries
 
 **Included**: structural design artifacts for reusable prototype and PRD context
 **Not included**: pixel-perfect specs, final production design system, implementation details
+
+## Completion
+
+The workflow is complete when the confirmed artifacts needed by the current consumer exist, or a no-change result identifies the reusable artifacts and any unresolved design decision.

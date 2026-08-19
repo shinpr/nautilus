@@ -7,7 +7,9 @@
 - Exploring design variations quickly
 - Responsive component behavior testing
 
-## Prompt Structure
+## Prompt Section Library
+
+Use only the sections that affect the component or its evaluation.
 
 ```markdown
 Build [component/page description] used by [persona name] in [scenario] to [action/decision].
@@ -26,7 +28,7 @@ Failure: [what disproves the hypothesis].
 - Interactions:
   - [trigger] → [response]
   - [trigger] → [response]
-- States:
+- Relevant states:
   - Default: [appearance]
   - Hover: [appearance]
   - Active: [appearance]
@@ -37,7 +39,7 @@ Failure: [what disproves the hypothesis].
 ### Data
 [Provide concrete sample data as JSON or TypeScript interface]
 
-## Design
+## Design (when visual decisions affect the component)
 - Color palette: [hex values with semantic meaning — primary for actions, red for errors, etc.]
 - Border-radius: [values]
 - Shadows: [values]
@@ -47,7 +49,7 @@ Failure: [what disproves the hypothesis].
 Override shadcn/ui defaults:
 - [specific overrides — colors, radius, shadows]
 
-## Responsive
+## Responsive (when responsive behavior is part of the decision)
 - Mobile (< 768px): [layout changes]
 - Desktop (>= 768px): [layout]
 
@@ -76,13 +78,7 @@ Import components from the registry instead of default shadcn/ui.
 
 ### Iterative Refinement
 
-v0 supports conversational refinement:
-1. Generate the base component
-2. "Make the card corners more rounded and add a subtle shadow"
-3. "Add a dark mode variant"
-4. "Make it responsive — stack vertically on mobile"
-
-Each refinement builds on the previous output.
+Use conversational refinement for the smallest change needed to expose the next validation boundary. Preserve an accepted result instead of regenerating unrelated parts.
 
 ### What Works Well
 
@@ -97,9 +93,9 @@ Each refinement builds on the previous output.
 - Use inline mock data rather than external APIs
 - Keep interactions to the component being tested
 
-## Guide File Template
+## Optional Guide File
 
-The guide file (`v0-guide.md`) should contain:
+Create `v0-guide.md` only when a human evaluator or integrator needs instructions outside the executable prompt. Include only the applicable items:
 
 1. **What this component tests** — the hypothesis in plain language
 2. **How to evaluate** — what to look at in the generated output

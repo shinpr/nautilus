@@ -1,7 +1,7 @@
 {
   "name": "nautilus-kit",
-  "version": "0.2.0",
-  "description": "Product management skills and agents for AI coding assistants — hypothesis-driven discovery, validation, and PRD creation",
+  "version": "0.3.0",
+  "description": "Repository-based product discovery for Cursor, from product questions to evidence-backed PRDs",
   "license": "MIT",
   "author": "Shinsuke Kagawa",
   "repository": {
@@ -21,11 +21,11 @@
   "keywords": [
     "agent-skills",
     "cursor",
-    "ai",
     "product-management",
     "product-discovery",
+    "product-validation",
+    "hypothesis-testing",
     "hypothesis-driven",
-    "prd",
-    "design-thinking"
+    "prd"
   ]
 }

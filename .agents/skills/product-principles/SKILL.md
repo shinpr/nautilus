@@ -8,14 +8,14 @@ description: Defines 4 Risks confidence thresholds, OST hierarchy levels, Knowle
 ## Core Philosophy
 
 1. **Hypothesis Until Proven**: Every assumption is a hypothesis until validated with evidence. Treat unvalidated ideas as hypotheses, not facts
-2. **Value Traceability**: From hypothesis to validation to user story to PRD to implementation to test — maintain traceability across the entire chain
+2. **Value Traceability**: Preserve the links needed to connect a decision or implementation back to its supporting outcome and evidence
 3. **Feedback Accumulation**: Every outcome (including failures) is a learning asset. Never delete invalidated hypotheses — they inform future decisions
 4. **Validated Enough, Not Perfect**: Don't wait for perfect validation. Use cost x risk x reversibility to determine sufficient confidence
-5. **Artifacts Over Notes**: Keep structural decisions in designated repo artifacts so prototypes, PRDs, and implementation can reuse the same context
+5. **Proportionate Artifacts**: Keep durable decisions in repo artifacts when a downstream consumer will reuse them; no-change and reuse are valid outcomes
 
 ## Opportunity Solution Tree (OST) Hierarchy
 
-All product work follows this hierarchy:
+Use this hierarchy to distinguish outcomes, opportunities, solutions, assumptions, and experiments when those distinctions affect the current decision:
 
 ```
 Outcome
@@ -39,11 +39,11 @@ Product Outcome
 | Opportunity | Large | `docs/discovery/opportunities/` | User problems, needs, desires |
 | Solution | Medium | PRD (`docs/prd/`) | Feature candidates addressing an Opportunity |
 | Assumption | Small | `docs/discovery/hypotheses/` | Premises underlying a Solution |
-| User Story | Smallest | Within PRD | Minimum unit of value with all 4 Risks validated |
+| User Story | Smallest | Within PRD | Minimum unit of value with sufficient evidence for its material risks |
 
 ## 4 Risks (Authoritative Definition)
 
-A user story is the **minimum unit of value**. All four risks must be **sufficiently validated**:
+A user story is the **minimum unit of value**. Consider all four risks and gather enough evidence for the dimensions that can change the delivery decision:
 
 - **Value** — Will users use/buy this? Does it solve their problem?
 - **Usability** — Can users figure out how to use it? Does the UX work?
@@ -69,7 +69,7 @@ Track confidence per risk dimension (0-10):
 | Medium cost | 5-7 | Data |
 | High-cost, irreversible (platform change, pricing change) | 8+ | Test results |
 
-PRDs must show each user story's **current confidence and remaining risks**. Enable PO/DRI to judge "validated enough for delivery", not just "fully validated".
+PRDs show **current confidence and remaining risks** at the smallest scope that changes a delivery decision. Avoid repeating the same assessment on every story when the evidence and decision are shared.
 
 ## Knowledge Pyramid (Authoritative Definition)
 
@@ -91,7 +91,7 @@ Distillation criteria (enforced by knowledge-distiller):
 
 ## State Design (Authoritative Definition)
 
-Every user-facing interaction must account for these states:
+For each user-facing interaction, account for the states that can occur or change its acceptance:
 
 | State | Description |
 |-------|-------------|
@@ -101,11 +101,11 @@ Every user-facing interaction must account for these states:
 | **Partial** | Some data available, some not — show available, indicate missing |
 | **Success** | Normal state with data — primary design focus |
 
-PRDs should specify behavior for all states in acceptance criteria. Prototypes should demonstrate at minimum: empty, success, and error states.
+PRDs and prototypes cover the states needed to define or validate the current interaction. Omit states that cannot occur or do not affect the decision.
 
 ## Key Principles for Daily Decisions
 
-- **3+ Solutions Test**: If an Opportunity can't generate 3+ different Solutions, it may actually be a Solution disguised as an Opportunity (Torres principle). See `references/opportunity-template.md` for Opportunity file structure
+- **3+ Solutions Test**: Use the ability to identify meaningfully different Solutions as a diagnostic for whether an Opportunity is framed too narrowly. A failed diagnostic is a framing signal, not an obligation to manufacture alternatives. See `references/opportunity-template.md` for Opportunity file structure
 - **Don't Kill the Product**: Never sever the connection to business outcomes, but use NSM to balance against pure metric-chasing pressure
 - **Design is a Perspective, Not a Phase**: Design thinking applies across all processes — discovery, validation, definition, delivery, and reflection
 - **Cycle, Not Phases**: Discovery → Validation → Definition → Delivery → Reflection is a continuous cycle. Start from anywhere
@@ -118,4 +118,4 @@ These principles exist to counter natural tendencies in product thinking:
 - **3+ Solutions Test** counters the tendency to treat the first Solution idea as the Opportunity itself. When only one Solution comes to mind, the framing is likely too narrow
 - **Confidence Meter (0-10)** counters all-or-nothing thinking about validation. The threshold varies by cost × risk × reversibility because not everything needs the same evidence level
 - **Knowledge Pyramid tiers** counter both context overload (loading every hypothesis) and knowledge loss (forgetting past learnings). The 3+ rule for Tier 1 promotion ensures principles are grounded, not anecdotal
-- **State Design** counters the tendency to design only for the happy path. Acceptance criteria that cover only Success state miss the states users encounter most during onboarding
+- **State Design** counters the tendency to design only for the happy path. Cover the non-success states that can occur and affect the current interaction

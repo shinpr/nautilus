@@ -11,10 +11,10 @@ confidence:
   feasibility: 0
   viability: 0
 opportunity: OPP-NNN       # linked opportunity
-time-budget: 2w            # time investment limit
-deadline: YYYY-MM-DD       # hard cutoff date
+# Add time-budget only when validation work can expand.
+# Add deadline only when a calendar cutoff changes the decision.
 created: YYYY-MM-DD
-validated:                 # filled on conclusion
+# Add validated on conclusion.
 ---
 ```
 
@@ -34,7 +34,7 @@ validated:                 # filled on conclusion
 
 - **Type**: [prototype / data-analysis / interview / code-spike / market-research / expert-review]
 - **Description**: [How will we test this?]
-- **Time budget**: [Maximum time to invest]
+- **Stopping condition**: [Evidence, time, or cost boundary that ends this validation]
 - **Resources needed**: [What do we need?]
 
 ## Context
@@ -49,6 +49,8 @@ validated:                 # filled on conclusion
 
 ### Confidence Update
 
+Record the risk dimensions whose evidence changed.
+
 | Risk | Before | After | Evidence |
 |------|--------|-------|----------|
 | Value | 0 | - | |
@@ -60,9 +62,9 @@ validated:                 # filled on conclusion
 
 [What did we learn? Was the hypothesis confirmed, denied, or inconclusive?]
 
-### Next Actions
+### Next Decision
 
-- [ ] [Action based on the result]
+[Decision changed by the result, or no further action]
 
 ---
 

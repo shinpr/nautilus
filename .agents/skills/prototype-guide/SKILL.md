@@ -1,6 +1,6 @@
 ---
 name: prototype-guide
-description: Generates high-quality prototype prompts with design context injection, user flows, state transitions, concrete mock data, and prompt/guide separation. Use when creating prototypes, writing prompts for Lovable or v0, or validating Usability and Value risks through tangible artifacts.
+description: Generates prototype prompts focused on one validation decision with the design context, flows, states, and data needed to observe it. Use when creating prototypes or validating Usability and Value risks with Lovable, v0, or similar tools.
 ---
 
 # Prototype Generation Guide
@@ -11,28 +11,28 @@ Prototypes are **hypothesis validation tools**, not final implementations. They 
 
 ## Design Context Injection
 
-Every prototype prompt must include relevant design context. Without context, prototypes validate nothing — they just produce arbitrary UI.
+Every prototype prompt includes the context needed to make its validation result meaningful.
 
-### Required Context (always include)
+### Core Context
 
-1. **Design Principles** — from `docs/product/design-principles.md`
-2. **Persona** — from `docs/product/personas/`
-3. **Scenario** — what the user is trying to accomplish, their context
-4. **Hypothesis Under Test** — what specific question this prototype answers
+1. **Scenario** — what the user is trying to accomplish and under what conditions
+2. **Decision Under Test** — what specific question the prototype must answer
 
-### Recommended Context (include when available)
+### Include When It Changes the Prototype or Evaluation
 
-5. **State Design** — which states to demonstrate (see product-principles skill)
-6. **Accessibility Requirements** — WCAG 2.2 AA baseline
-7. **Existing Components** — design system components for consistency
-8. **Journey Position** — where in the user journey this occurs
+3. **Design Principles** — relevant trade-offs from `docs/product/design-principles.md`
+4. **Persona** — characteristics that affect behavior or evaluation
+5. **State Design** — states needed to test the decision (see product-principles skill)
+6. **Accessibility Requirements** — requirements exercised by the prototype
+7. **Existing Components** — design system components needed for consistency
+8. **Journey Position** — when surrounding journey context affects the interaction
 
 ### Blueprint Context (include when `docs/product/design/` exists)
 
 See `blueprint-standards` Artifact Overview for the full blueprint artifact list.
 
 Read only the blueprint artifacts relevant to the hypothesis under test:
-- **Always**: `brand-direction.md` when present
+- **Include** `brand-direction.md` when visual direction or tokens affect the prototype or its evaluation
 - **Include** `information-architecture.md` when navigation, page hierarchy, or screen placement matters
 - **Include** the specific file in `flows/` that matches the interaction under test
 - **Include** `content-model.md` when realistic entities, relationships, or stateful data shape the prototype
@@ -57,12 +57,12 @@ How to connect prototypes with your design system depends on your setup:
 
 - **Prototype to learn, not to ship**: Don't over-invest in polish
 - **Context makes the difference**: A prototype without design context is just random UI
-- **One hypothesis per prototype**: Keep focused on a single question
+- **One decision focus per prototype**: Combine hypotheses only when the same flow and evidence resolve them together
 - **Describe flows, not just screens**: Step-by-step user flow improves output quality more than isolated UI descriptions
 - **Describe states, not just features**: State transitions and recovery behavior matter as much as happy-path layout
 - **Use concrete data and copy**: Realistic sample data and actual UI copy produce better prototypes than placeholders
 - **Separate machine prompt from human guide**: Keep executable instructions and evaluation notes in different files
-- **Save everything**: Code, screenshots, and learnings all go to `docs/discovery/prototypes/`
+- **Preserve reusable evidence**: Save the artifacts needed to evaluate, reproduce, or reuse the result
 - **Iterate, don't restart**: Build on previous prototypes
 
 For detailed prompt construction patterns, DS integration examples, platform-specific tips, and scope boundaries, see `references/prototype-prompt-guide.md`.

@@ -215,7 +215,7 @@ function main(argv = process.argv, cwd = process.cwd()) {
 
   function showHelp() {
     console.log(`
-nautilus-kit — Product management skills & agents for AI coding assistants
+nautilus-kit — Repository-based product discovery for Cursor
 
 Usage:
   npx nautilus-kit install              Install skills and agents

@@ -31,7 +31,7 @@ So that [expected value/benefit]
 
 ## 4 Risks Assessment
 
-Every user story must assess Cagan's 4 Risks:
+Consider Cagan's 4 Risks for the delivery decision. Record a risk at story level when its evidence or readiness differs from the feature-level assessment:
 
 ### Value Risk
 - **Question**: Will users use this? Does it solve their problem?
@@ -64,19 +64,19 @@ Every user story must assess Cagan's 4 Risks:
 
 ## "Validated Enough" Judgment
 
-Not all stories need 8+ on every risk. The threshold depends on **cost x risk x reversibility**:
+The evidence threshold for a material risk depends on **cost x risk x reversibility**:
 
 | Condition | Required Confidence | Example |
 |-----------|--------------------|---------|
-| Low-cost, reversible | 3-4 on each risk | Feature flag experiment, UI tweak |
-| Medium cost | 5-7 on each risk | New feature requiring 1-2 sprints |
-| High-cost, irreversible | 8+ on each risk | Platform migration, pricing model change |
+| Low-cost, reversible | 3-4 | Feature flag experiment, UI tweak |
+| Medium cost | 5-7 | New feature requiring 1-2 sprints |
+| High-cost, irreversible | 8+ | Platform migration, pricing model change |
 
 ### Decision Framework
 
 ```
-For each user story:
-1. Assess current confidence per risk (0-10)
+For each delivery decision:
+1. Identify the risk dimensions that can change readiness
 2. Determine the cost/reversibility of implementation
 3. Compare confidence to threshold
 4. If any risk is below threshold:
@@ -88,7 +88,7 @@ For each user story:
 
 ## User Story in PRD
 
-In the PRD, each user story includes:
+In the PRD, each user story includes its readiness and only the risk evidence that differs from the shared assessment:
 
 ```markdown
 #### US-N: [Story Title]
@@ -97,23 +97,16 @@ As a [persona name]
 I want to [goal]
 So that [benefit]
 
-**4 Risks Confidence (0-10):**
-| Risk | Score | Evidence | Remaining Risk |
-|------|-------|----------|----------------|
-| Value | N | [evidence] | [what's uncertain] |
-| Usability | N | [evidence] | [what's uncertain] |
-| Feasibility | N | [evidence] | [what's uncertain] |
-| Viability | N | [evidence] | [what's uncertain] |
-
 **Delivery readiness**: [validated enough / needs more validation]
 **Rationale**: [cost x risk x reversibility justification]
+**Story-specific risk**: [material difference from shared evidence, or omit]
 ```
 
 ## Common Anti-Patterns
 
 - **Solution-as-story**: "As a user, I want a dropdown menu" — this describes implementation, not value
 - **Epic disguised as story**: Too large to deliver independently. Split it
-- **Missing persona**: "As a user" instead of referencing a specific persona
+- **Missing user evidence**: A generic actor hides a behaviorally relevant distinction
 - **No evidence**: Confidence scores without backing evidence
 - **Perfectionism**: Waiting for all 8+ before proceeding when 3-4 would suffice
 - **Ignoring remaining risks**: Not documenting what's still uncertain

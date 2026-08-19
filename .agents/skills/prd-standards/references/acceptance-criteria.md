@@ -66,7 +66,7 @@ then the system shall display cached results with a "Results may be outdated" ba
 
 ## State-Aware ACs
 
-Every user-facing AC should consider relevant states:
+For each user-facing requirement, add ACs for the states that can occur and change acceptance:
 
 | State | AC Pattern |
 |-------|-----------|
@@ -82,7 +82,7 @@ Every user-facing AC should consider relevant states:
 - **Testable**: Can be verified with a clear pass/fail
 - **Specific**: No ambiguity about expected behavior
 - **Independent**: Each AC tests one behavior
-- **Complete**: Covers the full behavior including edge cases
+- **Sufficient**: Covers the required behavior and material edge cases
 
 ### Do
 - Use concrete values ("within 2 seconds", "maximum 50 characters")
@@ -97,6 +97,8 @@ Every user-facing AC should consider relevant states:
 - Forget edge cases and error states
 
 ## AC in PRD Format
+
+When an implementation, test, or planning consumer references individual ACs, assign stable IDs:
 
 ```markdown
 - [ ] Requirement: [Description]
@@ -126,6 +128,6 @@ then the system shall disable all non-essential animations.
 
 Each AC should be traceable:
 - **User Story** → AC tests a specific aspect of the story's value
-- **4 Risks** → ACs collectively cover all four risk dimensions
+- **Material Risks** → ACs cover behavior needed to contain or verify the risks that affect delivery
 - **Design States** → ACs specify behavior for each relevant state
-- **Implementation/Test** → Stable AC IDs (`AC-001`, `AC-002`, ...) can be referenced in downstream specs, plans, and tests
+- **Implementation/Test** → Assign stable AC IDs (`AC-001`, `AC-002`, ...) when downstream specs, plans, or tests reference individual ACs; otherwise keep the criteria unnumbered

@@ -1,26 +1,31 @@
 {
   "name": "nautilus-kit",
-  "version": "0.3.0",
-  "description": "Repository-based product discovery for Cursor, from product questions to evidence-backed PRDs",
+  "version": "1.0.0",
+  "description": "Repository-based product discovery for Cursor and Codex, from product questions to evidence-backed PRDs",
   "license": "MIT",
   "author": "Shinsuke Kagawa",
   "repository": {
     "type": "git",
-    "url": "https://github.com/shinpr/nautilus"
+    "url": "git+https://github.com/shinpr/nautilus.git"
   },
   "bin": {
-    "nautilus-kit": "./bin/cli.js"
+    "nautilus-kit": "bin/cli.js"
+  },
+  "scripts": {
+    "test": "node --test scripts/tests/*.test.js"
   },
   "files": [
     "bin/",
     ".agents/",
     ".cursor/",
+    ".codex/",
     "assets/",
     "LICENSE"
   ],
   "keywords": [
     "agent-skills",
     "cursor",
+    "codex",
     "product-management",
     "product-discovery",
     "product-validation",

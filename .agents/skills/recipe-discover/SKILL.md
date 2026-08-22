@@ -21,7 +21,7 @@ Delegate code analysis when a separate repository reading can change the discove
 
 ### 1. Context Assessment
 
-Input: $ARGUMENTS
+Input: Use the path or text supplied with the explicit skill invocation. If no input was supplied and the target cannot be inferred unambiguously, ask for it.
 
 **Assess the starting point:**
 

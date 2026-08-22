@@ -1,0 +1,7 @@
+interface:
+  display_name: "recipe-define"
+  short_description: "Create an evidence-backed PRD"
+  default_prompt: "Use $recipe-define to create a PRD: "
+
+policy:
+  allow_implicit_invocation: false

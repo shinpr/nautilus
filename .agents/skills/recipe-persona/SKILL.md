@@ -20,7 +20,7 @@ Delegate code analysis when repository evidence can answer a current persona que
 
 ### 1. Context Assessment
 
-Input: $ARGUMENTS
+Input: Use the path or text supplied with the explicit skill invocation. If no input was supplied and the target cannot be inferred unambiguously, ask for it.
 
 | Situation | Action |
 |-----------|--------|

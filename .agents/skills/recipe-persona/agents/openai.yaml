@@ -1,0 +1,7 @@
+interface:
+  display_name: "recipe-persona"
+  short_description: "Create an evidence-backed persona"
+  default_prompt: "Use $recipe-persona to create or update a persona: "
+
+policy:
+  allow_implicit_invocation: false

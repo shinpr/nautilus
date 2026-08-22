@@ -4,158 +4,128 @@
 
 # Nautilus
 
-Turn product questions into evidence-backed PRDs in Cursor.
+Turn product questions into testable hypotheses, working prototypes, and evidence-backed PRDs in Cursor or Codex.
 
-Nautilus installs Agent Skills and review agents in your repository. They help you frame opportunities and test the assumptions that could change a product decision. The resulting evidence stays next to the code when implementation begins.
+Nautilus keeps discovery work in your repository, where later sessions can reuse what earlier ones learned. Start with a rough question or whatever evidence already exists, including the codebase itself. Run only the workflow you need. Nautilus adds only what the current question requires. The resulting evidence and decisions are still there when you validate, write the PRD, or start implementation.
 
 ## What You Can Do
 
-- Frame product opportunities from user feedback, market evidence, or an existing codebase
-- Track hypotheses with explicit success, failure, and stopping conditions
-- Validate Value, Usability, Feasibility, and Viability risks with evidence proportional to the decision
-- Create only the design context needed by a prototype or PRD
-- Produce PRDs that carry the relevant evidence, remaining risks, and design decisions
-- Review documents and validation plans in a separate context before committing important decisions
-
-Nautilus does not require a fixed sequence. Start with the recipe that matches the decision in front of you, reuse what already exists, and add an artifact only when it helps the current work.
+- Turn rough questions and existing evidence into focused opportunities and hypotheses
+- Test assumptions about customer value, usability, technical feasibility, and business viability
+- Generate a self-contained HTML prototype grounded in your product context
+- Optionally export a ready-to-use prototype prompt for Lovable or v0
+- Turn validated work into a PRD without losing the evidence and open risks behind it
 
 ## Quick Start
 
-Requirements:
+You need Node.js and either [Cursor](https://cursor.com) or [Codex](https://developers.openai.com/codex).
 
-- [Cursor](https://cursor.com)
-- Node.js for the `npx` installer
+From your project directory, install Nautilus for the client you use:
 
-Install Nautilus in your project:
+| Client | Install command |
+|--------|-----------------|
+| Cursor | `npx nautilus-kit install --target cursor` |
+| Codex | `npx nautilus-kit install --target codex` |
+| Both | `npx nautilus-kit install --target all` |
 
-```bash
-cd your-project
-npx nautilus-kit install
-```
+`npx nautilus-kit install` is shorthand for the Cursor installation. Open a new Cursor or Codex session in the project after installation.
 
-Then invoke a recipe in Cursor chat. For example:
+Then start with a plain request:
 
-```text
-/recipe-discover Explore why trial users abandon onboarding
-```
+| Goal | Cursor | Codex |
+|------|--------|-------|
+| Explore a product problem | `/recipe-discover Explore why trial users abandon onboarding` | `$recipe-discover Explore why trial users abandon onboarding` |
+| Generate a prototype | `/recipe-validate Make a prototype for HYPO-001` | `$recipe-validate Make a prototype for HYPO-001` |
+| Create a PRD | `/recipe-define Create a PRD from the validated onboarding hypotheses` | `$recipe-define Create a PRD from the validated onboarding hypotheses` |
 
-The recipe frames Opportunities, asks you to confirm the product scope, and then records the confirmed Opportunities and their hypotheses under `docs/discovery/`.
+Cursor invokes recipes with `/recipe-*`; Codex uses the same recipe name with `$recipe-*`.
 
-Other useful starting points:
+## Recipes
 
-```text
-/recipe-validate HYPO-001
-/recipe-define Create a PRD from the validated onboarding hypotheses
-/recipe-vision Reassess our product outcomes
-```
+Recipes are independent workflows. Run one when you need it, or combine them as the work progresses.
 
-## Choose a Recipe
+| Recipe | Use it to |
+|--------|-----------|
+| `recipe-vision` | Define or revise the product vision, outcomes, success measures, or product-specific design principles |
+| `recipe-persona` | Create or update a persona from research, product evidence, or implemented user roles |
+| `recipe-discover` | Frame opportunities and generate hypotheses from the evidence available now |
+| `recipe-blueprint` | Define the structure, key flows, content, visual direction, or AI interactions needed by a prototype or PRD |
+| `recipe-refine-visuals` | Refine colors, typography, spacing, and other visual direction before prototype testing |
+| `recipe-validate` | Choose an appropriate validation method, generate a prototype when needed, and record the resulting evidence |
+| `recipe-prototype-prompt` | Export a prompt for Lovable, v0, or a similar external prototype generator |
+| `recipe-reflect` | Update affected product artifacts or preserve a reusable learning after validation |
+| `recipe-define` | Turn sufficiently supported hypotheses into a PRD |
 
-| Command | Use it when you want to |
-|---------|-------------------------|
-| `/recipe-vision` | Define or revise the product vision, outcomes, North Star Metric, or product-specific design principles |
-| `/recipe-persona` | Create or update a persona from research, product evidence, or implemented user roles |
-| `/recipe-discover` | Frame Opportunities and generate hypotheses from the evidence available now |
-| `/recipe-blueprint` | Add the information architecture, flows, content model, brand direction, or AI interaction decisions needed by a prototype or PRD |
-| `/recipe-refine-visuals` | Have a designer refine generated Visual Tokens before prototype testing |
-| `/recipe-validate` | Test a hypothesis with a method suited to its primary risk |
-| `/recipe-reflect` | Update affected artifacts or distill a reusable learning when validation changes a product decision |
-| `/recipe-define` | Turn sufficiently supported hypotheses into a PRD |
+## Prototype Generation
 
-Examples:
+For usability hypotheses, `recipe-validate` generates a self-contained HTML prototype in `docs/discovery/prototypes/`. It uses the relevant hypothesis, persona, design decisions, and existing UI as source material.
 
-- For an existing product, `/recipe-discover` can ask the codebase-analyzer to report current behavior before framing an Opportunity.
-- For usability testing, run `/recipe-blueprint` only when shared design context is missing, then use `/recipe-validate` to prepare the prototype prompt and record the result.
-- After validation, use `/recipe-reflect` when the result changes an artifact, reveals a repeated pattern, or affects a later decision.
-
-## Where Nautilus Pauses
-
-Nautilus asks for confirmation before recording product scope, strategy, personas, major design choices, PRDs, visual overrides, or promoted learnings.
-
-Validation pauses before it would use external resources, change the product outcome, or exceed an agreed time or cost boundary. Local analysis and reversible validation within the agreed boundary continue without another approval step.
-
-## What It Writes
-
-Recipes create or update only the artifacts needed for the current work:
+If you prefer to build the prototype in Lovable or v0, use `recipe-prototype-prompt` instead. It writes a self-contained prompt for the selected platform; it does not generate the HTML itself.
 
 ```text
-your-project/
-├── .agents/skills/          # Product workflows and shared rules
-├── .cursor/agents/          # Separate-context reviewers and analyzers
-└── docs/
-    ├── product/
-    │   ├── vision.md
-    │   ├── design-principles.md
-    │   ├── learnings.md
-    │   ├── personas/
-    │   └── design/          # IA, flows, content model, brand direction, AI interaction model
-    ├── discovery/
-    │   ├── opportunities/
-    │   ├── hypotheses/
-    │   ├── journeys/
-    │   ├── prototypes/
-    │   └── INDEX.md         # Updated when indexed status or mappings change
-    └── prd/                 # PRDs ready for an implementation workflow
+Cursor: /recipe-prototype-prompt HYPO-001 for Lovable
+Codex:  $recipe-prototype-prompt HYPO-001 for Lovable
 ```
 
-Not every project needs every directory or file.
+## What Stays in the Repository
 
-## How It Works
+Each recipe reads what already exists and adds only the files needed for the current work. Later sessions and implementation work can use the same record:
 
-### Match the evidence to the stakes
+```text
+docs/
+├── product/       # Vision, personas, design decisions, and reusable learnings
+├── discovery/     # Opportunities, hypotheses, journeys, evidence, and prototypes
+└── prd/           # Product requirements ready for implementation
+```
 
-Nautilus tracks confidence separately across Value, Usability, Feasibility, and Viability. A small feature behind a flag needs less proof than a platform migration.
+Validation results stay with their hypotheses. PRDs link back to the opportunities, hypotheses, prototypes, and product decisions they rely on.
 
-### Load only what the current task needs
-
-Artifacts remain available in the repo, but recipes read only the sources that can change the current task. This keeps prior evidence reachable without loading the entire discovery history.
-
-### Review in a separate context
-
-Four agents handle work where a fresh context improves the result:
-
-| Agent | Responsibility |
-|-------|----------------|
-| `doc-reviewer` | Reviews PRDs for unsupported claims, contradictions, missing boundaries, and delivery usability |
-| `codebase-analyzer` | Reports relevant facts about the current implementation |
-| `hypothesis-verifier` | Designs validation that can disprove a hypothesis and checks material confounders |
-| `knowledge-distiller` | Looks across hypothesis evidence for repeated patterns and contradictions |
-
-The authoring recipe does not treat review findings as commands. It checks the evidence behind each one and returns any change to an approved product decision to you.
-
-### Promote repeated findings into product knowledge
-
-Validation results stay with their hypotheses. Reflection promotes a repeated finding to `docs/product/learnings.md` only when independent evidence supports it. Freshness dates keep older learnings visible for review instead of treating them as permanent facts.
-
-## Connecting to Implementation
-
-Nautilus stops at the PRD. The PRD links the approved outcome and requirements to the evidence and design decisions needed for delivery. From there, use your coding assistant or implementation workflow to design, build, and test the change.
+Local, reversible work continues without repeated approval. Nautilus asks before recording product scope, strategy, major design choices, or a PRD.
 
 ## Installation and Updates
 
-The installer copies `.agents/skills/` and `.cursor/agents/` into your project and creates `.nautilus-manifest.json` to track files managed by Nautilus. You may want to add the manifest to `.gitignore`.
+### Project installation
 
-To install from a clone instead of `npx`:
+Use the commands in [Quick Start](#quick-start) to install Nautilus in the current project.
+
+### User installation
+
+Use `--user` to make Nautilus available across projects:
 
 ```bash
-git clone https://github.com/shinpr/nautilus.git
-cp -r nautilus/.agents your-project/
-cp -r nautilus/.cursor your-project/
+npx nautilus-kit install --target cursor --user
+npx nautilus-kit install --target codex --user
+npx nautilus-kit install --target all --user
 ```
 
-Preview and apply an update:
+User-scoped skills are installed in `~/.agents/skills/`. Cursor agents go to `~/.cursor/agents/`; Codex agents go to `${CODEX_HOME:-~/.codex}/agents/`.
+
+### Updates
+
+Nautilus remembers whether you installed Cursor, Codex, or both, so the same update command works for either client:
 
 ```bash
 npx nautilus-kit update --dry-run
 npx nautilus-kit update
 ```
 
-`update` replaces changed files listed in `.nautilus-manifest.json` and adds new packaged files. Commit or back up edits to managed files before updating. Files outside the manifest are left untouched.
+For a user installation, add `--user`. To change the installed clients during an update, specify the target:
 
-Check the installed version and managed file count:
+```bash
+npx nautilus-kit update --target cursor
+npx nautilus-kit update --target codex
+npx nautilus-kit update --target all
+```
+
+Updates add new managed files and replace unchanged managed files while preserving local modifications and unrelated files.
+
+Open a new Cursor or Codex session after updating so it loads the new workflows and agents.
+
+Check the installed version and selected clients with:
 
 ```bash
 npx nautilus-kit status
+npx nautilus-kit status --user
 ```
 
 ## License

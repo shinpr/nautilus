@@ -10,7 +10,7 @@ disable-model-invocation: true
 
 ### 1. Context Assessment
 
-Input: $ARGUMENTS
+Input: Use the path or text supplied with the explicit skill invocation. If no input was supplied and the target cannot be inferred unambiguously, ask for it.
 
 | Situation | Mode | Action |
 |-----------|------|--------|

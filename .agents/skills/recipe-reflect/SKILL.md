@@ -17,7 +17,7 @@ Delegate Level 2 and Level 3 distillation to knowledge-distiller for unbiased pa
 
 ### 1. Scope Assessment
 
-Input: $ARGUMENTS
+Input: Use the path or text supplied with the explicit skill invocation. If no input was supplied and the target cannot be inferred unambiguously, ask for it.
 
 **Determine the reflection level** (see `references/reflection-guide.md`):
 

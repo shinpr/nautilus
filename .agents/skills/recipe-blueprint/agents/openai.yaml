@@ -1,0 +1,7 @@
+interface:
+  display_name: "recipe-blueprint"
+  short_description: "Create decision-relevant design context"
+  default_prompt: "Use $recipe-blueprint to create design context: "
+
+policy:
+  allow_implicit_invocation: false

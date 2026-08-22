@@ -1,0 +1,7 @@
+interface:
+  display_name: "recipe-reflect"
+  short_description: "Reflect validation into product knowledge"
+  default_prompt: "Use $recipe-reflect to reflect on validation: "
+
+policy:
+  allow_implicit_invocation: false

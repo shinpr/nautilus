@@ -1,0 +1,7 @@
+interface:
+  display_name: "recipe-prototype-prompt"
+  short_description: "Export an external prototype prompt"
+  default_prompt: "Use $recipe-prototype-prompt to export a prototype prompt: "
+
+policy:
+  allow_implicit_invocation: false

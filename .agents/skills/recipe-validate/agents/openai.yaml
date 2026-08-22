@@ -1,0 +1,7 @@
+interface:
+  display_name: "recipe-validate"
+  short_description: "Validate a product hypothesis"
+  default_prompt: "Use $recipe-validate to validate: "
+
+policy:
+  allow_implicit_invocation: false

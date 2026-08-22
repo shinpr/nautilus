@@ -22,7 +22,7 @@ Delegate validation design to hypothesis-verifier for bias-free assessment.
 
 ### 1. Hypothesis Assessment
 
-Input: $ARGUMENTS
+Input: Use the path or text supplied with the explicit skill invocation. If no input was supplied and the target cannot be inferred unambiguously, ask for it.
 
 Read the target hypothesis file(s). Understand:
 - What is being tested (the hypothesis statement)
@@ -55,24 +55,19 @@ Execute validation based on the risk type and method:
 | Risk Type | Validation Methods | Tools |
 |-----------|-------------------|-------|
 | **Value** | Market research, user interviews, competitive analysis, landing page test | Web search, survey analysis |
-| **Usability** | Prototype testing, usability study, interaction analysis | Prototype generation (per prototype-guide skill) |
+| **Usability** | Prototype testing, usability study, interaction analysis | prototype-generator (per prototype-guide skill) |
 | **Feasibility** | Code spike, architecture review, dependency analysis | codebase-analyzer, code execution |
 | **Viability** | Business model analysis, ROI calculation, regulatory review | Web search, BMC/VPC analysis |
 
 #### Prototype Generation (for Usability validation)
-When generating prototypes:
-1. Construct prompt using prototype-guide skill `references/prototype-prompt-guide.md`
-2. Inject the design context that changes the prototype or its evaluation
-3. When `docs/product/design/` exists, read only the blueprint artifacts relevant to the prototype:
-   - see `blueprint-standards` Artifact Overview for the full artifact list
-   - read `brand-direction.md` when visual direction or tokens affect the prototype or its evaluation
-   - read `information-architecture.md` when page hierarchy or navigation matters
-   - read the specific file in `flows/` that matches the interaction under test
-   - read `content-model.md` when mock data shape or entity relationships matter
-   - read `ai-interaction-model.md` only for AI-powered features
-   - if a relevant artifact is missing, say so explicitly instead of inferring a missing file
-4. Generate prototype with appropriate tool
-5. Save the output needed to evaluate, reproduce, or reuse the result to `docs/discovery/prototypes/`
+Invoke `prototype-generator` in a separate context:
+
+1. Pass `hypothesis_path` as the canonical target hypothesis path.
+2. Pass one exact `output_path` per invocation. Use `docs/discovery/prototypes/hypo-{id}-prototype.html` by default; when the confirmed validation design requires separate artifacts, use `docs/discovery/prototypes/hypo-{id}-{variant}-prototype.html` for each artifact.
+3. The generator reads the decision-relevant product and design sources directly and writes one self-contained HTML artifact at that path. The validation design determines whether one artifact or separate variant artifacts supply sufficient evidence.
+4. Consume its completion report as prototype-readiness evidence. When it returns `blocked`, resolve only the named incomplete condition before invoking it again.
+5. Collect the observations defined by the confirmed validation design before recording a hypothesis result. When observation has not run, report the prototype as ready and validation as pending; use `inconclusive` only when executed validation produced insufficient evidence.
+6. Continue validation and result recording in the parent context; prototype-generator does not update the hypothesis record.
 
 #### Market Research (for Value/Viability validation)
 Use web search to gather market data. See product-principles skill `references/mvp-definition.md` for scope assessment.
@@ -108,6 +103,7 @@ When a hypothesis with a deadline reaches it without conclusion:
 | Agent | When | Why (context separation benefit) |
 |-------|------|----------------------------------|
 | hypothesis-verifier | Always (validation design) | Eliminates confirmation bias in test design |
+| prototype-generator | Prototype validation | Keeps generated frontend code and visual iteration out of validation design and result-recording context |
 | codebase-analyzer | Feasibility validation | Objective code analysis without hypothesis bias |
 
 ## Scope Boundaries

@@ -1,0 +1,7 @@
+interface:
+  display_name: "recipe-vision"
+  short_description: "Define product vision and outcomes"
+  default_prompt: "Use $recipe-vision to define or update product vision: "
+
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,7 @@
+interface:
+  display_name: "recipe-discover"
+  short_description: "Frame opportunities and hypotheses"
+  default_prompt: "Use $recipe-discover to explore: "
+
+policy:
+  allow_implicit_invocation: false

@@ -21,7 +21,7 @@ Delegate the completed draft to doc-reviewer for bias-free quality assessment be
 
 ### 1. Readiness Assessment
 
-Input: $ARGUMENTS
+Input: Use the path or text supplied with the explicit skill invocation. If no input was supplied and the target cannot be inferred unambiguously, ask for it.
 
 Assess whether hypotheses are "validated enough" for PRD creation:
 

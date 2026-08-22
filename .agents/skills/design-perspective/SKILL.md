@@ -79,7 +79,7 @@ When validating Usability risk through prototypes:
 ## Key Principles for Daily Decisions
 
 - **Design principles first**: Check product design principles before making UX decisions
-- **Relevant states matter**: Cover each state that can occur or change the acceptance decision
+- **Relevant states matter**: Implement the states that can occur and affect the acceptance decision; classify the others as `not_applicable`
 - **Accessibility is not optional**: WCAG 2.2 AA is the baseline, not a stretch goal
 - **Context over aesthetics**: A beautiful design that ignores user context fails the Usability risk
 - **Test with real scenarios**: Validate UX with persona-grounded scenarios, not abstract tasks

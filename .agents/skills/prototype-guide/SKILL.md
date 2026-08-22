@@ -1,68 +1,40 @@
 ---
 name: prototype-guide
-description: Generates prototype prompts focused on one validation decision with the design context, flows, states, and data needed to observe it. Use when creating prototypes or validating Usability and Value risks with Lovable, v0, or similar tools.
+description: Defines evidence-grounded prototype quality and external-generator prompt construction. Use when generating or evaluating a prototype, or exporting a prompt for Lovable, v0, or a similar tool.
 ---
 
-# Prototype Generation Guide
+# Prototype Guide
 
 ## Purpose
 
-Prototypes are **hypothesis validation tools**, not final implementations. They test Usability and Value risks by making ideas tangible enough for evaluation.
+A prototype makes one product decision observable before delivery. Apply product evidence and design decisions that affect that observation; leave unrelated implementation choices to the generator.
 
-## Design Context Injection
+## Required Context
 
-Every prototype prompt includes the context needed to make its validation result meaningful.
+Start from:
 
-### Core Context
+1. the hypothesis and its success/failure criteria;
+2. the persona and scenario when they change behavior or evaluation;
+3. the product and design sources selected by `references/prototype-quality.md`.
 
-1. **Scenario** — what the user is trying to accomplish and under what conditions
-2. **Decision Under Test** — what specific question the prototype must answer
+Classify a missing input as blocking only when it controls the tested flow or interpretation. Name the missing decision and the evidence that would resolve it.
 
-### Include When It Changes the Prototype or Evaluation
+## Shared Prototype Contract
 
-3. **Design Principles** — relevant trade-offs from `docs/product/design-principles.md`
-4. **Persona** — characteristics that affect behavior or evaluation
-5. **State Design** — states needed to test the decision (see product-principles skill)
-6. **Accessibility Requirements** — requirements exercised by the prototype
-7. **Existing Components** — design system components needed for consistency
-8. **Journey Position** — when surrounding journey context affects the interaction
+- Focus on one validation decision. Combine hypotheses only when the same interaction and evidence resolve them together.
+- Make the critical flow, consequences, and relevant recovery behavior observable.
+- Use domain-realistic content and data rather than generic placeholders.
+- Apply the highest-priority available design source instead of re-inferring existing decisions.
+- Classify Loading, Empty, Error, Partial, and Success as `required` or `not_applicable`. Implement the states that can occur and affect the validation decision; record a reason for every `not_applicable` state.
+- Keep the visible UI product-native; carry test setup and evaluation evidence in the completion report.
+- Preserve the artifacts needed to evaluate, reproduce, or reuse the result.
 
-### Blueprint Context (include when `docs/product/design/` exists)
+## Reference Routing
 
-See `blueprint-standards` Artifact Overview for the full blueprint artifact list.
+- WHEN generating or evaluating a prototype artifact: read `references/prototype-quality.md` and apply every applicable criterion.
+- WHEN exporting a prompt for an external generator: also read `references/prototype-prompt-guide.md` and the selected platform template.
+- WHEN product-specific usability, persona, state, or accessibility decisions are needed: load `design-perspective`.
 
-Read only the blueprint artifacts relevant to the hypothesis under test:
-- **Include** `brand-direction.md` when visual direction or tokens affect the prototype or its evaluation
-- **Include** `information-architecture.md` when navigation, page hierarchy, or screen placement matters
-- **Include** the specific file in `flows/` that matches the interaction under test
-- **Include** `content-model.md` when realistic entities, relationships, or stateful data shape the prototype
-- **Include** `ai-interaction-model.md` only for AI-powered features
+## Scope Boundary
 
-If no matching flow exists, say so explicitly and proceed with the available blueprint artifacts.
-
-### Design Source Priority
-
-Use the primary-source precedence defined in `references/prototype-prompt-guide.md` under `Source Selection Rule`.
-
-## Design System Integration
-
-How to connect prototypes with your design system depends on your setup:
-
-- **npm Package**: Include install instruction and component names in prompt
-- **In-Repository Components**: Use codebase-analyzer to identify existing components, list paths and APIs
-- **Tailwind Config / Design Tokens**: Include token definitions in prompt only when no higher-priority source exists
-- **No DS Yet**: Use Visual Tokens from `brand-direction.md` when available; otherwise define basic constraints (palette, typography, spacing) that can seed a future DS
-
-## Key Principles
-
-- **Prototype to learn, not to ship**: Don't over-invest in polish
-- **Context makes the difference**: A prototype without design context is just random UI
-- **One decision focus per prototype**: Combine hypotheses only when the same flow and evidence resolve them together
-- **Describe flows, not just screens**: Step-by-step user flow improves output quality more than isolated UI descriptions
-- **Describe states, not just features**: State transitions and recovery behavior matter as much as happy-path layout
-- **Use concrete data and copy**: Realistic sample data and actual UI copy produce better prototypes than placeholders
-- **Separate machine prompt from human guide**: Keep executable instructions and evaluation notes in different files
-- **Preserve reusable evidence**: Save the artifacts needed to evaluate, reproduce, or reuse the result
-- **Iterate, don't restart**: Build on previous prototypes
-
-For detailed prompt construction patterns, DS integration examples, platform-specific tips, and scope boundaries, see `references/prototype-prompt-guide.md`.
+This skill owns prototype quality and prompt construction. `recipe-validate` owns the validation lifecycle and hypothesis record. `recipe-prototype-prompt` owns explicit external prompt export. The prototype generator owns the HTML artifact.

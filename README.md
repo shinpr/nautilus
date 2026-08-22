@@ -4,7 +4,7 @@
 
 # Nautilus
 
-Turn product questions into evidence-backed PRDs in Cursor.
+Turn product questions into evidence-backed PRDs in Cursor or Codex.
 
 Nautilus installs Agent Skills and review agents in your repository. They help you frame opportunities and test the assumptions that could change a product decision. The resulting evidence stays next to the code when implementation begins.
 
@@ -23,7 +23,7 @@ Nautilus does not require a fixed sequence. Start with the recipe that matches t
 
 Requirements:
 
-- [Cursor](https://cursor.com)
+- [Cursor](https://cursor.com) or [Codex](https://developers.openai.com/codex)
 - Node.js for the `npx` installer
 
 Install Nautilus in your project:
@@ -33,15 +33,25 @@ cd your-project
 npx nautilus-kit install
 ```
 
-Then invoke a recipe in Cursor chat. For example:
+The default installs shared skills and Cursor agents in the current project. Install for Codex or both clients with:
+
+```bash
+npx nautilus-kit install --target codex
+npx nautilus-kit install --target all
+```
+
+Then invoke a recipe in your client. For example:
 
 ```text
-/recipe-discover Explore why trial users abandon onboarding
+Cursor: /recipe-discover Explore why trial users abandon onboarding
+Codex:  $recipe-discover Explore why trial users abandon onboarding
 ```
 
 The recipe frames Opportunities, asks you to confirm the product scope, and then records the confirmed Opportunities and their hypotheses under `docs/discovery/`.
 
-Other useful starting points:
+The tables below use Cursor's `/recipe-*` form. In Codex, use the corresponding `$recipe-*` skill name.
+
+Other useful starting points in Cursor:
 
 ```text
 /recipe-validate HYPO-001
@@ -58,14 +68,16 @@ Other useful starting points:
 | `/recipe-discover` | Frame Opportunities and generate hypotheses from the evidence available now |
 | `/recipe-blueprint` | Add the information architecture, flows, content model, brand direction, or AI interaction decisions needed by a prototype or PRD |
 | `/recipe-refine-visuals` | Have a designer refine generated Visual Tokens before prototype testing |
-| `/recipe-validate` | Test a hypothesis with a method suited to its primary risk |
+| `/recipe-validate` | Test a hypothesis with a method suited to its primary risk; applicable prototype validation generates a self-contained HTML prototype in a separate agent context |
+| `/recipe-prototype-prompt` | Export a Lovable, v0, or similar external-generator prompt instead of generating HTML internally |
 | `/recipe-reflect` | Update affected artifacts or distill a reusable learning when validation changes a product decision |
 | `/recipe-define` | Turn sufficiently supported hypotheses into a PRD |
 
 Examples:
 
 - For an existing product, `/recipe-discover` can ask the codebase-analyzer to report current behavior before framing an Opportunity.
-- For usability testing, run `/recipe-blueprint` only when shared design context is missing, then use `/recipe-validate` to prepare the prototype prompt and record the result.
+- For usability testing, run `/recipe-blueprint` only when shared design context is missing, then use `/recipe-validate` to generate the prototype and record the result.
+- Use `/recipe-prototype-prompt` when the required artifact is a reusable external-generator prompt rather than the HTML prototype.
 - After validation, use `/recipe-reflect` when the result changes an artifact, reveals a repeated pattern, or affects a later decision.
 
 ## Where Nautilus Pauses
@@ -81,7 +93,8 @@ Recipes create or update only the artifacts needed for the current work:
 ```text
 your-project/
 ├── .agents/skills/          # Product workflows and shared rules
-├── .cursor/agents/          # Separate-context reviewers and analyzers
+├── .cursor/agents/          # Cursor separate-context reviewers, analyzers, and prototype generator
+├── .codex/agents/           # Codex equivalents with the same prompt bodies
 └── docs/
     ├── product/
     │   ├── vision.md
@@ -112,7 +125,7 @@ Artifacts remain available in the repo, but recipes read only the sources that c
 
 ### Review in a separate context
 
-Four agents handle work where a fresh context improves the result:
+Five agents handle work where a fresh context improves the result:
 
 | Agent | Responsibility |
 |-------|----------------|
@@ -120,6 +133,7 @@ Four agents handle work where a fresh context improves the result:
 | `codebase-analyzer` | Reports relevant facts about the current implementation |
 | `hypothesis-verifier` | Designs validation that can disprove a hypothesis and checks material confounders |
 | `knowledge-distiller` | Looks across hypothesis evidence for repeated patterns and contradictions |
+| `prototype-generator` | Generates an evidence-grounded self-contained HTML prototype without displacing the parent validation context |
 
 The authoring recipe does not treat review findings as commands. It checks the evidence behind each one and returns any change to an approved product decision to you.
 
@@ -133,14 +147,30 @@ Nautilus stops at the PRD. The PRD links the approved outcome and requirements t
 
 ## Installation and Updates
 
-The installer copies `.agents/skills/` and `.cursor/agents/` into your project and creates `.nautilus-manifest.json` to track files managed by Nautilus. You may want to add the manifest to `.gitignore`.
+The installer copies shared skills once and installs the native agents selected by `--target cursor|codex|all`. Project installs create `.nautilus-manifest.json`; user installs create `~/.nautilus-kit/manifest.json`. The manifest tracks only files supplied by Nautilus.
+
+Install at user scope:
+
+```bash
+npx nautilus-kit install --user                    # Cursor by default
+npx nautilus-kit install --target codex --user
+npx nautilus-kit install --target all --user
+```
+
+User-scoped files are placed at:
+
+| Content | Location |
+|---------|----------|
+| Shared skills | `~/.agents/skills/` |
+| Cursor agents | `~/.cursor/agents/` |
+| Codex agents | `${CODEX_HOME:-~/.codex}/agents/` |
 
 To install from a clone instead of `npx`:
 
 ```bash
-git clone https://github.com/shinpr/nautilus.git
-cp -r nautilus/.agents your-project/
-cp -r nautilus/.cursor your-project/
+git clone https://github.com/shinpr/nautilus.git /path/to/nautilus
+cd /path/to/your-project
+node /path/to/nautilus/bin/cli.js install --target all
 ```
 
 Preview and apply an update:
@@ -150,12 +180,19 @@ npx nautilus-kit update --dry-run
 npx nautilus-kit update
 ```
 
-`update` replaces changed files listed in `.nautilus-manifest.json` and adds new packaged files. Commit or back up edits to managed files before updating. Files outside the manifest are left untouched.
+Without `--target`, update keeps the targets recorded by the installation. Supply `--target` to add or retire a native-agent target:
+
+```bash
+npx nautilus-kit update --target all
+```
+
+`update` replaces unchanged managed files, adds new packaged files, and preserves local modifications. A conflicting unmanaged destination fails before other files are changed. Files outside the manifest remain untouched. During the one-time migration from a v0.3 manifest, a differing known managed file is copied under `.nautilus-preserved/` before its packaged replacement is installed.
 
 Check the installed version and managed file count:
 
 ```bash
 npx nautilus-kit status
+npx nautilus-kit status --user
 ```
 
 ## License

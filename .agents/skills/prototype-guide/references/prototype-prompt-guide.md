@@ -66,16 +66,16 @@ Use only the sections needed by the prototype generator or evaluator.
 ```markdown
 ## Context
 - Product: [name and brief description]
-- Design Principles: [from docs/product/design-principles.md]
+- Design Principles: [relevant decisions extracted from docs/product/design-principles.md]
 - Persona: [name and key characteristics from persona file]
 - Scenario: [what the user is trying to do, their environment, constraints]
 
 ### Include When Relevant
-- Brand Direction: [relevant decisions and Visual Tokens from `docs/product/design/brand-direction.md`]
-- IA Context: [relevant page path from `docs/product/design/information-architecture.md` when navigation matters]
-- Flow Context: [specific file from `docs/product/design/flows/` that matches this interaction]
-- Content Model Context: [relevant entities/relationships from `docs/product/design/content-model.md` when data structure matters]
-- AI Interaction Context: [relevant section from `docs/product/design/ai-interaction-model.md` for AI-powered features]
+- Brand Direction: [relevant decisions and Visual Token values extracted from `docs/product/design/brand-direction.md`]
+- IA Context: [relevant page structure extracted from `docs/product/design/information-architecture.md` when navigation matters]
+- Flow Context: [relevant steps extracted from the matching file in `docs/product/design/flows/`]
+- Content Model Context: [relevant entities and relationships extracted from `docs/product/design/content-model.md` when data structure matters]
+- AI Interaction Context: [relevant decisions extracted from `docs/product/design/ai-interaction-model.md` for AI-powered features]
 
 ## Hypothesis
 - Testing: [the specific hypothesis being validated]
@@ -111,7 +111,7 @@ Use only the sections needed by the prototype generator or evaluator.
 
 ### Output Format Principle
 
-Generate the machine-executable `[platform]-prompt.md`. Add a separate `[platform]-guide.md` only when a human consumer needs usage instructions that do not belong in the executable prompt.
+Generate the machine-executable `{platform}-prompt.md`. Add a separate `{platform}-guide.md` only when a human consumer needs usage instructions that do not belong in the executable prompt.
 
 For platform-specific prompt templates, see:
 - `references/lovable-template.md` — Lovable prompt structure and tips
@@ -149,24 +149,15 @@ Apply these design tokens:
 ### Blueprint Visual Tokens
 ```markdown
 ## Design System
-Read `docs/product/design/brand-direction.md` and apply Visual Tokens directly:
-- Colors: use `--color-*` token values for surfaces, actions, text, feedback
-- Typography: use `--font-*`, `--font-size-base`, and weight tokens
-- Spacing: use `--space-*`, `--radius-*`, and `--shadow-*` tokens
-Trace any overrides back to the relevant blueprint decision.
+Apply these Visual Tokens extracted from the approved brand direction:
+- Colors: [applicable `--color-*` names and values for surfaces, actions, text, feedback]
+- Typography: [applicable `--font-*`, `--font-size-*`, and weight values]
+- Spacing and depth: [applicable `--space-*`, `--radius-*`, and `--shadow-*` values]
 ```
 
-### Source Selection Rule
+### Applying the Selected Source
 
-```markdown
-Choose one primary design source in this order:
-1. Existing in-repo design system/components
-2. Blueprint Visual Tokens
-3. Tailwind config / standalone tokens
-4. Ad-hoc constraints derived from principles
-
-If multiple sources exist, prefer the highest-priority source and use lower-priority sources only to fill gaps.
-```
+Use the primary source selected by Source Acquisition in `prototype-quality.md`. Materialize the applicable components, properties, and token values in the prompt. A repository-local path is sufficient only when the target generator has verified access to that repository; otherwise include the decision-relevant content directly.
 
 ### No DS Yet
 ```markdown
@@ -176,7 +167,6 @@ Use these constraints (seed for future DS):
 - Typography: [font, sizes]
 - Spacing: [scale]
 - Border-radius: [values]
-Record any new design decisions made during prototyping.
 ```
 
 ## Prototype Scope Boundaries
@@ -196,17 +186,14 @@ Record any new design decisions made during prototyping.
 
 ## Quality Checklist
 
-- [ ] Design principles included in prompt
-- [ ] Persona and scenario specified
-- [ ] Blueprint artifacts referenced when relevant
-- [ ] Primary design source selected using the precedence rule
-- [ ] Hypothesis under test is explicit
-- [ ] User flow described step-by-step
-- [ ] Features have specific acceptance criteria
-- [ ] Interactions described as state transitions
-- [ ] States to demonstrate listed (loading, empty, error, success)
-- [ ] Accessibility requirements included
-- [ ] DS integration details provided
-- [ ] Mock data examples provided with concrete structure
+- [ ] Decision under test and observable success/failure criteria are explicit
+- [ ] Scenario and each included product/design source can change generation or evaluation
+- [ ] Primary design source selected using Source Acquisition in `prototype-quality.md`
+- [ ] Critical user flow and decision-relevant state transitions are observable
+- [ ] Each state that can change the decision is required with a trigger; other listed states are not applicable with a reason
+- [ ] Applicable criteria from `prototype-quality.md` are expressed as generator actions and acceptance conditions
+- [ ] Design-system details and concrete mock data are included when they control fidelity or evaluation
+- [ ] Decision-relevant repository content is embedded unless the target generator has verified repository access
+- [ ] Target-platform instructions are included only when they change generated output or invocation
 - [ ] Prompt file contains only executable content (passed decision test)
-- [ ] Guide file contains only human-readable documentation
+- [ ] A guide file exists only for a named human consumer and contains no machine-executable prompt content

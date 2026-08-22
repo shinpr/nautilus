@@ -1,0 +1,7 @@
+interface:
+  display_name: "recipe-refine-visuals"
+  short_description: "Refine approved visual tokens"
+  default_prompt: "Use $recipe-refine-visuals to refine visual tokens: "
+
+policy:
+  allow_implicit_invocation: false

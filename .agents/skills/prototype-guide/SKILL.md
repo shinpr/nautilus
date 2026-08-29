@@ -25,7 +25,7 @@ Classify a missing input as blocking only when it controls the tested flow or in
 - Make the critical flow, consequences, and relevant recovery behavior observable.
 - Use domain-realistic content and data rather than generic placeholders.
 - Apply the highest-priority available design source instead of re-inferring existing decisions.
-- Classify Loading, Empty, Error, Partial, and Success as `required` or `not_applicable`. Implement the states that can occur and affect the validation decision; record a reason for every `not_applicable` state.
+- Implement the states that can occur and affect the validation decision. Report each implemented trigger and any non-obvious exclusion whose absence could change evaluation.
 - Keep the visible UI product-native; carry test setup and evaluation evidence in the completion report.
 - Preserve the artifacts needed to evaluate, reproduce, or reuse the result.
 

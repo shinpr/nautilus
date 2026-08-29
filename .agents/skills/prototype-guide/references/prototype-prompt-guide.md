@@ -24,7 +24,7 @@ Resolve an ambiguity when its plausible answers would materially change correctn
 
 ### Structure Over Length
 
-A well-structured short prompt outperforms a long unstructured one. Use the section template below — it helps the AI identify priorities and relationships.
+Use the section template below to expose priorities and relationships in the shortest sufficient prompt.
 
 ### Describe Interactions as State Transitions
 
@@ -189,7 +189,7 @@ Use these constraints (seed for future DS):
 - [ ] Scenario and each included product/design source can change generation or evaluation
 - [ ] Primary design source selected using Source Acquisition in `prototype-quality.md`
 - [ ] Critical user flow and decision-relevant state transitions are observable
-- [ ] Each state that can change the decision is required with a trigger; other listed states are not applicable with a reason
+- [ ] Each state that can change the decision has a trigger; any non-obvious exclusion that affects interpretation has a reason
 - [ ] Applicable criteria from `prototype-quality.md` are expressed as generator actions and acceptance conditions
 - [ ] Design-system details and concrete mock data are included when they control fidelity or evaluation
 - [ ] Decision-relevant repository content is embedded unless the target generator has verified repository access

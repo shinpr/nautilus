@@ -92,7 +92,7 @@ test("prototype validation keeps source, scope, and evidence boundaries", () => 
 
   assert.match(generator, /default `hypo-\{id\}-prototype\.html` covers the complete interaction/);
   assert.match(generator, /`hypo-\{id\}-\{variant\}-prototype\.html` covers only that named variant/);
-  assert.match(generator, /variant is not defined by the hypothesis is blocked/);
+  assert.match(generator, /variant-specific path requires a variant defined by the hypothesis/);
   assert.match(generator, /loaded `prototype-guide` skill's `references\/prototype-quality\.md`/);
 
   const [completed, blocked] = jsonCodeBlocks(generator);

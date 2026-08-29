@@ -1,112 +1,39 @@
 # User Story Guide
 
-## Purpose
+User stories express the smallest delivery unit whose value and material risks can be judged together.
 
-Guide for writing user stories with 4 Risks assessment and Confidence Meter integration. User stories are the **minimum unit of value** in nautilus.
+## Story Form
 
-## User Story Format
-
-```
-As a [user type]
-I want to [goal/desire]
-So that [expected value/benefit]
+```text
+As a [persona or evidenced user distinction]
+I want to [goal]
+So that [value]
 ```
 
-### Writing Good User Stories
+Use a named persona when its behavior or acceptance differs. Otherwise use the narrowest evidenced user distinction. Describe the goal and value while leaving implementation choices to requirements and design.
 
-- **User type**: Reference a specific persona from `docs/product/personas/`. Avoid generic "user"
-- **Goal/desire**: What the user wants to accomplish, not how the system works
-- **Value/benefit**: Why this matters to the user. Must connect to an Opportunity
+## Delivery Readiness
 
-### INVEST Criteria
+Use the product-principles definitions for the 4 Risks and Confidence Meter. For each delivery decision:
 
-| Criterion | Description |
-|-----------|-------------|
-| **Independent** | Can be developed and delivered independently |
-| **Negotiable** | Details can be discussed, not a rigid contract |
-| **Valuable** | Delivers value to the user or business |
-| **Estimable** | Team can estimate the effort |
-| **Small** | Small enough to be delivered in a single iteration |
-| **Testable** | Has clear acceptance criteria |
+1. Identify only the risk dimensions that can change readiness.
+2. Reuse feature-level evidence shared by multiple stories.
+3. Compare the remaining uncertainty with implementation cost, risk, and reversibility.
+4. Record story-level evidence only when it differs from the shared assessment.
+5. Mark the story `validated enough` or `needs more validation` with the evidence that determines that result.
 
-## 4 Risks Assessment
-
-Consider Cagan's 4 Risks for the delivery decision. Record a risk at story level when its evidence or readiness differs from the feature-level assessment:
-
-### Value Risk
-- **Question**: Will users use this? Does it solve their problem?
-- **Evidence types**: User interviews, usage data, prototype testing, competitive analysis
-- **Low confidence indicators**: No user evidence, only stakeholder opinion, untested assumption
-
-### Usability Risk
-- **Question**: Can users figure out how to use it? Does the UX work?
-- **Evidence types**: Prototype testing, usability studies, interaction patterns, accessibility audit
-- **Low confidence indicators**: No prototype tested, complex interaction, new paradigm
-
-### Feasibility Risk
-- **Question**: Can we build it? Is the effort realistic?
-- **Evidence types**: Code spike, architecture review, team expertise, dependency analysis
-- **Low confidence indicators**: Unknown technology, complex integration, tight timeline
-
-### Viability Risk
-- **Question**: Does it work as a business? Can we explain why we're building it?
-- **Evidence types**: Market analysis, business model fit, regulatory review, ROI analysis
-- **Low confidence indicators**: Unclear revenue impact, regulatory uncertainty, misaligned with strategy
-
-## Confidence Meter (0-10) per Risk
-
-| Score | Meaning | Typical Evidence |
-|-------|---------|------------------|
-| 0-2 | Gut feeling / no evidence | Assumption only |
-| 3-4 | Structured evaluation | Expert review, competitive analysis, scoring |
-| 5-7 | Data-backed | Analytics, surveys, interview patterns |
-| 8-10 | Tested and confirmed | Prototype validation, A/B test, beta results |
-
-## "Validated Enough" Judgment
-
-The evidence threshold for a material risk depends on **cost x risk x reversibility**:
-
-| Condition | Required Confidence | Example |
-|-----------|--------------------|---------|
-| Low-cost, reversible | 3-4 | Feature flag experiment, UI tweak |
-| Medium cost | 5-7 | New feature requiring 1-2 sprints |
-| High-cost, irreversible | 8+ | Platform migration, pricing model change |
-
-### Decision Framework
-
-```
-For each delivery decision:
-1. Identify the risk dimensions that can change readiness
-2. Determine the cost/reversibility of implementation
-3. Compare confidence to threshold
-4. If any risk is below threshold:
-   a. Can we reduce cost/increase reversibility? (feature flag, gradual rollout)
-   b. If yes → lower the threshold
-   c. If no → validate further before including in PRD
-5. Document the rationale for "validated enough" or "needs more validation"
-```
-
-## User Story in PRD
-
-In the PRD, each user story includes its readiness and only the risk evidence that differs from the shared assessment:
+## PRD Form
 
 ```markdown
-#### US-N: [Story Title]
+### US-N: [Story Title]
 
-As a [persona name]
+As a [persona or evidenced user distinction]
 I want to [goal]
-So that [benefit]
+So that [value]
 
-**Delivery readiness**: [validated enough / needs more validation]
-**Rationale**: [cost x risk x reversibility justification]
-**Story-specific risk**: [material difference from shared evidence, or omit]
+- **Delivery readiness**: [validated enough / needs more validation]
+- **Rationale**: [cost × risk × reversibility evidence]
+- **Story-specific risk**: [material difference from shared evidence; omit when none]
 ```
 
-## Common Anti-Patterns
-
-- **Solution-as-story**: "As a user, I want a dropdown menu" — this describes implementation, not value
-- **Epic disguised as story**: Too large to deliver independently. Split it
-- **Missing user evidence**: A generic actor hides a behaviorally relevant distinction
-- **No evidence**: Confidence scores without backing evidence
-- **Perfectionism**: Waiting for all 8+ before proceeding when 3-4 would suffice
-- **Ignoring remaining risks**: Not documenting what's still uncertain
+Split a story when its parts can be delivered independently or require materially different readiness decisions. Keep a larger story intact when splitting would make its value or acceptance uninterpretable.

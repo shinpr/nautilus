@@ -7,7 +7,7 @@ description: Integrates design principles, WCAG 2.2 AA accessibility, persona co
 
 ## Core Philosophy
 
-Design is not a phase — it is a **perspective applied across all product processes**.
+Apply design evidence wherever it can change discovery, validation, requirements, or reflection.
 
 | Process | Design's Role |
 |---------|--------------|
@@ -26,6 +26,8 @@ Design principles are **product-specific guardrails** that guide all design deci
 ## State Design
 
 See product-principles skill for the authoritative State Design definition (Loading / Empty / Error / Partial / Success).
+
+Implement the states that can occur and affect the acceptance decision.
 
 In practice:
 - PRDs should specify behavior for the states relevant to each acceptance boundary
@@ -50,9 +52,9 @@ When they can change the design decision, reference:
 - **Personas** (`docs/product/personas/`) — Who is using this? What's their context, skill level, environment?
 - **Journey Maps** (`docs/discovery/journeys/`) — Where in their journey does this interaction happen?
 
-When creating or updating personas, use `references/persona-template.md` for the standard structure (demographics, JTBD, pains/gains, behavioral patterns, validation status).
+When creating or updating personas, use `references/persona-template.md` for decision-relevant context, jobs, behavioral evidence, and validation gaps.
 
-Design decisions without persona/context grounding are assumptions that need validation.
+Treat design decisions without persona or context evidence as assumptions requiring validation.
 
 ## Blueprint Integration
 
@@ -75,20 +77,3 @@ When validating Usability risk through prototypes:
 3. Specify success criteria (task completion rate, time-on-task, error rate)
 4. Generate prototype with design context injected (see prototype-guide skill)
 5. Record results with specific UX learnings
-
-## Key Principles for Daily Decisions
-
-- **Design principles first**: Check product design principles before making UX decisions
-- **Relevant states matter**: Implement the states that can occur and affect the acceptance decision; classify the others as `not_applicable`
-- **Accessibility is not optional**: WCAG 2.2 AA is the baseline, not a stretch goal
-- **Context over aesthetics**: A beautiful design that ignores user context fails the Usability risk
-- **Test with real scenarios**: Validate UX with persona-grounded scenarios, not abstract tasks
-
-## Why Design Is a Perspective
-
-Treating design as a phase (something done after requirements and before development) leads to surface-level UI work disconnected from user needs. As a perspective:
-
-- Design thinking applies at Opportunity Discovery (journey maps reveal pain points that metrics miss)
-- Design thinking applies at Validation (prototypes make hypotheses testable before code is written)
-- Design thinking applies at Definition (state design and accessibility in ACs catch gaps that functional specs miss)
-- Design principles are product-specific trade-off resolutions, not generic aesthetics guidelines

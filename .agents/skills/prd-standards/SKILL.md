@@ -42,7 +42,7 @@ A nautilus PRD uses the portions of the standard structure required by its deliv
 
 ## User Story Standards
 
-User stories remain persona-grounded. Record 4 Risks evidence at the smallest scope that changes delivery readiness; shared evidence does not need to be repeated per story. See `references/user-story-guide.md` for the full guide.
+User stories remain grounded in an evidenced persona or user distinction. Record 4 Risks evidence at the smallest scope that changes delivery readiness; shared evidence does not need to be repeated per story. See `references/user-story-guide.md` for the output and readiness rules.
 
 Key rules:
 - Reference a specific persona from `docs/product/personas/`, not generic "user"
@@ -52,7 +52,7 @@ Key rules:
 
 ## Acceptance Criteria Standards
 
-Use EARS-format acceptance criteria when its event, state, or conditional form makes the requirement more testable or a downstream consumer requires it. See `references/acceptance-criteria.md` for patterns and examples.
+Use EARS-format acceptance criteria when its event, state, or conditional form makes the requirement more testable or a downstream consumer requires it. See `references/acceptance-criteria.md` for selection, quality, and traceability rules.
 
 Key rules:
 - Use When (event-driven), While (state-driven), or If-Then (conditional) patterns

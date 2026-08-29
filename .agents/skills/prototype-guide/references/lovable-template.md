@@ -25,7 +25,7 @@ Build an interactive prototype for [product name].
 
 ## Context
 [product name] is [brief description].
-Target user: [persona name] — [key characteristics, skill level, context].
+Target user: [persona name]. Relevant characteristics: [skill level and context that affect the flow].
 This prototype tests: [hypothesis statement].
 
 ## Knowledge

@@ -41,7 +41,7 @@ When business context can change the Opportunity decision, select the relevant b
 - **VPC**: Map Customer Profile (jobs/pains/gains) to Value Map (products/pain relievers/gain creators)
 - **Market Analysis**: TAM/SAM/SOM, competitive landscape, market gaps
 
-See business-context skill `references/business-model-canvas.md`, `references/value-proposition-canvas.md`, and `references/market-analysis.md` for detailed frameworks.
+Read the selected business-context reference for its decision boundary and evidence requirements.
 
 **Web search**: Use web search for market research — industry reports, competitor analysis, trend data. Market research benefits from hypothesis context (unlike code analysis).
 
@@ -84,7 +84,6 @@ Write the confirmed Opportunities and their decision-relevant hypotheses. Create
 - Opportunity files in `docs/discovery/opportunities/`
 - Hypothesis files in `docs/discovery/hypotheses/`
 - Journey maps in `docs/discovery/journeys/` when journey evidence was required
-- `docs/discovery/INDEX.md` when its mapping changes
 
 Present the created hypotheses, proposed validation methods or stopping conditions, and recommended priority.
 

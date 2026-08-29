@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 **Context**: Refine the Visual Tokens in `docs/product/design/brand-direction.md` after `recipe-blueprint` has created an initial set.
 
-This is intentionally a side workflow. Use it when a human with design judgment wants to refine the auto-derived token set. Do not force this into the main blueprint flow for users who cannot make token-level design decisions.
+This side workflow applies when a human with design judgment explicitly requests refinement of the auto-derived token set.
 
 ## Required Skills [LOAD BEFORE EXECUTION]
 
@@ -21,9 +21,8 @@ This is intentionally a side workflow. Use it when a human with design judgment 
    - text-on-surface contrast ratio is at least 4.5:1 for normal text
    - heading text is at least 1.25x the body size in the primary hierarchy step
    - spacing tokens form a consistent increasing scale without reversals
-4. Present overrides and rationale to the user
-5. End the current turn with the proposed overrides as the workflow output
-6. After the user confirms those overrides in a later turn, update the same `brand-direction.md` file and mark the source as `expert-refined`
+4. Apply exact overrides supplied by the user and mark the source as `expert-refined`
+5. When the request requires a new design choice, present only that choice and its rationale; update the file after the user confirms it
 
 ## Scope Boundaries
 

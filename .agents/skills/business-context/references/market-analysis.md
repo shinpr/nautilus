@@ -1,95 +1,19 @@
 # Market Analysis Reference
 
-## Purpose
+Select only the market evidence that can change the current Opportunity or risk decision.
 
-Framework for market research and competitive analysis. Use during Discovery to understand market context, validate Viability risk, and identify Opportunities through market gaps.
+| Decision | Evidence candidates |
+|----------|---------------------|
+| Market size or timing | TAM/SAM/SOM, growth, barriers, regulatory or economic change |
+| Target segment | Behavioral, organizational, geographic, or demographic distinctions relevant to adoption |
+| Competitive position | Direct and indirect alternatives, pricing, strengths, weaknesses, user evidence |
+| Market gap | Underserved jobs, pains, segments, or delivery models |
 
-## Market Size
+For each claim:
 
-- **TAM (Total Addressable Market)**: Total market demand for the category
-- **SAM (Serviceable Addressable Market)**: Segment you can realistically target
-- **SOM (Serviceable Obtainable Market)**: What you can realistically capture in 1-3 years
-- **Growth rate**: Market trajectory (growing / stable / declining)
-- **Market drivers**: What's pushing growth
-- **Market barriers**: What's limiting growth
+- cite the source and publication date;
+- distinguish observed data from estimates and inference;
+- use more than one source when a material decision depends on a contested estimate;
+- stop research when additional evidence cannot change the current decision.
 
-## Target Market Segmentation
-
-| Dimension | B2C | B2B |
-|-----------|-----|-----|
-| Demographic | Age, gender, income, education | Industry, company size |
-| Geographic | Location, urban/rural | Region, market maturity |
-| Psychographic | Lifestyle, values, attitudes | Company culture, innovation appetite |
-| Behavioral | Usage patterns, loyalty, benefits sought | Decision process, buying cycle |
-
-## Competitive Analysis
-
-### Direct Competitors
-Products/services solving the same problem for the same market.
-
-### Indirect Competitors
-Different approaches to the same underlying problem.
-
-### Analysis Framework
-
-For each competitor, assess:
-
-| Dimension | Assessment |
-|-----------|-----------|
-| Product/Service | What they offer |
-| Pricing | Strategy and model |
-| Positioning | How they position themselves |
-| Strengths | What they do well |
-| Weaknesses | Where they fall short |
-| Market share | Estimated presence |
-| User feedback | Reviews, complaints, praise |
-
-### Positioning Map
-Plot competitors on 2-3 key dimensions to visualize market gaps.
-Choose dimensions that matter most to your target segment (e.g., price vs. feature depth, simplicity vs. power).
-
-## Market Trends
-
-- **Industry trends**: Sector-specific changes
-- **Technology trends**: Emerging capabilities
-- **Regulatory changes**: Compliance requirements
-- **Economic factors**: Market conditions
-- **Social/cultural shifts**: Behavioral changes
-
-## Research Methods
-
-### Primary Research
-Customer interviews, surveys, user testing, direct observation
-
-### Secondary Research
-Industry reports, government statistics, academic studies, competitor analysis
-
-### Web Research
-Industry analysis, competitor websites, user reviews, technology developments
-
-## Application in nautilus
-
-### Connection to Risks
-- **TAM/SAM/SOM** → Viability risk (is the market large enough?)
-- **Competitive analysis** → Value risk (can we differentiate?)
-- **Market trends** → Feasibility risk (is the timing right?)
-- **Market gaps** → Opportunity identification (underserved needs)
-
-### Red Flags
-- No clear market need (problem not significant enough)
-- Saturated market (too many strong competitors)
-- Shrinking market (declining demand)
-- High barriers to entry
-- Unclear differentiation
-- Weak validation (assumptions not tested)
-
-## Quality Checklist
-
-- [ ] Market size estimated with cited data sources
-- [ ] Target segments clearly defined
-- [ ] Key competitors identified and analyzed
-- [ ] Market gaps identified
-- [ ] Competitive positioning clear
-- [ ] Market trends understood
-- [ ] Data sources are recent (within 1-2 years)
-- [ ] Findings cross-validated
+Return the conclusion, its supporting evidence, material limitations, and the exact Opportunity or risk decision it informs. A full market report is required only for a named consumer.

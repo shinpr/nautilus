@@ -4,7 +4,7 @@ description: Creates or updates evidence-backed personas with the context and JT
 disable-model-invocation: true
 ---
 
-**Context**: Create or update persona files with demographics, context, JTBD, pains/gains, and behavioral patterns. Integrates existing codebase analysis when available.
+**Context**: Create or update persona files with the evidence-backed distinctions, context, and jobs needed by current product decisions.
 
 ## Required Skills [LOAD BEFORE EXECUTION]
 
@@ -24,7 +24,7 @@ Input: Use the path or text supplied with the explicit skill invocation. If no i
 
 | Situation | Action |
 |-----------|--------|
-| No personas exist | Create from scratch — gather user research or assumptions |
+| No personas exist | Gather available user evidence and label unresolved assumptions |
 | Personas exist, new data available | Update existing personas with new evidence |
 | Existing codebase | Invoke codebase-analyzer when roles, permissions, or implemented workflows can change the persona |
 | Post-interview / post-survey | Update with new primary research |
@@ -54,17 +54,10 @@ Map Customer Profile from Value Proposition Canvas:
 
 ### 3. Persona Drafting
 
-Use design-perspective skill `references/persona-template.md` to create persona files:
-
-1. **Demographics**: Role, experience, technical proficiency, industry
-2. **Context**: Environment, frequency, time pressure, adjacent tools
-3. **JTBD**: Primary job, secondary jobs, social/emotional jobs
-4. **Pains and Gains**: Mapped from research with severity/priority
-5. **Behavioral Patterns**: Decision-making, adoption tendency, information sources
-6. **Validation Status**: Based on research quality — mark assumptions explicitly
+Use design-perspective skill `references/persona-template.md`. Include only distinctions, context, jobs, pains, gains, and behavioral evidence that can change a current product decision. Mark each inference or assumption explicitly.
 
 Present the persona draft to the user for confirmation:
-- Complete persona draft
+- Decision-relevant persona content
 - Evidence sources and confidence level
 - Assumptions that need validation
 - Connections to existing Opportunities (if any)

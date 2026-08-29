@@ -38,14 +38,14 @@ Failure: [what disproves the hypothesis].
 [Provide concrete sample data as JSON or TypeScript interface]
 
 ## Design (when visual decisions affect the component)
-- Color palette: [hex values with semantic meaning — primary for actions, red for errors, etc.]
+- Color palette: [hex values]. Semantic roles: [action, error, success, and other applicable meanings]
 - Border-radius: [values]
 - Shadows: [values]
 - Spacing: [scale]
 - Typography: [font, size scale]
 
 Override shadcn/ui defaults:
-- [specific overrides — colors, radius, shadows]
+- [specific override and the shadcn/ui default it replaces]
 
 ## Responsive (when responsive behavior is part of the decision)
 - Mobile (< 768px): [layout changes]

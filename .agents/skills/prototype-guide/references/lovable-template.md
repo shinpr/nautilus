@@ -12,12 +12,7 @@
 Use only the sections that affect the prototype or its evaluation.
 
 ```markdown
-Before building, ask about an ambiguity only when its plausible answers would materially change the prototype or its evaluation:
-- Target user or role
-- Primary user flow
-- Design system constraints
-- Data model or sample content
-- What should be in scope vs. explicitly out of scope
+Before building, ask one focused question when plausible answers to a missing decision would materially change the prototype or its evaluation. Name the affected decision and the evidence needed to resolve it. Continue with the supplied sources when the unresolved choice cannot change the validation evidence.
 
 Build an interactive prototype for [product name].
 
@@ -51,16 +46,18 @@ This prototype tests: [hypothesis statement].
 - Copy: [actual headline, helper text, CTA labels]
 
 ## Relevant States
-- Loading: [show skeleton / spinner / progressive load]
-- Empty: [empty state message and CTA]
-- Error: [error message and recovery action]
-- Success: [primary display]
+Classify each state as `required` or `not_applicable`:
+- Loading: [required — trigger and visible behavior | not_applicable — reason]
+- Empty: [required — trigger, message, and next action | not_applicable — reason]
+- Error: [required — trigger, message, and recovery | not_applicable — reason]
+- Success: [required — trigger and visible consequence | not_applicable — reason]
+- Partial: [required — trigger and visible behavior | not_applicable — reason]
 
 ## Guardrails
-- Do not modify [shared navigation / existing pages / established branding]
-- Do not introduce [auth / backend integration / payments] in this prompt
+- Preserve [shared navigation / existing pages / established branding]
+- Keep [auth / backend integration / payments] outside this prompt; represent required behavior with [frontend mock or preset state]
 - Keep the prototype focused on [the flow under test]
-- Use realistic copy, not placeholder text like "Lorem ipsum" or generic labels
+- Use realistic domain copy for headlines, helper text, actions, and states
 - Prefer frontend mocks over real integrations until the flow is validated
 
 ## Design (when visual decisions affect the prototype)
@@ -94,22 +91,21 @@ Edit the current prototype in the smallest increment that makes the next validat
 ### What Works Well
 
 - Explicit page paths (`/dashboard`, `/settings`)
-- Role-based descriptions ("As an admin, I can see all users")
+- Role-based descriptions tied to the target persona and action
 - Concrete data examples rather than abstract descriptions
-- Specific interaction descriptions ("click → modal opens → form inside")
-- Real UI copy ("Start free trial", "No invoices found") instead of placeholders
-- Clear scope boundaries ("only the billing flow, not account settings")
+- Specific interaction descriptions that map each trigger to its visible response
+- Real UI copy for actions and states
+- Scope boundaries that name the included flow and deferred neighboring flows
 
 ### What to Keep Simple
 
-- Use LocalStorage for data persistence until the frontend is stable
-- Connect Supabase only after the UI and flows are working
-- Start without authentication — add it as a separate prompt later
-- Keep one prompt focused on one flow or tightly related page set
+- Use LocalStorage for data persistence during initial UI and flow validation
+- Add Supabase in a later prompt when persistence becomes part of the evaluated behavior
+- Represent authentication as a preset mock state and validate the authentication flow in a separate prompt
 
-## Optional Guide File
+## Guide File Condition
 
-Create `lovable-guide.md` only when a human evaluator needs instructions outside the executable prompt. Include only the applicable items:
+Create `lovable-guide.md` when a named human evaluator needs instructions outside the executable prompt. Include each item that evaluator uses:
 
 1. **What this prototype tests** — the hypothesis in plain language
 2. **How to use it** — steps for the person doing the testing

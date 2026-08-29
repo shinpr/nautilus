@@ -28,13 +28,16 @@ Failure: [what disproves the hypothesis].
 - Interactions:
   - [trigger] → [response]
   - [trigger] → [response]
-- Relevant states:
+- Relevant states (classify each non-default state as `required` or `not_applicable`):
   - Default: [appearance]
-  - Hover: [appearance]
-  - Active: [appearance]
-  - Disabled: [appearance]
-  - Loading: [appearance]
-  - Error: [appearance]
+  - Hover: [required — trigger and appearance | not_applicable — reason]
+  - Active: [required — trigger and appearance | not_applicable — reason]
+  - Disabled: [required — trigger and appearance | not_applicable — reason]
+  - Loading: [required — trigger and appearance | not_applicable — reason]
+  - Empty: [required — trigger, appearance, and next action | not_applicable — reason]
+  - Error: [required — trigger, appearance, and recovery | not_applicable — reason]
+  - Success: [required — trigger and visible consequence | not_applicable — reason]
+  - Partial: [required — trigger and appearance | not_applicable — reason]
 
 ### Data
 [Provide concrete sample data as JSON or TypeScript interface]
@@ -64,9 +67,9 @@ Override shadcn/ui defaults:
 ### shadcn/ui Integration
 
 v0 is built on shadcn/ui. Use this to your advantage:
-- Name shadcn/ui components explicitly ("use a shadcn Dialog, not a custom modal")
+- Name shadcn/ui components explicitly ("use the shadcn Dialog component")
 - Specify overrides clearly — v0 defaults to shadcn/ui's default theme
-- For custom styling, describe the override relative to defaults ("border-radius: 12px instead of shadcn default")
+- For custom styling, describe the override with explicit values relative to the shadcn/ui defaults
 
 ### Design System via Registry
 
@@ -82,7 +85,6 @@ Use conversational refinement for the smallest change needed to expose the next 
 
 ### What Works Well
 
-- Single-component focus (one Card, one Form, one Dashboard panel)
 - Explicit color semantics ("red for destructive actions, green for success")
 - Naming third-party libraries when needed ("use framer-motion for animations")
 - Specifying data structures with TypeScript interfaces
@@ -93,9 +95,9 @@ Use conversational refinement for the smallest change needed to expose the next 
 - Use inline mock data rather than external APIs
 - Keep interactions to the component being tested
 
-## Optional Guide File
+## Guide File Condition
 
-Create `v0-guide.md` only when a human evaluator or integrator needs instructions outside the executable prompt. Include only the applicable items:
+Create `v0-guide.md` when a named human evaluator or integrator needs instructions outside the executable prompt. Include each item that consumer uses:
 
 1. **What this component tests** — the hypothesis in plain language
 2. **How to evaluate** — what to look at in the generated output

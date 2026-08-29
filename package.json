@@ -1,6 +1,6 @@
 {
   "name": "nautilus-kit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Repository-based product discovery for Cursor and Codex, from product questions to evidence-backed PRDs",
   "license": "MIT",
   "author": "Shinsuke Kagawa",

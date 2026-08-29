@@ -11,19 +11,21 @@
 
 Use only the sections that affect the prototype or its evaluation.
 
-```markdown
-Before building, ask about an ambiguity only when its plausible answers would materially change the prototype or its evaluation:
+Before using the template, check these inputs for missing decisions whose plausible answers would materially change the prototype or its evaluation:
 - Target user or role
 - Primary user flow
 - Design system constraints
 - Data model or sample content
-- What should be in scope vs. explicitly out of scope
+- Included and deferred scope
 
+Apply the missing-input rule under `prototype-guide`'s `Required Context` to each unresolved material decision. Leave choices that cannot change the validation evidence to Lovable.
+
+```markdown
 Build an interactive prototype for [product name].
 
 ## Context
 [product name] is [brief description].
-Target user: [persona name] — [key characteristics, skill level, context].
+Target user: [persona name]. Relevant characteristics: [skill level and context that affect the flow].
 This prototype tests: [hypothesis statement].
 
 ## Knowledge
@@ -51,16 +53,13 @@ This prototype tests: [hypothesis statement].
 - Copy: [actual headline, helper text, CTA labels]
 
 ## Relevant States
-- Loading: [show skeleton / spinner / progressive load]
-- Empty: [empty state message and CTA]
-- Error: [error message and recovery action]
-- Success: [primary display]
+- [Required state]: [trigger and visible behavior; include recovery for a failure state]
 
 ## Guardrails
-- Do not modify [shared navigation / existing pages / established branding]
-- Do not introduce [auth / backend integration / payments] in this prompt
+- Preserve [shared navigation / existing pages / established branding]
+- Keep [auth / backend integration / payments] outside this prompt; represent required behavior with [frontend mock or preset state]
 - Keep the prototype focused on [the flow under test]
-- Use realistic copy, not placeholder text like "Lorem ipsum" or generic labels
+- Use realistic domain copy for headlines, helper text, actions, and states
 - Prefer frontend mocks over real integrations until the flow is validated
 
 ## Design (when visual decisions affect the prototype)
@@ -102,14 +101,13 @@ Edit the current prototype in the smallest increment that makes the next validat
 
 ### What to Keep Simple
 
-- Use LocalStorage for data persistence until the frontend is stable
-- Connect Supabase only after the UI and flows are working
-- Start without authentication — add it as a separate prompt later
-- Keep one prompt focused on one flow or tightly related page set
+- Use LocalStorage for data persistence during initial UI and flow validation
+- Add Supabase in a later prompt when persistence becomes part of the evaluated behavior
+- Represent authentication as a preset mock state and validate the authentication flow in a separate prompt
 
 ## Optional Guide File
 
-Create `lovable-guide.md` only when a human evaluator needs instructions outside the executable prompt. Include only the applicable items:
+Create `lovable-guide.md` only when a named human evaluator needs instructions outside the executable prompt. Include only the applicable items:
 
 1. **What this prototype tests** — the hypothesis in plain language
 2. **How to use it** — steps for the person doing the testing

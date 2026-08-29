@@ -7,7 +7,7 @@ description: Provides Business Model Canvas, Value Proposition Canvas, and TAM/S
 
 ## Purpose
 
-Provide structured frameworks for understanding the business environment surrounding product decisions. These frameworks help assess **Viability risk** (see product-principles skill) and identify Opportunities through market gaps.
+Select the business evidence and framework needed to change a current Opportunity, Value, or Viability decision.
 
 ## When to Use Each Framework
 
@@ -17,43 +17,15 @@ Provide structured frameworks for understanding the business environment surroun
 | Value Proposition Canvas | Designing value propositions that match user needs | Customer Profile + Value Map fit |
 | Market Analysis | Understanding market size, competition, and trends | Market sizing, competitive positioning |
 
-## Business Model Canvas (BMC)
+Read only the selected reference. Extract evidence rather than reproducing the framework:
 
-Analyzes the full business model across 9 components: Customer Segments, Value Propositions, Channels, Customer Relationships, Revenue Streams, Key Resources, Key Activities, Key Partnerships, Cost Structure.
-
-Use during Opportunity Discovery to understand business context and identify where Solutions must fit within the business model.
-
-See `references/business-model-canvas.md` for the full framework and quality checklist.
-
-## Value Proposition Canvas (VPC)
-
-Designs value propositions by mapping Customer Profile (Jobs, Pains, Gains) to Value Map (Products & Services, Pain Relievers, Gain Creators). The goal is Problem-Solution Fit.
-
-### Connection to OST
-
-- **Customer Jobs** surface **Opportunities** (unmet jobs = opportunities)
-- **Pains** generate **Hypotheses** about friction causes
-- **Pain Relievers** validate **Value risk**
-- **Gain Creators** validate **Usability risk**
-
-See `references/value-proposition-canvas.md` for the full framework and fit assessment checklist.
-
-## Market Analysis
-
-Structures market research across: Market Size (TAM/SAM/SOM), Segmentation, Competitive Analysis, and Market Trends.
-
-### Connection to Risks
-
-- **TAM/SAM/SOM** validates Viability risk (market large enough?)
-- **Competitive analysis** validates Value risk (can we differentiate?)
-- **Market trends** inform Feasibility risk (timing right?)
-- **Market gaps** identify new Opportunities
-
-See `references/market-analysis.md` for the full framework, research methods, and quality checklist.
+- `references/business-model-canvas.md` for business-model fit and Viability dependencies
+- `references/value-proposition-canvas.md` for jobs, pains, gains, and Problem-Solution Fit
+- `references/market-analysis.md` for market size, segmentation, competition, trends, or gaps
 
 ## Key Principles
 
-- **Evidence over assumption**: Market claims need cited data sources
-- **Recency matters**: Market data older than 1-2 years needs re-validation
-- **Cross-validate**: Use multiple sources to confirm market signals
-- **Business model fit**: Every Solution should be checked against the business model for Viability
+- Cite sources for market claims and label estimates or assumptions.
+- Revalidate source age only when changed conditions can affect the current decision.
+- Cross-check a claim when the decision depends on a contested estimate.
+- Stop when additional business context cannot change the Opportunity or risk decision.

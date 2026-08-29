@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Guide for constructing prompts that generate prototypes with proper design context injection. Prototypes validate Usability and Value risks — without context, they validate nothing.
+Guide for constructing external-generator prompts that make one prototype validation decision observable with decision-sufficient product and design context.
 
 ## Prompt Engineering Principles
 
@@ -12,7 +12,9 @@ Examples in this guide are illustrative only. Replace them with domain-specific 
 
 ### Make the Validation Observable
 
-Specify the behavior, state, or visual decision needed to evaluate the prototype. Leave choices that do not affect the evaluation to the generator.
+State the required behavior, state, or visual decision first and make its acceptance conditions observable.
+
+Resolve an ambiguity when its plausible answers would materially change correctness, scope, or evaluation; use the highest-priority available product source or the least-restrictive sufficient criterion. Leave choices that cannot change the validation evidence to the generator.
 
 | Instead of | Write |
 |-----------|-------|
@@ -22,7 +24,7 @@ Specify the behavior, state, or visual decision needed to evaluate the prototype
 
 ### Structure Over Length
 
-A well-structured short prompt outperforms a long unstructured one. Use the section template below — it helps the AI identify priorities and relationships.
+Use the section template below to expose priorities and relationships in the shortest sufficient prompt.
 
 ### Describe Interactions as State Transitions
 
@@ -70,7 +72,8 @@ Use only the sections needed by the prototype generator or evaluator.
 - Persona: [name and key characteristics from persona file]
 - Scenario: [what the user is trying to do, their environment, constraints]
 
-### Include When Relevant
+### Decision-Relevant Sources
+
 - Brand Direction: [relevant decisions and Visual Token values extracted from `docs/product/design/brand-direction.md`]
 - IA Context: [relevant page structure extracted from `docs/product/design/information-architecture.md` when navigation matters]
 - Flow Context: [relevant steps extracted from the matching file in `docs/product/design/flows/`]
@@ -95,11 +98,7 @@ Use only the sections needed by the prototype generator or evaluator.
 [Integration details — see Design System section below]
 
 ## States to Demonstrate
-- Loading: [behavior]
-- Empty: [behavior]
-- Error: [behavior and recovery]
-- Success: [primary state]
-- Partial: [if applicable]
+- [Required state]: [trigger and visible behavior; include recovery for a failure state]
 
 ## Accessibility
 - WCAG 2.2 AA baseline
@@ -111,7 +110,7 @@ Use only the sections needed by the prototype generator or evaluator.
 
 ### Output Format Principle
 
-Generate the machine-executable `{platform}-prompt.md`. Add a separate `{platform}-guide.md` only when a human consumer needs usage instructions that do not belong in the executable prompt.
+Generate the machine-executable `{platform}-prompt.md`. Add a separate `{platform}-guide.md` only when a named human consumer needs usage instructions outside the executable prompt.
 
 For platform-specific prompt templates, see:
 - `references/lovable-template.md` — Lovable prompt structure and tips
@@ -182,7 +181,7 @@ Use these constraints (seed for future DS):
 - Database → Simple JSON structures
 - API endpoints → Static mock responses
 - Authentication → Mock login state (boolean)
-- Third-party APIs → Placeholder data
+- Third-party APIs → Deterministic mock responses with realistic domain values
 
 ## Quality Checklist
 
@@ -190,7 +189,7 @@ Use these constraints (seed for future DS):
 - [ ] Scenario and each included product/design source can change generation or evaluation
 - [ ] Primary design source selected using Source Acquisition in `prototype-quality.md`
 - [ ] Critical user flow and decision-relevant state transitions are observable
-- [ ] Each state that can change the decision is required with a trigger; other listed states are not applicable with a reason
+- [ ] Each state that can change the decision has a trigger; any non-obvious exclusion that affects interpretation has a reason
 - [ ] Applicable criteria from `prototype-quality.md` are expressed as generator actions and acceptance conditions
 - [ ] Design-system details and concrete mock data are included when they control fidelity or evaluation
 - [ ] Decision-relevant repository content is embedded unless the target generator has verified repository access

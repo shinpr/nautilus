@@ -27,7 +27,7 @@ Assess whether hypotheses are "validated enough" for PRD creation:
 
 1. Read relevant Opportunity and hypothesis files
 2. For each hypothesis intended for the PRD:
-   - Check confidence scores against thresholds (see prd-standards skill `references/user-story-guide.md`)
+   - Check confidence against the product-principles cost, risk, and reversibility criteria
    - Assess cost x risk x reversibility
    - Determine: validated enough / needs more validation
 3. See product-principles skill `references/mvp-definition.md` for scope determination

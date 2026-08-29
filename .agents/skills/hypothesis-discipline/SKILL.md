@@ -14,7 +14,7 @@ A hypothesis is not a guess. A hypothesis selected for validation needs a clear 
 - Hypotheses exist at **every level** of the OST hierarchy (see product-principles skill)
 - Each hypothesis has a **target level** attribute indicating which OST level it addresses
 - Hypotheses follow an **ADR-style lifecycle** — a single file tracks the full journey from draft to conclusion
-- **Rejected and invalidated hypotheses are never deleted** — they are learning assets
+- Preserve rejected and invalidated hypotheses as learning assets
 
 ## Hypothesis Lifecycle
 
@@ -33,7 +33,7 @@ The authoritative schema is defined in `references/hypothesis-template.md`. Key 
 - `id`: HYPO-NNN
 - `level`: outcome / opportunity / solution / assumption
 - `status`: draft / testing / validated / invalidated / inconclusive / adopted / rejected / timeout
-- `confidence`: per-risk scores (value, usability, feasibility, viability) on 0-10 scale (see product-principles skill for Confidence Meter definition)
+- `confidence`: scores for the risk dimensions that can change the hypothesis decision, on the product-principles 0-10 scale
 - `time-budget` and `deadline`: include when time or calendar limits affect the validation decision
 
 ## Validation Criteria Requirements
@@ -52,7 +52,7 @@ A hypothesis entering validation defines:
 - Add a **deadline** when a calendar cutoff changes the decision
 - When deadline passes without conclusion → status becomes `timeout`
 - Timeout forces a decision: extend (with justification), pivot, or abandon
-- **Never let a hypothesis run indefinitely** — unbounded exploration wastes resources
+- End validation at its evidence, time, or cost boundary
 
 ## Confidence Update Rules
 
@@ -63,29 +63,13 @@ A hypothesis entering validation defines:
 
 ## Result Recording
 
-When a hypothesis reaches conclusion (validated/invalidated/inconclusive/adopted/rejected):
-
-1. **Record the result** in the hypothesis file with evidence
-2. **Update confidence scores** with final values
-3. **Link to evidence** (data, screenshots, prototype results, interview notes)
-4. **Extract learnings** — what did we learn regardless of the outcome?
-5. **Update the parent Opportunity** if the result changes its understanding
+When a hypothesis reaches a conclusion, record the result, changed confidence dimensions, and evidence in the hypothesis file. Carry a learning or parent-Opportunity update into reflection only when the result can change a later decision.
 
 ## Key Disciplines
 
-- **Separate creation from evaluation**: Don't judge hypotheses while generating them
+- **Separate creation from evaluation**: Generate candidates before applying evaluation criteria
 - **Seek disconfirming evidence**: Actively look for reasons the hypothesis might be wrong
 - **One decision per validation**: Combine hypotheses when the same evidence resolves the same decision; separate them when bundling would make the result uninterpretable
 - **Record decision-relevant evidence**: Preserve the evidence and reasoning needed to understand or reuse the conclusion
 - **Rejected ≠ worthless**: A rejected hypothesis teaches what doesn't work and why
 - **Inconclusive is honest**: When evidence is insufficient, say so instead of forcing a verdict
-
-## Why These Disciplines Matter
-
-Each discipline exists to counter a specific cognitive tendency:
-
-- **Separate creation from evaluation** counters premature judgment that kills divergent thinking
-- **Seek disconfirming evidence** counters the natural pull toward confirming what we already believe
-- **One decision per validation** keeps results interpretable without forcing duplicate tests that use the same evidence
-- **Stopping conditions** counter unbounded exploration; use time or calendar cutoffs when they change the decision
-- **Confidence can go down** counters the assumption that validation is always forward progress. Negative evidence is equally valuable

@@ -5,6 +5,9 @@ const os = require("node:os");
 const path = require("node:path");
 const test = require("node:test");
 
+// Keep this suite limited to Cursor/Codex drift, unsupported skill invocation metadata,
+// and files missing from the npm package. Prompt wording and workflow policy are out of scope.
+
 const REPOSITORY_ROOT = path.resolve(__dirname, "../..");
 const CURSOR_AGENTS = path.join(REPOSITORY_ROOT, ".cursor/agents");
 const CODEX_AGENTS = path.join(REPOSITORY_ROOT, ".codex/agents");
@@ -18,15 +21,6 @@ function codexPrompt(content) {
   const match = content.match(/\ndeveloper_instructions = """\n([\s\S]*?)\n"""\s*$/);
   assert.ok(match, "Codex agent must end with a multiline developer_instructions field");
   return match[1].trim();
-}
-
-function read(relativePath) {
-  return fs.readFileSync(path.join(REPOSITORY_ROOT, relativePath), "utf8");
-}
-
-function jsonCodeBlocks(content) {
-  return [...content.matchAll(/```json\n([\s\S]*?)\n```/g)]
-    .map(match => JSON.parse(match[1]));
 }
 
 test("Cursor and Codex agents have identical prompt bodies", () => {
@@ -69,55 +63,6 @@ test("skills use supported invocation contracts", () => {
     );
     assert.match(metadata, /allow_implicit_invocation:\s*false/);
   }
-});
-
-test("prototype validation keeps source, scope, and evidence boundaries", () => {
-  const recipe = read(".agents/skills/recipe-validate/SKILL.md");
-  const quality = read(".agents/skills/prototype-guide/references/prototype-quality.md");
-  const guide = read(".agents/skills/prototype-guide/SKILL.md");
-  const designPerspective = read(".agents/skills/design-perspective/SKILL.md");
-  const generator = read(".cursor/agents/prototype-generator.md");
-
-  assert.match(recipe, /Invoke `prototype-generator` in a separate context/);
-  assert.match(recipe, /hypo-\{id\}-\{variant\}-prototype\.html/);
-  assert.match(recipe, /Collect the observations defined by the confirmed validation design/);
-  assert.ok(
-    quality.indexOf("Approved target-state decisions") <
-      quality.indexOf("Existing product UI and in-repository components")
-  );
-  assert.match(quality, /Set `visual_verification\.status: "passed"` only after those rendered checks run/);
-  assert.match(guide, /Implement the states that can occur and affect the validation decision/);
-  assert.doesNotMatch(guide, /states that can occur or change the validation decision/);
-  assert.match(designPerspective, /states that can occur and affect the acceptance decision/);
-
-  assert.match(generator, /default `hypo-\{id\}-prototype\.html` covers the complete interaction/);
-  assert.match(generator, /`hypo-\{id\}-\{variant\}-prototype\.html` covers only that named variant/);
-  assert.match(generator, /variant is not defined by the hypothesis is blocked/);
-  assert.match(generator, /loaded `prototype-guide` skill's `references\/prototype-quality\.md`/);
-
-  const [completed, blocked] = jsonCodeBlocks(generator);
-  assert.equal(completed.status, "completed");
-  assert.equal(Object.hasOwn(completed, "unresolved"), false);
-  assert.equal(blocked.status, "blocked");
-  assert.equal(Array.isArray(blocked.unresolved), true);
-  assert.deepEqual(
-    Object.keys(blocked.unresolved[0]).sort(),
-    ["condition", "evidence_or_action_needed"].sort()
-  );
-});
-
-test("external prototype prompts are explicit and self-contained", () => {
-  const recipe = read(".agents/skills/recipe-prototype-prompt/SKILL.md");
-  const guide = read(".agents/skills/prototype-guide/references/prototype-prompt-guide.md");
-
-  assert.match(recipe, /^disable-model-invocation: true$/m);
-  assert.match(recipe, /prototype-prompt-guide\.md/);
-  assert.match(recipe, /docs\/discovery\/prototypes\/hypo-\{id\}-\{platform\}-prompt\.md/);
-  assert.match(recipe, /Materialize the decision-relevant product, design, component, and data context/);
-  assert.match(recipe, /verified repository access/);
-  assert.match(recipe, /does not generate the HTML prototype/i);
-  assert.match(guide, /Source Acquisition in `prototype-quality\.md`/);
-  assert.doesNotMatch(guide, /### Source Selection Rule/);
 });
 
 test("the npm tarball contains shared skills and both native agent formats", () => {

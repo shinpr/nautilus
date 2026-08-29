@@ -1,5 +1,7 @@
 # Opportunity: [Opportunity Name]
 
+Create only sections that carry current evidence, impact, framing, or downstream links. Add hypothesis and learning sections when those artifacts exist.
+
 ```yaml
 ---
 id: OPP-NNN
@@ -24,11 +26,9 @@ What evidence supports this Opportunity?
 
 > If no evidence exists yet, this Opportunity is a hypothesis. Create a hypothesis file to validate it.
 
-## 3+ Solutions Test (Torres Principle)
+## Framing Diagnostic
 
-Can you identify 3+ meaningfully different Solutions for this Opportunity? If not, record that the framing may describe a Solution. This is a diagnostic result; do not create filler alternatives to pass it.
-
-- [Meaningfully different Solution ideas found during discovery]
+Can you identify 3+ meaningfully different Solutions for this Opportunity? If not, record that the framing may describe a Solution. A failed diagnostic is a valid result and creates no alternative-generation work.
 
 ## Impact Assessment
 
@@ -38,14 +38,16 @@ Can you identify 3+ meaningfully different Solutions for this Opportunity? If no
 
 ## Related Hypotheses
 
+Add when hypotheses have been created for this Opportunity.
+
 | Hypothesis ID | Level | Status | Summary |
 |---------------|-------|--------|---------|
 | HYPO-NNN | solution | draft | [brief description] |
 
 ## Tier 2 Learnings
 
-[Accumulated learnings from validated hypotheses under this Opportunity. Updated by recipe-reflect via knowledge-distiller.]
+[Add only learnings promoted by recipe-reflect from supporting hypothesis evidence.]
 
 ---
 
-*Updated by recipe-reflect. See `docs/discovery/INDEX.md` for navigation.*
+*Updated by recipe-reflect when hypothesis evidence changes this Opportunity.*

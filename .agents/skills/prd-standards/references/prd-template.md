@@ -1,6 +1,6 @@
 # PRD: [Feature Name]
 
-Use the sections that carry a decision, boundary, evidence, or information required by delivery. Omit empty sections and avoid repeating shared evidence per story.
+Use the sections that carry a decision, boundary, evidence, or information required by delivery. Omit empty sections and keep shared evidence at feature scope.
 
 ## Overview
 

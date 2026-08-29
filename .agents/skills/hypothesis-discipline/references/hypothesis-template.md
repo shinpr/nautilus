@@ -1,22 +1,19 @@
 # Hypothesis: [Hypothesis Statement]
 
+Create the definition and validation sections when the hypothesis is drafted. Add result sections only after validation produces evidence.
+
 ```yaml
 ---
 id: HYPO-NNN
-level: solution            # outcome / opportunity / solution / assumption
-status: draft              # draft / testing / validated / invalidated / inconclusive / adopted / rejected / timeout
-confidence:
-  value: 0                 # 0-10
-  usability: 0
-  feasibility: 0
-  viability: 0
-opportunity: OPP-NNN       # linked opportunity
-# Add time-budget only when validation work can expand.
-# Add deadline only when a calendar cutoff changes the decision.
+level: solution
+status: draft
+confidence: {}
+opportunity: OPP-NNN
 created: YYYY-MM-DD
-# Add validated on conclusion.
 ---
 ```
+
+Populate `confidence` only with decision-relevant `value`, `usability`, `feasibility`, or `viability` scores. Add `time-budget` when validation work can expand, `deadline` when a calendar cutoff changes the decision, and `validated` when the hypothesis reaches a conclusion.
 
 ## We believe that
 
@@ -24,48 +21,43 @@ created: YYYY-MM-DD
 
 ## We'll know we're right when
 
-[Measurable success criteria — what observable outcome confirms this hypothesis?]
+[Observable outcome that supports the hypothesis]
 
 ## We'll know we're wrong when
 
-[Measurable failure criteria — what observable outcome disproves this hypothesis?]
+[Observable outcome that disproves the hypothesis]
 
 ## Validation Method
 
 - **Type**: [prototype / data-analysis / interview / code-spike / market-research / expert-review]
-- **Description**: [How will we test this?]
-- **Stopping condition**: [Evidence, time, or cost boundary that ends this validation]
-- **Resources needed**: [What do we need?]
+- **Description**: [How the evidence will be gathered]
+- **Stopping condition**: [Evidence, time, or cost boundary]
+- **Resources needed**: [Include only resources required by the selected method]
 
 ## Context
 
-[Why does this hypothesis matter? What Opportunity does it serve? What prior learnings informed it?]
+[Opportunity, prior evidence, or product decision that makes this hypothesis relevant]
 
 ## Validation Results
 
+Add this section after validation runs.
+
 ### Evidence
 
-[Record evidence gathered during validation. Include data, screenshots, quotes, links.]
+[Observed results with sources]
 
 ### Confidence Update
 
-Record the risk dimensions whose evidence changed.
+Record only risk dimensions whose evidence changed.
 
 | Risk | Before | After | Evidence |
 |------|--------|-------|----------|
-| Value | 0 | - | |
-| Usability | 0 | - | |
-| Feasibility | 0 | - | |
-| Viability | 0 | - | |
+| [risk] | [score] | [score] | [source] |
 
 ### Conclusion
 
-[What did we learn? Was the hypothesis confirmed, denied, or inconclusive?]
+[Confirmed, disproved, or inconclusive result and its evidence]
 
 ### Next Decision
 
 [Decision changed by the result, or no further action]
-
----
-
-*Lifecycle: draft → testing → validated/invalidated/inconclusive → adopted/rejected/timeout. See hypothesis-discipline skill for details.*

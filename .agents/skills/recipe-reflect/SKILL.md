@@ -11,7 +11,7 @@ disable-model-invocation: true
 1. [LOAD IF NOT ACTIVE] `product-principles` — Knowledge Pyramid and promotion criteria
 2. [LOAD IF NOT ACTIVE] `hypothesis-discipline` — validation results, lifecycle status, and confidence changes
 
-Delegate Level 2 and Level 3 distillation to knowledge-distiller for unbiased pattern extraction.
+Delegate Level 2 and Level 3 distillation to knowledge-distiller for independent evidence synthesis.
 
 ## Execution Decision Flow
 
@@ -35,7 +35,7 @@ Input: Use the path or text supplied with the explicit skill invocation. If no i
 3. Check if this result changes understanding of the parent Opportunity
 
 #### Level 2: Opportunity Reflection
-1. Start from the Opportunity summary or index and load the hypothesis evidence needed to confirm or challenge a candidate pattern
+1. Start from the Opportunity and load the hypothesis evidence needed to assess candidate learnings and contradictions
 2. Prepare context for knowledge-distiller (hypothesis summaries, results, confidence changes)
 
 #### Level 3: Vision Reflection
@@ -46,17 +46,15 @@ Input: Use the path or text supplied with the explicit skill invocation. If no i
 
 ### 3. Knowledge Distillation
 
-**Invoke knowledge-distiller** for pattern extraction:
+**Invoke knowledge-distiller** for evidence distillation:
 - knowledge-distiller operates in a separate context to avoid individual hypothesis bias
-- It analyzes multiple hypotheses to find patterns, contradictions, and trends
-- It proposes Tier 2 learnings (for Opportunity) or Tier 1 promotions (for Vision)
+- It distills evidence into candidate learnings and contradictions
+- It proposes Tier 2 learnings (for Opportunity) or Tier 1 learnings (for Vision)
 - It enforces distillation quality criteria (per product-principles skill)
 
 Present distillation results to the user for the knowledge-promotion decision:
-- Extracted patterns and trends
-- Proposed learnings (Tier 2 or Tier 1)
+- Candidate learnings with proposed tiers, supporting evidence, and contexts
 - Contradictions found and the decisions they may affect
-- Tier promotion proposals with supporting evidence
 
 End the current turn with the distillation result as the workflow output. Promote knowledge only after the user confirms the proposal in a later turn.
 
@@ -70,30 +68,20 @@ After that confirmation:
 
 #### Tier 2 → Tier 1
 - Write to `docs/product/learnings.md`
-- Include freshness tag (`last-validated: YYYY-MM-DD`)
-- Include supporting hypothesis references (3+ required)
-- Include cross-segment evidence
-
-### 5. Index Update
-
-Update `docs/discovery/INDEX.md` when one of these indexed values changed:
-- Hypothesis status summary (counts by status)
-- Opportunity-to-hypothesis mapping
-- Recent validation results
-- Tier 1 learning changes (if any)
-- Last updated timestamp
+- Include supporting evidence references and their dates
+- State the contexts where the learning applies
 
 ## Sub-agent Usage
 
 | Agent | When | Why (context separation benefit) |
 |-------|------|----------------------------------|
-| knowledge-distiller | Level 2 and Level 3 reflection | Unbiased pattern extraction across individual hypotheses |
+| knowledge-distiller | Level 2 and Level 3 reflection | Independent evidence synthesis across hypotheses |
 
 ## Scope Boundaries
 
-**Included**: Result recording, knowledge distillation, Tier promotion, INDEX.md maintenance
+**Included**: Result recording, knowledge distillation, and Tier promotion
 **Not included**: Hypothesis validation (→ recipe-validate), new hypothesis generation (→ recipe-discover)
 
 ## Completion
 
-The workflow is complete when approved promotions and affected index values are updated, or a no-change result is reported with the evidence and contradictions relevant to the decision.
+The workflow is complete when approved promotions are updated, or a no-change result is reported with the evidence and contradictions relevant to the decision.

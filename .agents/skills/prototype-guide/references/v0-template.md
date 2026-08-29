@@ -11,6 +11,8 @@
 
 Use only the sections that affect the component or its evaluation.
 
+When selecting component states, consider Hover, Active, and Disabled in addition to the shared prototype states. Carry only states that can occur and affect the evaluation into the prompt.
+
 ```markdown
 Build [component/page description] used by [persona name] in [scenario] to [action/decision].
 
@@ -30,24 +32,20 @@ Failure: [what disproves the hypothesis].
   - [trigger] → [response]
 - Relevant states:
   - Default: [appearance]
-  - Hover: [appearance]
-  - Active: [appearance]
-  - Disabled: [appearance]
-  - Loading: [appearance]
-  - Error: [appearance]
+  - [Additional required state]: [trigger and appearance; include recovery for a failure state]
 
 ### Data
 [Provide concrete sample data as JSON or TypeScript interface]
 
 ## Design (when visual decisions affect the component)
-- Color palette: [hex values with semantic meaning — primary for actions, red for errors, etc.]
+- Color palette: [hex values]. Semantic roles: [action, error, success, and other applicable meanings]
 - Border-radius: [values]
 - Shadows: [values]
 - Spacing: [scale]
 - Typography: [font, size scale]
 
 Override shadcn/ui defaults:
-- [specific overrides — colors, radius, shadows]
+- [specific override and the shadcn/ui default it replaces]
 
 ## Responsive (when responsive behavior is part of the decision)
 - Mobile (< 768px): [layout changes]
@@ -66,7 +64,7 @@ Override shadcn/ui defaults:
 v0 is built on shadcn/ui. Use this to your advantage:
 - Name shadcn/ui components explicitly ("use a shadcn Dialog, not a custom modal")
 - Specify overrides clearly — v0 defaults to shadcn/ui's default theme
-- For custom styling, describe the override relative to defaults ("border-radius: 12px instead of shadcn default")
+- For custom styling, describe the override with explicit values relative to the shadcn/ui defaults
 
 ### Design System via Registry
 
@@ -82,7 +80,6 @@ Use conversational refinement for the smallest change needed to expose the next 
 
 ### What Works Well
 
-- Single-component focus (one Card, one Form, one Dashboard panel)
 - Explicit color semantics ("red for destructive actions, green for success")
 - Naming third-party libraries when needed ("use framer-motion for animations")
 - Specifying data structures with TypeScript interfaces
@@ -95,7 +92,7 @@ Use conversational refinement for the smallest change needed to expose the next 
 
 ## Optional Guide File
 
-Create `v0-guide.md` only when a human evaluator or integrator needs instructions outside the executable prompt. Include only the applicable items:
+Create `v0-guide.md` only when a named human evaluator or integrator needs instructions outside the executable prompt. Include only the applicable items:
 
 1. **What this component tests** — the hypothesis in plain language
 2. **How to evaluate** — what to look at in the generated output

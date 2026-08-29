@@ -4,64 +4,56 @@
 
 Guide for constructing external-generator prompts that make one prototype validation decision observable with decision-sufficient product and design context.
 
-## Prompt Writing Principles
+## Prompt Engineering Principles
 
-Apply an instruction when it can change prototype generation or evaluation. Use the smallest instruction set that makes the validation decision observable.
+Apply these principles when they affect the prototype's validation decision.
 
-### State Positive, Executable Outcomes
+Examples in this guide are illustrative only. Replace them with domain-specific content for the product you are testing.
 
-State the required action, behavior, or allowed state first. Express quality expectations as observable acceptance conditions and preserve accepted product decisions with the same meaning.
+### Make the Validation Observable
 
-Retain an explicit prohibition only when a violation would be an irreversible action the caller cannot normally recover from and positive wording would blur the boundary. Pair it with the required safe behavior and the condition that permits crossing the boundary.
+State the required behavior, state, or visual decision first and make its acceptance conditions observable.
 
-### Clarify Outcome-Relevant Decisions
+Resolve an ambiguity when its plausible answers would materially change correctness, scope, or evaluation; use the highest-priority available product source or the least-restrictive sufficient criterion. Leave choices that cannot change the validation evidence to the generator.
 
-Resolve an ambiguity when its plausible interpretations would materially change correctness, scope, or evaluation. Use the highest-priority available product source or the least-restrictive observable criterion that resolves the decision.
+| Instead of | Write |
+|-----------|-------|
+| "Create a search feature" | "Create a search bar that filters a product list by name and category. When user types 'laptop', show only laptop products. Include autocomplete suggestions showing top 3 matches." |
+| "Make it look good" | "Apply the product's primary design source. Preserve its hierarchy and interaction patterns; introduce new visual values only where the prototype tests them." |
+| "Add error handling" | "When search returns no results: show 'No products found for [query]' with a clear search button. When API fails: show 'Search unavailable' with a retry button." |
 
-Leave choices whose valid alternatives produce equivalent validation evidence to the generator.
+### Structure Over Length
 
-### Provide Necessary and Sufficient Context
-
-Include a context item when removing it could change a generation decision, action, or evaluation result. Name the source of product-specific decisions and extract the facts that control the prompt.
-
-Consolidate repeated context and place each detail near the instruction it controls.
-
-### Define the Consumer-Required Output
-
-Specify the artifact, sections, fields, or serialization required by the next consumer. Require an exact representation when a platform, evaluator, or machine parser depends on it.
-
-### Control Boundaries, Not Reversible Routes
-
-State the scope, protected product decisions, true dependencies, and observable completion conditions. For reversible implementation choices, provide the purpose, relevant evidence, and selection criteria, then let the generator choose the route.
-
-### Use the Smallest Useful Structure
-
-Use section boundaries when they make instruction roles, priorities, or dependencies visible. Keep a single clear action as lightweight prose.
-
-### Use Examples Deliberately
-
-Use an example when it communicates a product-specific mapping, non-obvious exception, or boundary that a concise rule cannot express. Keep the smallest set that removes those ambiguities and replace illustrative values with decision-relevant product content.
-
-### Handle Unresolved Inputs
-
-Treat source facts as observed, gap-filling decisions as inferred, and unresolved inputs as unknown. When an unknown controls the tested flow or its interpretation, pause generation and name the missing decision, its effect, and the evidence or user choice needed to continue. Proceed with the selected sources when the unresolved choice cannot change the validation evidence.
+A well-structured short prompt outperforms a long unstructured one. Use the section template below — it helps the AI identify priorities and relationships.
 
 ### Describe Interactions as State Transitions
 
 Describe the states that the prototype must demonstrate or that can change the evaluation:
 
 ```markdown
-[Interaction]:
-- Trigger: [user action]
-- Default: [visible state]
-- Loading: [visible progress and available actions]
-- Success: [visible consequence]
-- Error: [visible failure and recovery action]
+Add to Cart button:
+- Default: Blue background (#2563EB), white text
+- Hover: Darker blue (#1D4ED8)
+- Loading: Show spinner, button disabled
+- Success: Change text to "Added ✓" for 2 seconds, then revert
+- Error: Shake animation, show error message below button
 ```
 
 ### Provide Decision-Relevant Data
 
-Provide the smallest realistic record set when its shape, wording, or edge cases affect the interaction being tested. Include the exact case that makes the evaluated behavior observable.
+Provide concrete data when its shape, wording, or edge cases affect the interaction being tested:
+
+```markdown
+Sample product:
+{
+  "id": "prod-001",
+  "name": "Wireless Headphones",
+  "price": 89.99,
+  "category": "Audio",
+  "in_stock": true,
+  "rating": 4.5
+}
+```
 
 ### One Prompt, One Focus
 
@@ -81,8 +73,6 @@ Use only the sections needed by the prototype generator or evaluator.
 - Scenario: [what the user is trying to do, their environment, constraints]
 
 ### Decision-Relevant Sources
-
-Include each source whose decisions can change the generated prototype or its evaluation:
 
 - Brand Direction: [relevant decisions and Visual Token values extracted from `docs/product/design/brand-direction.md`]
 - IA Context: [relevant page structure extracted from `docs/product/design/information-architecture.md` when navigation matters]
@@ -108,12 +98,7 @@ Include each source whose decisions can change the generated prototype or its ev
 [Integration details — see Design System section below]
 
 ## States to Demonstrate
-Classify each state as `required` or `not_applicable`:
-- Loading: [required — trigger and visible behavior | not_applicable — reason]
-- Empty: [required — trigger and visible behavior | not_applicable — reason]
-- Error: [required — trigger, visible behavior, and recovery | not_applicable — reason]
-- Success: [required — trigger and visible consequence | not_applicable — reason]
-- Partial: [required — trigger and visible behavior | not_applicable — reason]
+- [Required state]: [trigger and visible behavior; include recovery for a failure state]
 
 ## Accessibility
 - WCAG 2.2 AA baseline
@@ -125,7 +110,7 @@ Classify each state as `required` or `not_applicable`:
 
 ### Output Format Principle
 
-Generate the machine-executable `{platform}-prompt.md`. Add a separate `{platform}-guide.md` when a named human consumer needs usage instructions outside the executable prompt.
+Generate the machine-executable `{platform}-prompt.md`. Add a separate `{platform}-guide.md` only when a named human consumer needs usage instructions outside the executable prompt.
 
 For platform-specific prompt templates, see:
 - `references/lovable-template.md` — Lovable prompt structure and tips
@@ -200,13 +185,8 @@ Use these constraints (seed for future DS):
 
 ## Quality Checklist
 
-- [ ] Required actions and states are positive and observable; each retained prohibition protects an irreversible action boundary and supplies the safe behavior and authorization condition
-- [ ] Each resolved ambiguity or added constraint can change generation or evaluation and uses the least-restrictive sufficient criterion
 - [ ] Decision under test and observable success/failure criteria are explicit
 - [ ] Scenario and each included product/design source can change generation or evaluation
-- [ ] Reversible implementation choices remain open when their alternatives produce equivalent validation evidence
-- [ ] Each example communicates a non-obvious product mapping, exception, or boundary and belongs to the smallest covering set
-- [ ] Missing inputs that control the tested flow name their effect and the evidence or user decision required to continue
 - [ ] Primary design source selected using Source Acquisition in `prototype-quality.md`
 - [ ] Critical user flow and decision-relevant state transitions are observable
 - [ ] Each state that can change the decision is required with a trigger; other listed states are not applicable with a reason

@@ -11,9 +11,16 @@
 
 Use only the sections that affect the prototype or its evaluation.
 
-```markdown
-Before building, ask one focused question when plausible answers to a missing decision would materially change the prototype or its evaluation. Name the affected decision and the evidence needed to resolve it. Continue with the supplied sources when the unresolved choice cannot change the validation evidence.
+Before using the template, check these inputs for missing decisions whose plausible answers would materially change the prototype or its evaluation:
+- Target user or role
+- Primary user flow
+- Design system constraints
+- Data model or sample content
+- Included and deferred scope
 
+Apply the missing-input rule under `prototype-guide`'s `Required Context` to each unresolved material decision. Leave choices that cannot change the validation evidence to Lovable.
+
+```markdown
 Build an interactive prototype for [product name].
 
 ## Context
@@ -46,12 +53,7 @@ This prototype tests: [hypothesis statement].
 - Copy: [actual headline, helper text, CTA labels]
 
 ## Relevant States
-Classify each state as `required` or `not_applicable`:
-- Loading: [required — trigger and visible behavior | not_applicable — reason]
-- Empty: [required — trigger, message, and next action | not_applicable — reason]
-- Error: [required — trigger, message, and recovery | not_applicable — reason]
-- Success: [required — trigger and visible consequence | not_applicable — reason]
-- Partial: [required — trigger and visible behavior | not_applicable — reason]
+- [Required state]: [trigger and visible behavior; include recovery for a failure state]
 
 ## Guardrails
 - Preserve [shared navigation / existing pages / established branding]
@@ -91,11 +93,11 @@ Edit the current prototype in the smallest increment that makes the next validat
 ### What Works Well
 
 - Explicit page paths (`/dashboard`, `/settings`)
-- Role-based descriptions tied to the target persona and action
+- Role-based descriptions ("As an admin, I can see all users")
 - Concrete data examples rather than abstract descriptions
-- Specific interaction descriptions that map each trigger to its visible response
-- Real UI copy for actions and states
-- Scope boundaries that name the included flow and deferred neighboring flows
+- Specific interaction descriptions ("click → modal opens → form inside")
+- Real UI copy ("Start free trial", "No invoices found") instead of placeholders
+- Clear scope boundaries ("only the billing flow, not account settings")
 
 ### What to Keep Simple
 
@@ -103,9 +105,9 @@ Edit the current prototype in the smallest increment that makes the next validat
 - Add Supabase in a later prompt when persistence becomes part of the evaluated behavior
 - Represent authentication as a preset mock state and validate the authentication flow in a separate prompt
 
-## Guide File Condition
+## Optional Guide File
 
-Create `lovable-guide.md` when a named human evaluator needs instructions outside the executable prompt. Include each item that evaluator uses:
+Create `lovable-guide.md` only when a named human evaluator needs instructions outside the executable prompt. Include only the applicable items:
 
 1. **What this prototype tests** — the hypothesis in plain language
 2. **How to use it** — steps for the person doing the testing

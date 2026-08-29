@@ -11,6 +11,8 @@
 
 Use only the sections that affect the component or its evaluation.
 
+When selecting component states, consider Hover, Active, and Disabled in addition to the shared prototype states. Carry only states that can occur and affect the evaluation into the prompt.
+
 ```markdown
 Build [component/page description] used by [persona name] in [scenario] to [action/decision].
 
@@ -28,16 +30,9 @@ Failure: [what disproves the hypothesis].
 - Interactions:
   - [trigger] → [response]
   - [trigger] → [response]
-- Relevant states (classify each non-default state as `required` or `not_applicable`):
+- Relevant states:
   - Default: [appearance]
-  - Hover: [required — trigger and appearance | not_applicable — reason]
-  - Active: [required — trigger and appearance | not_applicable — reason]
-  - Disabled: [required — trigger and appearance | not_applicable — reason]
-  - Loading: [required — trigger and appearance | not_applicable — reason]
-  - Empty: [required — trigger, appearance, and next action | not_applicable — reason]
-  - Error: [required — trigger, appearance, and recovery | not_applicable — reason]
-  - Success: [required — trigger and visible consequence | not_applicable — reason]
-  - Partial: [required — trigger and appearance | not_applicable — reason]
+  - [Additional required state]: [trigger and appearance; include recovery for a failure state]
 
 ### Data
 [Provide concrete sample data as JSON or TypeScript interface]
@@ -67,7 +62,7 @@ Override shadcn/ui defaults:
 ### shadcn/ui Integration
 
 v0 is built on shadcn/ui. Use this to your advantage:
-- Name shadcn/ui components explicitly ("use the shadcn Dialog component")
+- Name shadcn/ui components explicitly ("use a shadcn Dialog, not a custom modal")
 - Specify overrides clearly — v0 defaults to shadcn/ui's default theme
 - For custom styling, describe the override with explicit values relative to the shadcn/ui defaults
 
@@ -95,9 +90,9 @@ Use conversational refinement for the smallest change needed to expose the next 
 - Use inline mock data rather than external APIs
 - Keep interactions to the component being tested
 
-## Guide File Condition
+## Optional Guide File
 
-Create `v0-guide.md` when a named human evaluator or integrator needs instructions outside the executable prompt. Include each item that consumer uses:
+Create `v0-guide.md` only when a named human evaluator or integrator needs instructions outside the executable prompt. Include only the applicable items:
 
 1. **What this component tests** — the hypothesis in plain language
 2. **How to evaluate** — what to look at in the generated output

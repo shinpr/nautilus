@@ -2,6 +2,8 @@
 name: recipe-persona
 description: Creates or updates evidence-backed personas with the context and JTBD needed for product decisions. Use when user segments or behavior affect discovery, design, or requirements.
 disable-model-invocation: true
+metadata:
+  opencode/autoinvoke: "false"
 ---
 
 **Context**: Create or update persona files with the evidence-backed distinctions, context, and jobs needed by current product decisions.

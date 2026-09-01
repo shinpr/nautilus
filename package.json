@@ -1,7 +1,7 @@
 {
   "name": "nautilus-kit",
-  "version": "1.0.1",
-  "description": "Repository-based product discovery for Cursor and Codex, from product questions to evidence-backed PRDs",
+  "version": "1.1.0",
+  "description": "Repository-based product discovery for Cursor, Codex, and OpenCode, from product questions to evidence-backed PRDs",
   "license": "MIT",
   "author": "Shinsuke Kagawa",
   "repository": {
@@ -19,6 +19,7 @@
     ".agents/",
     ".cursor/",
     ".codex/",
+    ".opencode/",
     "assets/",
     "LICENSE"
   ],
@@ -26,6 +27,7 @@
     "agent-skills",
     "cursor",
     "codex",
+    "opencode",
     "product-management",
     "product-discovery",
     "product-validation",

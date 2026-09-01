@@ -2,6 +2,8 @@
 name: recipe-vision
 description: Defines or updates product vision, outcomes, NSM, and decision-relevant design principles. Use when starting a product, changing strategy, or reassessing outcomes.
 disable-model-invocation: true
+metadata:
+  opencode/autoinvoke: "false"
 ---
 
 **Context**: Create or update `docs/product/vision.md` with Product Outcomes, Business Outcomes, NSM, design principles, and strategic priorities.

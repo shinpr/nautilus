@@ -2,6 +2,8 @@
 name: recipe-refine-visuals
 description: Use when a design-capable human wants to refine the auto-derived Visual Tokens in `docs/product/design/brand-direction.md`
 disable-model-invocation: true
+metadata:
+  opencode/autoinvoke: "false"
 ---
 
 **Context**: Refine the Visual Tokens in `docs/product/design/brand-direction.md` after `recipe-blueprint` has created an initial set.

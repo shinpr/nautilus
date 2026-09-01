@@ -72,7 +72,6 @@ test("installs Codex, OpenCode, or all native agent sets when selected", () => {
   assert.equal(opencodeResult.status, 0, opencodeResult.stderr);
   assert.equal(fs.existsSync(path.join(opencodeProject, ".agents/skills/recipe-validate/SKILL.md")), true);
   assert.equal(fs.existsSync(path.join(opencodeProject, ".opencode/agents/hypothesis-verifier.md")), true);
-  assert.equal(fs.existsSync(path.join(opencodeProject, ".opencode/commands/recipe-define.md")), true);
   assert.equal(fs.existsSync(path.join(opencodeProject, ".cursor/agents/hypothesis-verifier.md")), false);
   assert.equal(fs.existsSync(path.join(opencodeProject, ".codex/agents/hypothesis-verifier.toml")), false);
 
@@ -105,10 +104,6 @@ test("installs shared skills and selected agents at user scope", () => {
   assert.equal(fs.existsSync(path.join(codexHome, "agents/hypothesis-verifier.toml")), true);
   assert.equal(
     fs.existsSync(path.join(home, ".config/opencode/agents/hypothesis-verifier.md")),
-    true
-  );
-  assert.equal(
-    fs.existsSync(path.join(home, ".config/opencode/commands/recipe-define.md")),
     true
   );
   assert.equal(fs.existsSync(path.join(home, ".nautilus-kit/manifest.json")), true);

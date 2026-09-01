@@ -34,12 +34,6 @@ const MAPPINGS = [
     project: { root: "project", destination: ".opencode/agents" },
     user: { root: "opencode", destination: "agents" },
   },
-  {
-    source: ".opencode/commands",
-    targets: ["opencode"],
-    project: { root: "project", destination: ".opencode/commands" },
-    user: { root: "opencode", destination: "commands" },
-  },
 ];
 
 class CliError extends Error {

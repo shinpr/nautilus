@@ -12,7 +12,6 @@ const REPOSITORY_ROOT = path.resolve(__dirname, "../..");
 const CURSOR_AGENTS = path.join(REPOSITORY_ROOT, ".cursor/agents");
 const CODEX_AGENTS = path.join(REPOSITORY_ROOT, ".codex/agents");
 const OPENCODE_AGENTS = path.join(REPOSITORY_ROOT, ".opencode/agents");
-const OPENCODE_COMMANDS = path.join(REPOSITORY_ROOT, ".opencode/commands");
 const SKILLS = path.join(REPOSITORY_ROOT, ".agents/skills");
 
 function cursorPrompt(content) {
@@ -78,13 +77,6 @@ test("skills use supported invocation contracts", () => {
   }
 });
 
-test("the OpenCode recipe command delegates to the shared skill", () => {
-  const command = fs.readFileSync(path.join(OPENCODE_COMMANDS, "recipe-define.md"), "utf8");
-  assert.match(command, /^---\ndescription: .+\n---/);
-  assert.match(command, /Load the `recipe-define` skill/);
-  assert.match(command, /^\$ARGUMENTS$/m);
-});
-
 test("package metadata and tarball include all three supported clients", () => {
   const packageJson = JSON.parse(
     fs.readFileSync(path.join(REPOSITORY_ROOT, "package.json"), "utf8")
@@ -114,7 +106,6 @@ test("package metadata and tarball include all three supported clients", () => {
     ".cursor/agents/prototype-generator.md",
     ".codex/agents/prototype-generator.toml",
     ".opencode/agents/prototype-generator.md",
-    ".opencode/commands/recipe-define.md",
   ]) {
     assert.equal(packagedPaths.has(requiredPath), true, requiredPath);
   }

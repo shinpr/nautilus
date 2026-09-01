@@ -35,11 +35,11 @@ Then start with a plain request:
 
 | Goal | Cursor | Codex | OpenCode |
 |------|--------|-------|----------|
-| Explore a product problem | `/recipe-discover Explore why trial users abandon onboarding` | `$recipe-discover Explore why trial users abandon onboarding` | `Use recipe-discover to explore why trial users abandon onboarding` |
-| Generate a prototype | `/recipe-validate Make a prototype for HYPO-001` | `$recipe-validate Make a prototype for HYPO-001` | `Use recipe-validate to make a prototype for HYPO-001` |
-| Create a PRD | `/recipe-define Create a PRD from the validated onboarding hypotheses` | `$recipe-define Create a PRD from the validated onboarding hypotheses` | `Use recipe-define to create a PRD from the validated onboarding hypotheses` |
+| Explore a product problem | `/recipe-discover Explore why trial users abandon onboarding` | `$recipe-discover Explore why trial users abandon onboarding` | `/recipe-discover Explore why trial users abandon onboarding` |
+| Generate a prototype | `/recipe-validate Make a prototype for HYPO-001` | `$recipe-validate Make a prototype for HYPO-001` | `/recipe-validate Make a prototype for HYPO-001` |
+| Create a PRD | `/recipe-define Create a PRD from the validated onboarding hypotheses` | `$recipe-define Create a PRD from the validated onboarding hypotheses` | `/recipe-define Create a PRD from the validated onboarding hypotheses` |
 
-Cursor invokes recipes with `/recipe-*`; Codex uses the same recipe name with `$recipe-*`. In OpenCode, ask the agent to use the recipe by name.
+Cursor and OpenCode invoke recipes with `/recipe-*`; Codex uses the same recipe name with `$recipe-*`.
 
 ## Recipes
 
@@ -66,7 +66,7 @@ If you prefer to build the prototype in Lovable or v0, use `recipe-prototype-pro
 ```text
 Cursor: /recipe-prototype-prompt HYPO-001 for Lovable
 Codex:  $recipe-prototype-prompt HYPO-001 for Lovable
-OpenCode: Use recipe-prototype-prompt for HYPO-001 and target Lovable
+OpenCode: /recipe-prototype-prompt HYPO-001 for Lovable
 ```
 
 ## What Stays in the Repository

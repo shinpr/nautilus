@@ -13,7 +13,6 @@ Nautilus keeps discovery work in your repository, where later sessions can reuse
 - Turn rough questions and existing evidence into focused opportunities and hypotheses
 - Test assumptions about customer value, usability, technical feasibility, and business viability
 - Generate a self-contained HTML prototype grounded in your product context
-- Optionally export a ready-to-use prototype prompt for Lovable or v0
 - Turn validated work into a PRD without losing the evidence and open risks behind it
 
 ## Quick Start
@@ -59,15 +58,9 @@ Recipes are independent workflows. Run one when you need it, or combine them as 
 
 ## Prototype Generation
 
-For usability hypotheses, `recipe-validate` generates a self-contained HTML prototype in `docs/discovery/prototypes/`. It uses the relevant hypothesis, persona, design decisions, and existing UI as source material.
+For usability testing, `recipe-validate` calls a dedicated subagent to build a self-contained HTML prototype in `docs/discovery/prototypes/`. It uses the hypothesis, persona, design decisions, and existing UI, so the prototype stays focused on what you need to test.
 
-If you prefer to build the prototype in Lovable or v0, use `recipe-prototype-prompt` instead. It writes a self-contained prompt for the selected platform; it does not generate the HTML itself.
-
-```text
-Cursor: /recipe-prototype-prompt HYPO-001 for Lovable
-Codex:  $recipe-prototype-prompt HYPO-001 for Lovable
-OpenCode: /recipe-prototype-prompt HYPO-001 for Lovable
-```
+If you need to hand the work off to Lovable, v0, or another external generator, `recipe-prototype-prompt` writes the prompt instead.
 
 ## What Stays in the Repository
 

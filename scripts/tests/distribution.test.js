@@ -47,10 +47,6 @@ test("Cursor, Codex, and OpenCode agents have identical prompt bodies", () => {
     const opencodeContent = fs.readFileSync(path.join(OPENCODE_AGENTS, cursorFile), "utf8");
     assert.equal(codexPrompt(codexContent), cursorPrompt(cursorContent), cursorFile);
     assert.equal(cursorPrompt(opencodeContent), cursorPrompt(cursorContent), cursorFile);
-    assert.match(
-      opencodeContent,
-      /^---\ndescription: .+\nmode: subagent\npermission:\n  edit: (allow|deny)\n---/
-    );
   }
 });
 

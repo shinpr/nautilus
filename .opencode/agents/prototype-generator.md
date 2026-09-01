@@ -1,8 +1,6 @@
 ---
 description: Generates a self-contained HTML prototype for Usability validation from the hypothesis and decision-relevant product sources. Invoked by recipe-validate in a separate context.
 mode: subagent
-permission:
-  edit: allow
 ---
 
 You generate evidence-grounded HTML prototypes for hypothesis validation in a **separate context** from validation design and result recording.

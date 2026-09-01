@@ -4,7 +4,7 @@
 
 # Nautilus
 
-Turn product questions into testable hypotheses, working prototypes, and evidence-backed PRDs in Cursor or Codex.
+Turn product questions into testable hypotheses, working prototypes, and evidence-backed PRDs in Cursor, Codex, or OpenCode.
 
 Nautilus keeps discovery work in your repository, where later sessions can reuse what earlier ones learned. Start with a rough question or whatever evidence already exists, including the codebase itself. Run only the workflow you need. Nautilus adds only what the current question requires. The resulting evidence and decisions are still there when you validate, write the PRD, or start implementation.
 
@@ -13,12 +13,11 @@ Nautilus keeps discovery work in your repository, where later sessions can reuse
 - Turn rough questions and existing evidence into focused opportunities and hypotheses
 - Test assumptions about customer value, usability, technical feasibility, and business viability
 - Generate a self-contained HTML prototype grounded in your product context
-- Optionally export a ready-to-use prototype prompt for Lovable or v0
 - Turn validated work into a PRD without losing the evidence and open risks behind it
 
 ## Quick Start
 
-You need Node.js and either [Cursor](https://cursor.com) or [Codex](https://developers.openai.com/codex).
+You need Node.js and [Cursor](https://cursor.com), [Codex](https://developers.openai.com/codex), or [OpenCode](https://opencode.ai).
 
 From your project directory, install Nautilus for the client you use:
 
@@ -26,19 +25,20 @@ From your project directory, install Nautilus for the client you use:
 |--------|-----------------|
 | Cursor | `npx nautilus-kit install --target cursor` |
 | Codex | `npx nautilus-kit install --target codex` |
-| Both | `npx nautilus-kit install --target all` |
+| OpenCode | `npx nautilus-kit install --target opencode` |
+| All three | `npx nautilus-kit install --target all` |
 
-`npx nautilus-kit install` is shorthand for the Cursor installation. Open a new Cursor or Codex session in the project after installation.
+`npx nautilus-kit install` is shorthand for the Cursor installation. Open a new session in the selected client after installation.
 
 Then start with a plain request:
 
-| Goal | Cursor | Codex |
-|------|--------|-------|
-| Explore a product problem | `/recipe-discover Explore why trial users abandon onboarding` | `$recipe-discover Explore why trial users abandon onboarding` |
-| Generate a prototype | `/recipe-validate Make a prototype for HYPO-001` | `$recipe-validate Make a prototype for HYPO-001` |
-| Create a PRD | `/recipe-define Create a PRD from the validated onboarding hypotheses` | `$recipe-define Create a PRD from the validated onboarding hypotheses` |
+| Goal | Cursor | Codex | OpenCode |
+|------|--------|-------|----------|
+| Explore a product problem | `/recipe-discover Explore why trial users abandon onboarding` | `$recipe-discover Explore why trial users abandon onboarding` | `/recipe-discover Explore why trial users abandon onboarding` |
+| Generate a prototype | `/recipe-validate Make a prototype for HYPO-001` | `$recipe-validate Make a prototype for HYPO-001` | `/recipe-validate Make a prototype for HYPO-001` |
+| Create a PRD | `/recipe-define Create a PRD from the validated onboarding hypotheses` | `$recipe-define Create a PRD from the validated onboarding hypotheses` | `/recipe-define Create a PRD from the validated onboarding hypotheses` |
 
-Cursor invokes recipes with `/recipe-*`; Codex uses the same recipe name with `$recipe-*`.
+Cursor and OpenCode invoke recipes with `/recipe-*`; Codex uses the same recipe name with `$recipe-*`.
 
 ## Recipes
 
@@ -58,14 +58,9 @@ Recipes are independent workflows. Run one when you need it, or combine them as 
 
 ## Prototype Generation
 
-For usability hypotheses, `recipe-validate` generates a self-contained HTML prototype in `docs/discovery/prototypes/`. It uses the relevant hypothesis, persona, design decisions, and existing UI as source material.
+For usability testing, `recipe-validate` calls a dedicated subagent to build a self-contained HTML prototype in `docs/discovery/prototypes/`. It uses the hypothesis, persona, design decisions, and existing UI, so the prototype stays focused on what you need to test.
 
-If you prefer to build the prototype in Lovable or v0, use `recipe-prototype-prompt` instead. It writes a self-contained prompt for the selected platform; it does not generate the HTML itself.
-
-```text
-Cursor: /recipe-prototype-prompt HYPO-001 for Lovable
-Codex:  $recipe-prototype-prompt HYPO-001 for Lovable
-```
+If you need to hand the work off to Lovable, v0, or another external generator, `recipe-prototype-prompt` writes the prompt instead.
 
 ## What Stays in the Repository
 
@@ -95,14 +90,15 @@ Use `--user` to make Nautilus available across projects:
 ```bash
 npx nautilus-kit install --target cursor --user
 npx nautilus-kit install --target codex --user
+npx nautilus-kit install --target opencode --user
 npx nautilus-kit install --target all --user
 ```
 
-User-scoped skills are installed in `~/.agents/skills/`. Cursor agents go to `~/.cursor/agents/`; Codex agents go to `${CODEX_HOME:-~/.codex}/agents/`.
+User-scoped skills are installed once in `~/.agents/skills/`. Cursor agents go to `~/.cursor/agents/`, Codex agents to `${CODEX_HOME:-~/.codex}/agents/`, and OpenCode agents to `~/.config/opencode/agents/`.
 
 ### Updates
 
-Nautilus remembers whether you installed Cursor, Codex, or both, so the same update command works for either client:
+Nautilus remembers which clients you installed, so the same update command works for any target:
 
 ```bash
 npx nautilus-kit update --dry-run
@@ -114,12 +110,13 @@ For a user installation, add `--user`. To change the installed clients during an
 ```bash
 npx nautilus-kit update --target cursor
 npx nautilus-kit update --target codex
+npx nautilus-kit update --target opencode
 npx nautilus-kit update --target all
 ```
 
 Updates add new managed files and replace unchanged managed files while preserving local modifications and unrelated files.
 
-Open a new Cursor or Codex session after updating so it loads the new workflows and agents.
+Open a new session in the selected client after updating so it loads the new workflows and agents.
 
 Check the installed version and selected clients with:
 

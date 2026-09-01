@@ -2,6 +2,8 @@
 name: recipe-define
 description: Creates a delivery-ready PRD from validated hypotheses with material 4 Risks evidence and necessary traceability. Use when turning validation results into requirements or user stories.
 disable-model-invocation: true
+metadata:
+  opencode/autoinvoke: "false"
 ---
 
 **Context**: Transform validated hypotheses into a PRD with 4 Risks confidence scores, hypothesis traceability, and user stories. The PRD follows a standard structure that can be consumed by downstream implementation workflows.

@@ -8,11 +8,11 @@ const path = require("path");
 const PROJECT_MANIFEST = ".nautilus-manifest.json";
 const USER_MANIFEST = ".nautilus-kit/manifest.json";
 const MANIFEST_VERSION = 2;
-const VALID_TARGETS = new Set(["cursor", "codex", "all"]);
+const VALID_TARGETS = new Set(["cursor", "codex", "opencode", "all"]);
 const MAPPINGS = [
   {
     source: ".agents/skills",
-    targets: ["cursor", "codex"],
+    targets: ["cursor", "codex", "opencode"],
     project: { root: "project", destination: ".agents/skills" },
     user: { root: "shared", destination: "skills" },
   },
@@ -27,6 +27,18 @@ const MAPPINGS = [
     targets: ["codex"],
     project: { root: "project", destination: ".codex/agents" },
     user: { root: "codex", destination: "agents" },
+  },
+  {
+    source: ".opencode/agents",
+    targets: ["opencode"],
+    project: { root: "project", destination: ".opencode/agents" },
+    user: { root: "opencode", destination: "agents" },
+  },
+  {
+    source: ".opencode/commands",
+    targets: ["opencode"],
+    project: { root: "project", destination: ".opencode/commands" },
+    user: { root: "opencode", destination: "commands" },
   },
 ];
 
@@ -68,9 +80,9 @@ function parseCommand(argv) {
       }
       if (target !== null) throw new CliError("--target may be specified only once.");
       target = argument === "--target" ? args[++index] : argument.slice("--target=".length);
-      if (!target) throw new CliError("--target requires cursor, codex, or all.");
+      if (!target) throw new CliError("--target requires cursor, codex, opencode, or all.");
       if (!VALID_TARGETS.has(target)) {
-        throw new CliError(`Invalid target '${target}'. Expected cursor, codex, or all.`);
+        throw new CliError(`Invalid target '${target}'. Expected cursor, codex, opencode, or all.`);
       }
       continue;
     }
@@ -81,7 +93,7 @@ function parseCommand(argv) {
 }
 
 function expandTargets(target) {
-  return target === "all" ? ["cursor", "codex"] : [target];
+  return target === "all" ? ["cursor", "codex", "opencode"] : [target];
 }
 
 function getVersion(sourceDir) {
@@ -154,6 +166,7 @@ function resolveRoots({ scope, cwd, manifest }) {
     shared: stored.shared || path.join(os.homedir(), ".agents"),
     cursor: stored.cursor || path.join(os.homedir(), ".cursor"),
     codex: stored.codex || resolveCodexHome(),
+    opencode: stored.opencode || path.join(os.homedir(), ".config", "opencode"),
   };
   for (const [name, root] of Object.entries(roots)) {
     if (!path.isAbsolute(root)) throw new CliError(`Stored ${name} root must be absolute.`, 2);
@@ -221,7 +234,7 @@ function normalizeManifest({ raw, scope, roots, sourceDir }) {
       sourceDir,
       scope,
       roots,
-      targets: ["cursor", "codex"],
+      targets: ["cursor", "codex", "opencode"],
     });
     const files = {};
     for (const sourcePath of raw.files) {
@@ -250,7 +263,10 @@ function normalizeManifest({ raw, scope, roots, sourceDir }) {
     throw new CliError(`Unsupported manifest version: ${raw.manifestVersion}`, 2);
   }
   if (raw.scope !== scope) throw new CliError(`Manifest scope is '${raw.scope}', not '${scope}'.`, 2);
-  if (!Array.isArray(raw.targets) || raw.targets.some(target => !["cursor", "codex"].includes(target))) {
+  if (
+    !Array.isArray(raw.targets) ||
+    raw.targets.some(target => !["cursor", "codex", "opencode"].includes(target))
+  ) {
     throw new CliError("Manifest contains invalid targets.", 2);
   }
   if (!raw.files || Array.isArray(raw.files) || typeof raw.files !== "object") {
@@ -509,11 +525,11 @@ function status({ cwd, scope }) {
 
 function showHelp() {
   console.log(`
-nautilus-kit — Repository-based product discovery for Cursor and Codex
+nautilus-kit — Repository-based product discovery for Cursor, Codex, and OpenCode
 
 Usage:
-  npx nautilus-kit install [--target cursor|codex|all] [--user]
-  npx nautilus-kit update [--target cursor|codex|all] [--user] [--dry-run]
+  npx nautilus-kit install [--target cursor|codex|opencode|all] [--user]
+  npx nautilus-kit update [--target cursor|codex|opencode|all] [--user] [--dry-run]
   npx nautilus-kit status [--user]
   npx nautilus-kit --version
   npx nautilus-kit --help

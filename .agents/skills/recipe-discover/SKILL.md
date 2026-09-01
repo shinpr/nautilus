@@ -2,6 +2,8 @@
 name: recipe-discover
 description: Frames product Opportunities and creates decision-relevant hypotheses from available evidence. Use when exploring a problem, market opportunity, or user need.
 disable-model-invocation: true
+metadata:
+  opencode/autoinvoke: "false"
 ---
 
 **Context**: Discover Opportunities and generate hypotheses by combining business analysis (BMC/VPC/market) with user analysis (JTBD/pains/gains). Outputs Opportunity files and hypothesis files.

@@ -2,6 +2,8 @@
 name: recipe-blueprint
 description: Selects and defines the structural design context needed by a prototype or PRD. Use when shared information architecture, flows, content, brand, Visual Tokens, or AI interaction decisions are missing.
 disable-model-invocation: true
+metadata:
+  opencode/autoinvoke: "false"
 ---
 
 **Context**: Create or update structural design artifacts in `docs/product/design/` so prototype generation and PRD authoring reuse the same design context.

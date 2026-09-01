@@ -2,6 +2,8 @@
 name: recipe-prototype-prompt
 description: Exports an evidence-grounded prompt for Lovable, v0, or a similar external prototype generator. Use when the desired artifact is a reusable generator prompt rather than an internally generated HTML prototype.
 disable-model-invocation: true
+metadata:
+  opencode/autoinvoke: "false"
 ---
 
 # Prototype Prompt Export

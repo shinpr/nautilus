@@ -59,7 +59,7 @@ test("installs Cursor into the project by default", () => {
   assert.equal(Array.isArray(manifest.files), false);
 });
 
-test("installs Codex or both native agent sets when selected", () => {
+test("installs Codex, OpenCode, or all native agent sets when selected", () => {
   const codexProject = temporaryDirectory("nautilus-codex-project");
   const codexResult = runCli(["install", "--target", "codex"], { cwd: codexProject });
   assert.equal(codexResult.status, 0, codexResult.stderr);
@@ -67,12 +67,25 @@ test("installs Codex or both native agent sets when selected", () => {
   assert.equal(fs.existsSync(path.join(codexProject, ".codex/agents/hypothesis-verifier.toml")), true);
   assert.equal(fs.existsSync(path.join(codexProject, ".cursor/agents/hypothesis-verifier.md")), false);
 
+  const opencodeProject = temporaryDirectory("nautilus-opencode-project");
+  const opencodeResult = runCli(["install", "--target", "opencode"], { cwd: opencodeProject });
+  assert.equal(opencodeResult.status, 0, opencodeResult.stderr);
+  assert.equal(fs.existsSync(path.join(opencodeProject, ".agents/skills/recipe-validate/SKILL.md")), true);
+  assert.equal(fs.existsSync(path.join(opencodeProject, ".opencode/agents/hypothesis-verifier.md")), true);
+  assert.equal(fs.existsSync(path.join(opencodeProject, ".cursor/agents/hypothesis-verifier.md")), false);
+  assert.equal(fs.existsSync(path.join(opencodeProject, ".codex/agents/hypothesis-verifier.toml")), false);
+
   const allProject = temporaryDirectory("nautilus-all-project");
   const allResult = runCli(["install", "--target", "all"], { cwd: allProject });
   assert.equal(allResult.status, 0, allResult.stderr);
   assert.equal(fs.existsSync(path.join(allProject, ".cursor/agents/hypothesis-verifier.md")), true);
   assert.equal(fs.existsSync(path.join(allProject, ".codex/agents/hypothesis-verifier.toml")), true);
-  assert.deepEqual(readJson(path.join(allProject, ".nautilus-manifest.json")).targets, ["cursor", "codex"]);
+  assert.equal(fs.existsSync(path.join(allProject, ".opencode/agents/hypothesis-verifier.md")), true);
+  assert.deepEqual(readJson(path.join(allProject, ".nautilus-manifest.json")).targets, [
+    "cursor",
+    "codex",
+    "opencode",
+  ]);
 });
 
 test("installs shared skills and selected agents at user scope", () => {
@@ -89,6 +102,10 @@ test("installs shared skills and selected agents at user scope", () => {
   assert.equal(fs.existsSync(path.join(home, ".agents/skills/recipe-validate/SKILL.md")), true);
   assert.equal(fs.existsSync(path.join(home, ".cursor/agents/hypothesis-verifier.md")), true);
   assert.equal(fs.existsSync(path.join(codexHome, "agents/hypothesis-verifier.toml")), true);
+  assert.equal(
+    fs.existsSync(path.join(home, ".config/opencode/agents/hypothesis-verifier.md")),
+    true
+  );
   assert.equal(fs.existsSync(path.join(home, ".nautilus-kit/manifest.json")), true);
   assert.equal(fs.existsSync(path.join(cwd, ".agents")), false);
 });
@@ -104,12 +121,18 @@ test("update uses recorded targets and can reconfigure them", () => {
   const reconfigure = runCli(["update", "--target", "all"], { cwd });
   assert.equal(reconfigure.status, 0, reconfigure.stderr);
   assert.equal(fs.existsSync(path.join(cwd, ".cursor/agents/hypothesis-verifier.md")), true);
-  assert.deepEqual(readJson(path.join(cwd, ".nautilus-manifest.json")).targets, ["cursor", "codex"]);
+  assert.equal(fs.existsSync(path.join(cwd, ".opencode/agents/hypothesis-verifier.md")), true);
+  assert.deepEqual(readJson(path.join(cwd, ".nautilus-manifest.json")).targets, [
+    "cursor",
+    "codex",
+    "opencode",
+  ]);
 
   const retireCursor = runCli(["update", "--target", "codex"], { cwd });
   assert.equal(retireCursor.status, 0, retireCursor.stderr);
   assert.equal(fs.existsSync(path.join(cwd, ".cursor/agents/hypothesis-verifier.md")), false);
   assert.equal(fs.existsSync(path.join(cwd, ".codex/agents/hypothesis-verifier.toml")), true);
+  assert.equal(fs.existsSync(path.join(cwd, ".opencode/agents/hypothesis-verifier.md")), false);
   assert.deepEqual(readJson(path.join(cwd, ".nautilus-manifest.json")).targets, ["codex"]);
 });
 

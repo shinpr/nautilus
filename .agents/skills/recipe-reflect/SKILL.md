@@ -2,6 +2,8 @@
 name: recipe-reflect
 description: Orchestrates reflection by updating affected artifacts and distilling reusable knowledge from validation results.
 disable-model-invocation: true
+metadata:
+  opencode/autoinvoke: "false"
 ---
 
 **Context**: Drive the feedback loop by reflecting on outcomes, updating target artifacts, and distilling learnings across the knowledge pyramid (see product-principles skill for Tier definitions).

@@ -2,6 +2,8 @@
 name: recipe-validate
 description: Validates a hypothesis with a risk-appropriate method and records decision-relevant evidence. Use when testing Value, Usability, Feasibility, or Viability assumptions.
 disable-model-invocation: true
+metadata:
+  opencode/autoinvoke: "false"
 ---
 
 **Context**: Validate hypotheses using appropriate methods based on risk type. Invoke hypothesis-verifier for bias-free validation design. Record results in hypothesis files.
